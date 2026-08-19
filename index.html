@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Calm Kids Sensory &amp; PikMe Publishing</title>
+<meta name="description" content="Low-stimulation, sensory-friendly coloring books for toddlers and kids by Calm Kids Sensory and PikMe Publishing." />
+<style>
+  :root {
+    --cream: #faf6ef;
+    --cream-deep: #f2ead9;
+    --sage: #cfe3d4;
+    --sage-deep: #a9c9b3;
+    --sage-text: #4c6b57;
+    --lavender: #e4defa;
+    --lavender-deep: #c9bdf0;
+    --ink: #4a4642;
+    --ink-soft: #7a746c;
+    --white: #ffffff;
+    --shadow: 0 10px 30px rgba(120, 110, 90, 0.12);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.7;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
+  }
+
+  .wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Header */
+  header.site-header {
+    background: linear-gradient(135deg, var(--sage) 0%, var(--lavender) 100%);
+    padding: 72px 24px 88px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header.site-header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(255,255,255,0.35), transparent 40%),
+      radial-gradient(circle at 85% 75%, rgba(255,255,255,0.3), transparent 45%);
+  }
+
+  .header-inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  .brand-mark {
+    font-size: 2.6rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    color: #3f5847;
+    margin: 0;
+  }
+
+  .brand-sub {
+    margin: 10px 0 0;
+    font-size: 1.05rem;
+    color: #5a5248;
+    font-weight: 500;
+  }
+
+  .brand-tagline {
+    margin: 22px auto 0;
+    max-width: 520px;
+    color: #5a5248;
+    font-size: 1rem;
+  }
+
+  nav.site-nav {
+    margin-top: 34px;
+    display: flex;
+    gap: 28px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  nav.site-nav a {
+    text-decoration: none;
+    color: #3f5847;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 8px 4px;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.2s ease;
+  }
+
+  nav.site-nav a:hover {
+    border-color: #3f5847;
+  }
+
+  /* Sections */
+  section {
+    padding: 72px 0;
+  }
+
+  .section-heading {
+    text-align: center;
+    max-width: 620px;
+    margin: 0 auto 48px;
+  }
+
+  .section-heading h2 {
+    font-size: 1.8rem;
+    color: #4c6b57;
+    margin: 0 0 14px;
+    font-weight: 600;
+  }
+
+  .section-heading p {
+    color: var(--ink-soft);
+    margin: 0;
+  }
+
+  /* Book grid */
+  .book-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 32px;
+  }
+
+  .book-card {
+    background: var(--white);
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .book-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 36px rgba(120, 110, 90, 0.18);
+  }
+
+  .book-cover {
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: rgba(255,255,255,0.85);
+  }
+
+  .book-cover.cover-1 { background: linear-gradient(160deg, var(--sage-deep), var(--sage)); }
+  .book-cover.cover-2 { background: linear-gradient(160deg, var(--lavender-deep), var(--lavender)); }
+  .book-cover.cover-3 { background: linear-gradient(160deg, #f0d9c4, var(--cream-deep)); }
+
+  .book-body {
+    padding: 24px 22px 28px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    text-align: center;
+  }
+
+  .book-body h3 {
+    margin: 0 0 8px;
+    font-size: 1.12rem;
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .book-body p {
+    margin: 0 0 20px;
+    color: var(--ink-soft);
+    font-size: 0.92rem;
+    flex: 1;
+  }
+
+  .btn-amazon {
+    display: inline-block;
+    text-decoration: none;
+    background: var(--sage-text);
+    color: var(--white);
+    padding: 12px 20px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.01em;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+
+  .btn-amazon:hover {
+    background: #3a5443;
+    transform: translateY(-1px);
+  }
+
+  /* About / Mission */
+  .mission {
+    background: var(--white);
+  }
+
+  .mission-inner {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .mission-card {
+    background: linear-gradient(135deg, var(--cream-deep), var(--lavender));
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: var(--shadow);
+  }
+
+  .mission-card ul {
+    margin: 0;
+    padding-left: 20px;
+    color: #4c4740;
+  }
+
+  .mission-card li {
+    margin-bottom: 12px;
+  }
+
+  .mission-text h2 {
+    color: #4c6b57;
+    font-size: 1.8rem;
+    margin: 0 0 18px;
+    font-weight: 600;
+  }
+
+  .mission-text p {
+    color: var(--ink-soft);
+    margin: 0 0 16px;
+  }
+
+  @media (max-width: 760px) {
+    .mission-inner {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Footer */
+  footer.site-footer {
+    background: linear-gradient(135deg, #eef3ec 0%, var(--cream-deep) 100%);
+    padding: 56px 24px 40px;
+    text-align: center;
+    color: var(--ink-soft);
+    font-size: 0.92rem;
+  }
+
+  .footer-brand {
+    font-weight: 600;
+    color: #4c6b57;
+    font-size: 1.05rem;
+    margin-bottom: 6px;
+  }
+
+  .footer-connect {
+    margin: 28px auto 0;
+    max-width: 460px;
+    background: var(--white);
+    border-radius: 16px;
+    padding: 22px 24px;
+    box-shadow: var(--shadow);
+  }
+
+  .footer-connect p {
+    margin: 6px 0;
+  }
+
+  .footer-connect .connect-title {
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+
+  .footer-links {
+    margin-top: 28px;
+    display: flex;
+    gap: 18px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .footer-links button {
+    background: none;
+    border: none;
+    color: var(--sage-text);
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 4px;
+    font-family: inherit;
+  }
+
+  .footer-copy {
+    margin-top: 22px;
+    font-size: 0.82rem;
+    color: #9a9388;
+  }
+
+  /* Modal */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(74, 70, 66, 0.45);
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 100;
+  }
+
+  .modal-overlay.open {
+    display: flex;
+  }
+
+  .modal-box {
+    background: var(--white);
+    border-radius: 20px;
+    max-width: 560px;
+    width: 100%;
+    max-height: 82vh;
+    overflow-y: auto;
+    padding: 36px 32px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+    position: relative;
+    text-align: left;
+  }
+
+  .modal-box h3 {
+    margin: 0 0 18px;
+    color: #4c6b57;
+    font-size: 1.3rem;
+  }
+
+  .modal-box p {
+    color: var(--ink-soft);
+    font-size: 0.94rem;
+    margin: 0 0 14px;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    background: var(--cream-deep);
+    border: none;
+    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    font-size: 1.1rem;
+    color: var(--ink);
+    cursor: pointer;
+    line-height: 1;
+  }
+
+  .modal-close:hover {
+    background: var(--sage);
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header" id="top">
+  <div class="header-inner">
+    <p class="brand-mark">Calm Kids Sensory</p>
+    <p class="brand-sub">PikMe Publishing</p>
+    <p class="brand-tagline">Quiet, screen-free coloring books made for sensory-sensitive moments.</p>
+    <nav class="site-nav">
+      <a href="#books">Coloring Books</a>
+      <a href="#mission">Our Mission</a>
+      <a href="#footer">Connect</a>
+    </nav>
+  </div>
+</header>
+
+<section id="books">
+  <div class="wrap">
+    <div class="section-heading">
+      <h2>Our Coloring Books</h2>
+      <p>Simple, low-stimulus pages designed for calm hands and quiet minds.</p>
+    </div>
+    <div class="book-grid">
+
+      <article class="book-card">
+        <div class="book-cover cover-1" aria-hidden="true">🕊️</div>
+        <div class="book-body">
+          <h3>Beautiful Birds Coloring Book 5-up</h3>
+          <p>Gentle bird illustrations with soft, uncluttered linework for restful coloring sessions.</p>
+          <a class="btn-amazon" href="https://www.amazon.com/author/calmkidssensory" target="_blank" rel="noopener noreferrer">View on Amazon</a>
+        </div>
+      </article>
+
+      <article class="book-card">
+        <div class="book-cover cover-2" aria-hidden="true">🦕</div>
+        <div class="book-body">
+          <h3>Simple Dinosaur Coloring Book 4-8</h3>
+          <p>Friendly, large-scale dinosaur pages sized for smaller hands and shorter attention spans.</p>
+          <a class="btn-amazon" href="https://www.amazon.com/author/calmkidssensory" target="_blank" rel="noopener noreferrer">View on Amazon</a>
+        </div>
+      </article>
+
+      <article class="book-card">
+        <div class="book-cover cover-3" aria-hidden="true">🧩</div>
+        <div class="book-body">
+          <h3>Fun Mazes for Toddlers 3-Up</h3>
+          <p>Easy, low-pressure maze paths that build focus without overwhelming young explorers.</p>
+          <a class="btn-amazon" href="https://www.amazon.com/author/calmkidssensory" target="_blank" rel="noopener noreferrer">View on Amazon</a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section id="mission" class="mission">
+  <div class="wrap mission-inner">
+    <div class="mission-text">
+      <h2>About Our Mission</h2>
+      <p>Calm Kids Sensory exists for the moments between the busy ones. Our books are built for children who feel things a little more intensely, and for the parents and educators looking for a quiet, screen-free way to help them settle.</p>
+      <p>Every page is kept simple on purpose. Wide lines, gentle subjects, and plenty of open space give overstimulated kids room to slow down, focus on one small task, and return to a calmer state at their own pace.</p>
+      <p>Through PikMe Publishing, we design each coloring book as a low-stimulus tool first, and a coloring book second, so it can sit alongside other sensory-friendly routines at home or in the classroom.</p>
+    </div>
+    <div class="mission-card">
+      <ul>
+        <li>Low-stimulus, uncluttered page designs</li>
+        <li>Screen-free, hands-on focus activity</li>
+        <li>Sized and paced for sensory-sensitive kids</li>
+        <li>Made for home, therapy, and classroom use</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer" id="footer">
+  <div class="wrap">
+    <p class="footer-brand">Calm Kids Sensory &middot; PikMe Publishing</p>
+    <p>Serene, low-stimulation coloring books for kids and the grown-ups who care for them.</p>
+
+    <div class="footer-connect">
+      <p class="connect-title">Connect With Us</p>
+      <p>YouTube: Calm Kids Sensory</p>
+      <p>Amazon Author Page, PikMe Publishing: <a href="https://www.amazon.com/author/calmkidssensory" target="_blank" rel="noopener noreferrer">amazon.com/author/calmkidssensory</a></p>
+      <p>Instagram: @calmkidssensory</p>
+      <p>TikTok: @calmkidssensory</p>
+      <p>Pinterest: CalmKidsSensory</p>
+    </div>
+
+    <div class="footer-links">
+      <button type="button" onclick="openModal('privacy-modal')">Privacy Policy</button>
+      <button type="button" onclick="openModal('terms-modal')">Terms of Service</button>
+    </div>
+
+    <p class="footer-copy">&copy; 2026 Calm Kids Sensory / PikMe Publishing. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- Privacy Policy Modal -->
+<div class="modal-overlay" id="privacy-modal" onclick="closeOnOverlay(event, 'privacy-modal')">
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="privacy-title">
+    <button class="modal-close" onclick="closeModal('privacy-modal')" aria-label="Close">&times;</button>
+    <h3 id="privacy-title">Privacy Policy</h3>
+    <p>Calm Kids Sensory and PikMe Publishing do not collect, store, or process any personal data through this website.</p>
+    <p>This site does not use cookies, tracking pixels, analytics scripts, or any form submissions. There are no accounts to create and no personal information to enter.</p>
+    <p>The only interactive links on this page are direct links to our Amazon author page, where any purchase, account activity, or data handling is governed entirely by Amazon's own privacy policy, not ours.</p>
+    <p>If you have any questions about this policy, please reach out to us through our listed social channels.</p>
+  </div>
+</div>
+
+<!-- Terms of Service Modal -->
+<div class="modal-overlay" id="terms-modal" onclick="closeOnOverlay(event, 'terms-modal')">
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="terms-title">
+    <button class="modal-close" onclick="closeModal('terms-modal')" aria-label="Close">&times;</button>
+    <h3 id="terms-title">Terms of Service</h3>
+    <p>This website is an informational showcase for Calm Kids Sensory and PikMe Publishing coloring books. It is provided as-is, for browsing purposes only.</p>
+    <p>We do not sell products directly through this site. Every "View on Amazon" button links out to our official Amazon author page, where all purchases, pricing, shipping, and returns are handled entirely by Amazon under Amazon's own terms of service.</p>
+    <p>All book titles, descriptions, and brand names shown here belong to Calm Kids Sensory and PikMe Publishing and may not be reproduced without permission.</p>
+    <p>We may update this site's content from time to time to keep it accurate and up to date.</p>
+  </div>
+</div>
+
+<script>
+  function openModal(id) {
+    document.getElementById(id).classList.add('open');
+  }
+  function closeModal(id) {
+    document.getElementById(id).classList.remove('open');
+  }
+  function closeOnOverlay(event, id) {
+    if (event.target.id === id) {
+      closeModal(id);
+    }
+  }
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal-overlay.open').forEach(function (m) {
+        m.classList.remove('open');
+      });
+    }
+  });
+</script>
+
+</body>
+</html>
