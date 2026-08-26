@@ -32,8 +32,16 @@
         <div class="offer-card">
           <p class="offer-kicker">Try it first</p>
           <h3>3-Page Free Sampler</h3>
-          <p>A few pages to color before you decide, ready to download and print right away.</p>
-          <a class="offer-btn sampler" href="../pdf/halloween-scenes-sampler.pdf" download>Download the Free Sampler</a>
+          <p>A few pages to try before you decide. Tell us where to send them.</p>
+          <form class="sampler-form">
+            <input type="hidden" name="book" value="Spooky Playful Halloween Scenes" />
+            <input type="hidden" name="pdfUrl" value="https://calmkidssensory.com/pdf/halloween-scenes-sampler.pdf" />
+            <input type="hidden" name="amazonUrl" value="https://www.amazon.com/dp/B0DRFZGWNB" />
+            <input type="email" name="email" class="sampler-input" placeholder="Your cozy email address..." required />
+            <button type="submit" class="btn-primary offer-btn sampler">Send Me My Free Pages</button>
+            <p class="sampler-success" hidden>A gentle email with your coloring pages is on its way to your inbox.</p>
+            <p class="sampler-error" hidden></p>
+          </form>
         </div>
         <div class="offer-card">
           <p class="offer-kicker">Print at home</p>
@@ -77,5 +85,6 @@
   </div>
 </footer>
 
+<script src="../js/sampler-form.js" defer></script>
 </body>
 </html>
