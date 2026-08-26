@@ -11,7 +11,7 @@
   "use strict";
 
   var GAS_WEB_APP_URL =
-    "https://script.google.com/macros/s/AKfycbzxB2E7YuRBj9vy0hCu0c7AN9rAQxImRjwmqrYfmksyIia9JJvxgF61oAX52fYQoU9plA/exec";
+    "https://script.google.com/macros/s/AKfycbwq0lqvsKsPHtzsf8kl35VtJhiLXDsNFEN72c9ZQQrHNaKB5MiDRe8p96RqnkA6d7uJHA/exec";
 
   function isValidEmail(value) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
