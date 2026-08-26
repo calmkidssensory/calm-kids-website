@@ -10,7 +10,8 @@
 (function () {
   "use strict";
 
-  var GAS_WEB_APP_URL = "PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE";
+  var GAS_WEB_APP_URL =
+    "https://script.google.com/macros/s/AKfycbzxB2E7YuRBj9vy0hCu0c7AN9rAQxImRjwmqrYfmksyIia9JJvxgF61oAX52fYQoU9plA/exec";
 
   function isValidEmail(value) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);

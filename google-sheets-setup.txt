@@ -136,3 +136,23 @@ NOTES
   confirm delivery, check the sheet directly.
 - Nothing in this file needs to be uploaded anywhere — it's a reference copy
   of the script that lives on Google's side once deployed.
+
+------------------------------------------------------------
+TROUBLESHOOTING — rows appear in the sheet but no email arrives
+------------------------------------------------------------
+This means the script hasn't been granted permission to send mail yet. Apps
+Script only asks for the permissions a function actually touches the first
+time you run it, and running setupSheetHeaders alone (Sheets access only)
+does not trigger the Gmail-send permission prompt.
+
+Fix:
+1. In the Apps Script editor, from the function dropdown choose "doPost".
+2. Click Run. It will fail immediately with a small "e is not defined"
+   error — that's expected and fine, doPost needs a live request to run
+   properly. What matters is that clicking Run surfaces an "Authorization
+   required" prompt first.
+3. Click through it: Review permissions > pick your account > Advanced >
+   Go to (project name) > Allow. Make sure the Gmail send permission is
+   included in what you approve, not just Sheets.
+4. No redeploy needed — this authorization applies immediately to the
+   existing Web App deployment. Test a sampler form on the site again.
