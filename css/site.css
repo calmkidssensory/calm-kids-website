@@ -236,8 +236,15 @@ section {
 .book-body h3 {
   margin: 0 0 6px;
   font-size: 1.06rem;
+  line-height: 1.35;
   color: var(--ink);
   font-weight: 600;
+  /* Reserve room for up to 3 lines so short and long titles all hand off
+     to the description paragraph at the same height across a row. */
+  min-height: calc(1.06rem * 1.35 * 3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .age-badge {
