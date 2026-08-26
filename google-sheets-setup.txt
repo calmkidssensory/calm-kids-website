@@ -3,10 +3,17 @@ Google Sheets + Apps Script setup
 
 This is the backend for the "3-Page Free Sampler" forms on our book pages
 (website/books/*.html, wired up by website/js/sampler-form.js). It logs every
-request to a Google Sheet and emails the visitor their sampler PDF link.
+request to a Google Sheet and sends the visitor a cozy, brand-styled HTML
+email with their sampler download and the book's cover art.
+
+The script below is the single source of truth for every book's file paths
+and Amazon link — it does not trust anything the browser sends except the
+visitor's email and which book they asked for. This is what keeps download
+links from ever going stale or 404ing: the URLs are built from the same
+slug-based naming convention the website itself uses, not copied by hand.
 
 ------------------------------------------------------------
-STEP 1 — Create the Sheet
+STEP 1 — Create the Sheet (skip if you already did this)
 ------------------------------------------------------------
 1. Go to sheets.google.com and create a new, blank spreadsheet.
 2. Name it something like "Calm Kids Sensory — Sampler Requests".
@@ -17,22 +24,89 @@ STEP 1 — Create the Sheet
 STEP 2 — Add the Apps Script
 ------------------------------------------------------------
 1. In the sheet, open Extensions > Apps Script.
-2. Delete any starter code in Code.gs and paste in EVERYTHING between the
-   dashed lines below.
+2. Delete any existing code in Code.gs and paste in EVERYTHING between the
+   dashed lines below (this replaces the earlier plain-text version).
 3. Click the save icon (or Ctrl+S / Cmd+S).
 4. From the function dropdown at the top, choose "setupSheetHeaders" and
-   click Run once. This writes the column headers into row 1. The first run
-   will ask you to authorize the script — that's expected, since it needs
-   permission to edit this sheet and send email on your behalf.
+   click Run once. This writes the column headers into row 1. If this is
+   your first time running the script, you'll be asked to authorize it —
+   approve it (you'll see an "unverified app" warning since this is your
+   own private script; click Advanced > Go to (project name) to continue).
+
+If you already authorized the earlier version of this script, you do not
+need to authorize again — the permissions (Sheets + Gmail send) are the same.
 
 ------------------------------------------------------------ START OF SCRIPT
 /**
  * Calm Kids Sensory — free sampler request handler.
  *
- * Receives a POST from a book page's sampler form, logs the request as a
- * new row, and emails the visitor a direct link to their sampler PDF,
- * along with the book's Amazon listing in case they'd like the paperback.
+ * Receives a POST from a book page's sampler form (email + book slug only),
+ * looks up that book's cover, sampler PDF, and Amazon link from the map
+ * below, logs the request as a new row, and emails the visitor a cozy
+ * HTML sampler email.
+ *
+ * Keep BOOKS in sync with website/books-data.mjs (specifically, with the
+ * scratchpad script that generates this map — see the comment above BOOKS).
+ * Every entry here must correspond to a real file at:
+ *   SITE_URL + "/pdf/"          + slug + "-sampler.pdf"
+ *   SITE_URL + "/images/covers/" + slug + ".jpg"
  */
+
+var SITE_URL = "https://calmkidssensory.com";
+var AMAZON_AUTHOR_URL = "https://www.amazon.com/author/calmkidssensory";
+
+// slug -> { title, amazonUrl }. Only books with a compiled sampler PDF
+// belong here (the sampler form only ever appears on those book pages).
+var BOOKS = {
+  "toddler-coloring-book": { title: "Simple Coloring Book for Toddler", amazonUrl: "https://www.amazon.com/dp/B0DQPC6YYR" },
+  "coloring-young-girls": { title: "Simple Coloring Book for Young Girls", amazonUrl: "https://www.amazon.com/dp/B0DQP72GWH" },
+  "coloring-young-boys": { title: "Simple Coloring Book for Young Boys", amazonUrl: "https://www.amazon.com/dp/B0DQP7Q4ZV" },
+  "dinosaur": { title: "Simple Dinosaur Coloring Book", amazonUrl: "https://www.amazon.com/dp/B0DTQ9Q395" },
+  "unicorn": { title: "Simple Unicorn Coloring Book", amazonUrl: "https://www.amazon.com/dp/B0DQPMH8WW" },
+  "birds": { title: "Beautiful Birds Coloring Book", amazonUrl: "https://www.amazon.com/dp/B0DQPKQGJ3" },
+  "dragons": { title: "Beautiful Dragons Coloring Book", amazonUrl: "https://www.amazon.com/dp/B0DQPKGXFP" },
+  "cute-cats-toddlers": { title: "Cute Cats Coloring Pages for Toddlers", amazonUrl: "https://www.amazon.com/dp/B0DQYCNSLR" },
+  "dogs": { title: "Beautiful Dogs Coloring Book", amazonUrl: "https://www.amazon.com/dp/B0DQYCMBFJ" },
+  "magical-christmas": { title: "Magical Christmas Coloring Fun", amazonUrl: "https://www.amazon.com/dp/B0DQJSYMGD" },
+  "magical-snakes": { title: "Magical Snakes Coloring Book", amazonUrl: "https://www.amazon.com/dp/B0DQJMKKNJ" },
+  "magical-fairies": { title: "Magical Fairies Coloring Book", amazonUrl: "https://www.amazon.com/dp/B0DQGTT54W" },
+  "magical-mermaids": { title: "Magical Mermaids Coloring Book", amazonUrl: "https://www.amazon.com/author/calmkidssensory" },
+  "underwater-world": { title: "Wonders of Underwater World Coloring Book", amazonUrl: "https://www.amazon.com/dp/B0DR6X8GJK" },
+  "jungle-mammals": { title: "Jungle Mammals Coloring Book", amazonUrl: "https://www.amazon.com/dp/B0DR6YFWS2" },
+  "relaxing-landscapes": { title: "Relaxing Landscapes Coloring Book", amazonUrl: "https://www.amazon.com/dp/B0DR6ZLLPJ" },
+  "science-fiction": { title: "Science Fiction Coloring Book", amazonUrl: "https://www.amazon.com/dp/B0DQYLCZS3" },
+  "reptiles-amphibians": { title: "Reptiles and Amphibians Coloring Book", amazonUrl: "https://www.amazon.com/dp/B0DR6Z6ZLS" },
+  "roosters": { title: "Beautiful Roosters Coloring Book", amazonUrl: "https://www.amazon.com/dp/B0DR8LXNPB" },
+  "zoo-animals": { title: "Beautiful Zoo Animals Coloring Book", amazonUrl: "https://www.amazon.com/dp/B0DR8KP7ZY" },
+  "orchids": { title: "Beautiful Orchids Coloring Book", amazonUrl: "https://www.amazon.com/dp/B0DRCTH88J" },
+  "scifi-robots": { title: "Sci-Fi Robots Coloring Book", amazonUrl: "https://www.amazon.com/dp/B0DRCWC1T2" },
+  "halloween-scenes": { title: "Spooky Playful Halloween Scenes", amazonUrl: "https://www.amazon.com/dp/B0DRFZGWNB" },
+  "wild-parakeets": { title: "Wild Parakeets Coloring Book", amazonUrl: "https://www.amazon.com/dp/B0DRGH6Z3N" },
+  "magical-creatures": { title: "Magical Creatures Coloring Book", amazonUrl: "https://www.amazon.com/dp/B0DRVLWLGD" },
+  "relaxing-animals": { title: "Relaxing Animals Coloring Book", amazonUrl: "https://www.amazon.com/dp/B0DRVVRNK1" },
+  "wild-flowers": { title: "Wild Flowers Coloring Book", amazonUrl: "https://www.amazon.com/author/calmkidssensory" },
+  "super-cars": { title: "Super Cars Coloring Book", amazonUrl: "https://www.amazon.com/dp/B0DRYHFLVR" },
+  "fighter-jets": { title: "Fighter Jets Coloring Book", amazonUrl: "https://www.amazon.com/dp/B0DS2JKF4X" },
+  "heavy-duty-vehicles": { title: "Heavy Duty Vehicles Coloring Book", amazonUrl: "https://www.amazon.com/dp/B0DS2GLY9R" },
+  "medieval-ships": { title: "Medieval Ships Coloring Book", amazonUrl: "https://www.amazon.com/dp/B0DS498462" },
+  "brides": { title: "Beautiful Brides Coloring Book", amazonUrl: "https://www.amazon.com/dp/B0DS8S2L87" },
+  "historic-architecture": { title: "Historic Architecture Coloring Book", amazonUrl: "https://www.amazon.com/dp/B0DS3VRFJ5" },
+  "psychedelic": { title: "Psychedelic Coloring Book", amazonUrl: "https://www.amazon.com/dp/B0DS8S8W8J" },
+  "samurai": { title: "Samurai Coloring Book", amazonUrl: "https://www.amazon.com/author/calmkidssensory" },
+  "koi-fish": { title: "Koi Fish Coloring Book", amazonUrl: "https://www.amazon.com/dp/B0DTV1S551" },
+  "realistic-cats": { title: "Realistic Cats Coloring Book", amazonUrl: "https://www.amazon.com/dp/B0DTV1GH98" },
+  "anime-art": { title: "Anime Art Coloring Book", amazonUrl: "https://www.amazon.com/dp/B0DY5ZWWBX" },
+  "animal-inspirational-quotes": { title: "Animal Inspirational Quotes Coloring Book", amazonUrl: "https://www.amazon.com/dp/B0DXLFFTXY" },
+  "flowers-butterflies": { title: "Flowers and Butterflies Coloring Book", amazonUrl: "https://www.amazon.com/dp/B0DWJFYF3D" },
+  "flowers-butterflies-quotes": { title: "Flowers and Butterflies Quotes Coloring Book", amazonUrl: "https://www.amazon.com/author/calmkidssensory" },
+  "mosaic-butterflies": { title: "Mosaic Butterflies Coloring Book", amazonUrl: "https://www.amazon.com/author/calmkidssensory" },
+  "mosaic-medieval-designs": { title: "Mosaic Medieval Designs with Quotes", amazonUrl: "https://www.amazon.com/dp/B0H2LX94GW" },
+  "mosaic-flowers": { title: "Mosaic Flowers Coloring Book", amazonUrl: "https://www.amazon.com/dp/B0DVZJWQNH" },
+  "mosaic-churches": { title: "Mosaic Churches Coloring Book", amazonUrl: "https://www.amazon.com/author/calmkidssensory" },
+  "beautiful-houses": { title: "Beautiful Houses Coloring Book", amazonUrl: "https://www.amazon.com/author/calmkidssensory" },
+  "scary-zombies": { title: "Scary Zombies Coloring Book", amazonUrl: "https://www.amazon.com/author/calmkidssensory" },
+  "fun-cowboys": { title: "Fun Cowboys Coloring Book", amazonUrl: "https://www.amazon.com/author/calmkidssensory" }
+};
 
 // One-time helper: run this manually from the Apps Script editor to write
 // the header row. Safe to re-run — it only touches row 1.
@@ -47,88 +121,163 @@ function doPost(e) {
   var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
 
   var email = (e.parameter.email || "").trim();
-  var book = (e.parameter.book || "").trim();
-  var pdfUrl = (e.parameter.pdfUrl || "").trim();
-  var amazonUrl = (e.parameter.amazonUrl || "").trim();
+  var slug = (e.parameter.slug || "").trim();
+  var book = BOOKS[slug];
 
-  if (!email || !book || !pdfUrl) {
+  if (!email || !book) {
     return ContentService
-      .createTextOutput(JSON.stringify({ status: "error", message: "Missing required field" }))
+      .createTextOutput(JSON.stringify({ status: "error", message: "Missing email or unknown book" }))
       .setMimeType(ContentService.MimeType.JSON);
   }
 
-  // 1) Log the request as a new row.
-  sheet.appendRow([new Date(), email, book, pdfUrl, amazonUrl]);
+  // Built from the site's own naming convention, not from anything the
+  // browser sent — this is what guarantees the links never 404.
+  var pdfUrl = SITE_URL + "/pdf/" + slug + "-sampler.pdf";
+  var coverUrl = SITE_URL + "/images/covers/" + slug + ".jpg";
+  var amazonUrl = book.amazonUrl || AMAZON_AUTHOR_URL;
 
-  // 2) Send the sampler email.
-  sendSamplerEmail(email, book, pdfUrl, amazonUrl);
+  sheet.appendRow([new Date(), email, book.title, pdfUrl, amazonUrl]);
+
+  sendSamplerEmail(email, book.title, coverUrl, pdfUrl, amazonUrl);
 
   return ContentService
     .createTextOutput(JSON.stringify({ status: "ok" }))
     .setMimeType(ContentService.MimeType.JSON);
 }
 
-function sendSamplerEmail(email, book, pdfUrl, amazonUrl) {
-  var subject = "Your quiet coloring pages — " + book;
+function sendSamplerEmail(email, title, coverUrl, pdfUrl, amazonUrl) {
+  var subject = "Your quiet coloring pages — " + title;
 
-  var amazonLine = amazonUrl
-    ? "\n\nIf your family enjoys these pages, the full " + book + " is available on Amazon:\n" + amazonUrl
-    : "";
-
-  var body =
+  var plainBody =
     "Hello,\n\n" +
-    "Thank you for asking for a free sampler from " + book + ". Here are your three pages, " +
+    "Thank you for asking for a free sampler from " + title + ". Here are your three pages, " +
     "ready to open and print at home:\n\n" +
     pdfUrl +
-    amazonLine +
+    "\n\nIf your family enjoys these pages, the full " + title + " is available on Amazon:\n" +
+    amazonUrl +
     "\n\n" +
     "We hope they bring a little quiet, screen-free focus to your day.\n\n" +
     "Warmly,\n" +
     "Calm Kids Sensory\n\n" +
     "Connect With Us:\n" +
     "YouTube: Calm Kids Sensory\n" +
-    "Amazon Author Page, PikMe Publishing: https://www.amazon.com/author/calmkidssensory\n" +
+    "Amazon Author Page, PikMe Publishing: " + AMAZON_AUTHOR_URL + "\n" +
     "Instagram: @calmkidssensory\n" +
     "TikTok: @calmkidssensory\n" +
     "Pinterest: CalmKidsSensory";
 
-  MailApp.sendEmail(email, subject, body);
+  MailApp.sendEmail(email, subject, plainBody, {
+    name: "Calm Kids Sensory",
+    htmlBody: buildEmailHtml(title, coverUrl, pdfUrl, amazonUrl),
+  });
+}
+
+function buildEmailHtml(title, coverUrl, pdfUrl, amazonUrl) {
+  return (
+    '<!DOCTYPE html>' +
+    '<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">' +
+    '<title>' + title + '</title></head>' +
+    '<body style="margin:0; padding:0; background-color:#faf6ef;">' +
+    '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#faf6ef; padding:32px 16px;">' +
+    '<tr><td align="center">' +
+    '<table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px; width:100%; background-color:#ffffff; border-radius:20px; overflow:hidden; font-family:Segoe UI, -apple-system, Helvetica Neue, Arial, sans-serif;">' +
+
+      // Header
+      '<tr><td style="background-color:#cfe3d4; padding:32px 40px; text-align:center;">' +
+        '<div style="font-size:22px; font-weight:600; color:#3f5847; letter-spacing:0.01em;">Calm Kids Sensory</div>' +
+        '<div style="font-size:13px; color:#4c6b57; margin-top:4px;">PikMe Publishing</div>' +
+      '</td></tr>' +
+
+      // Greeting
+      '<tr><td style="padding:36px 40px 8px; text-align:center;">' +
+        '<p style="margin:0; font-size:15px; line-height:1.7; color:#4a4642;">' +
+        'Thank you for asking for a free sampler from <strong>' + title + '</strong>. ' +
+        'Here are three pages, ready to open and print at home.</p>' +
+      '</td></tr>' +
+
+      // Cover art
+      '<tr><td style="padding:24px 40px; text-align:center;">' +
+        '<img src="' + coverUrl + '" alt="' + title + ' cover" width="220" ' +
+        'style="width:220px; max-width:60%; height:auto; border-radius:14px; box-shadow:0 10px 30px rgba(120,110,90,0.18);">' +
+      '</td></tr>' +
+
+      // Sampler CTA
+      '<tr><td style="padding:8px 40px 32px; text-align:center;">' +
+        '<a href="' + pdfUrl + '" style="display:inline-block; background-color:#89a08d; color:#2f4136; ' +
+        'text-decoration:none; font-weight:600; font-size:15px; padding:14px 30px; border-radius:999px;">' +
+        'Download Your 3-Page Sampler</a>' +
+      '</td></tr>' +
+
+      // Divider
+      '<tr><td style="padding:0 40px;"><div style="border-top:1px solid #f2ead9;"></div></td></tr>' +
+
+      // Amazon section
+      '<tr><td style="padding:32px 40px 8px; text-align:center;">' +
+        '<p style="margin:0 0 6px; font-size:12px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:#4c6b57;">' +
+        'Prefer the Physical Book?</p>' +
+        '<p style="margin:0 0 18px; font-size:14px; line-height:1.7; color:#7a746c;">' +
+        'The complete, bound coloring book, printed and delivered to your door.</p>' +
+        '<a href="' + amazonUrl + '" style="display:inline-block; background-color:#4c6b57; color:#ffffff; ' +
+        'text-decoration:none; font-weight:600; font-size:14px; padding:12px 26px; border-radius:999px;">' +
+        'Order on Amazon</a>' +
+      '</td></tr>' +
+
+      // Closing note
+      '<tr><td style="padding:28px 40px 8px; text-align:center;">' +
+        '<p style="margin:0; font-size:13px; color:#9a9388;">' +
+        'We hope these pages bring a little quiet, screen-free focus to your day.</p>' +
+      '</td></tr>' +
+
+      // Footer
+      '<tr><td style="background-color:#f2ead9; padding:28px 40px; text-align:center;">' +
+        '<p style="margin:0 0 10px; font-size:13px; font-weight:600; color:#4a4642;">Connect With Us</p>' +
+        '<p style="margin:0; font-size:12.5px; line-height:1.9; color:#7a746c;">' +
+        'YouTube: Calm Kids Sensory<br>' +
+        'Amazon Author Page, PikMe Publishing: <a href="' + AMAZON_AUTHOR_URL + '" style="color:#4c6b57;">amazon.com/author/calmkidssensory</a><br>' +
+        'Instagram: @calmkidssensory &nbsp;&middot;&nbsp; TikTok: @calmkidssensory &nbsp;&middot;&nbsp; Pinterest: CalmKidsSensory</p>' +
+      '</td></tr>' +
+
+    '</table></td></tr></table></body></html>'
+  );
 }
 ------------------------------------------------------------ END OF SCRIPT
 
 ------------------------------------------------------------
-STEP 3 — Deploy as a Web App
+STEP 3 — Deploy the update
 ------------------------------------------------------------
-1. In the Apps Script editor, click Deploy > New deployment.
-2. Click the gear icon next to "Select type" and choose "Web app".
-3. Fill in:
-     Description:      Sampler request handler
-     Execute as:        Me (your Google account)
-     Who has access:    Anyone
-4. Click Deploy. Google will ask you to authorize the script — approve it
-   (you'll see an "unverified app" warning since this is your own private
-   script; click Advanced > Go to (project name) to continue).
-5. Copy the "Web app URL" it gives you. It looks like:
-     https://script.google.com/macros/s/AKfycb.../exec
+If this is your FIRST deployment, follow these deploy steps as normal:
+1. Deploy > New deployment > gear icon > "Web app".
+2. Execute as: Me. Who has access: Anyone.
+3. Click Deploy, approve the authorization prompt, and copy the Web app URL.
+
+If you already have a LIVE deployment (you're updating the earlier script):
+saving the code alone does NOT update the live /exec URL — you must publish
+a new version:
+1. Deploy > Manage deployments.
+2. Click the pencil (edit) icon on your existing deployment.
+3. Under "Version", choose "New version".
+4. Click Deploy.
+The Web app URL stays exactly the same — nothing to change in
+website/js/sampler-form.js this time.
 
 ------------------------------------------------------------
-STEP 4 — Connect it to the website
+STEP 4 — Try it
 ------------------------------------------------------------
-1. Open website/js/sampler-form.js.
-2. Find this line near the top:
-     var GAS_WEB_APP_URL = "PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE";
-3. Replace the placeholder with the Web app URL you copied in Step 3.
-4. Save, commit, and push. Every "Send Me My Free Pages" button on the site
-   will now log to your sheet and email the sampler automatically.
+Fill out a sampler form on the live site and check that the email arrives
+with the cover image, the "Download Your 3-Page Sampler" button, and the
+Amazon button, all styled in our cream and sage colors.
+
+------------------------------------------------------------
+KEEPING BOOKS IN SYNC
+------------------------------------------------------------
+If a new book is added to the site with a sampler PDF, add a matching entry
+to the BOOKS map above (slug, title, amazonUrl) and publish a new deployment
+version. The slug must exactly match the book's URL slug on the site (the
+same one used in website/books/<slug>.html and website/pdf/<slug>-sampler.pdf).
 
 ------------------------------------------------------------
 NOTES
 ------------------------------------------------------------
-- If you ever need to re-authorize or update the email wording, go back into
-  Extensions > Apps Script from the sheet, edit, save, then Deploy >
-  Manage deployments > edit (pencil icon) > New version > Deploy. Editing the
-  code alone does not update a live deployment — you must publish a new
-  version for changes to take effect.
 - The website sends the request with mode: "no-cors", which is a known
   limitation of Google Apps Script Web Apps not sending browser-readable CORS
   headers. This means the site cannot read Google's response and shows the
@@ -156,3 +305,16 @@ Fix:
    included in what you approve, not just Sheets.
 4. No redeploy needed — this authorization applies immediately to the
    existing Web App deployment. Test a sampler form on the site again.
+
+------------------------------------------------------------
+TROUBLESHOOTING — sampler link in the email 404s
+------------------------------------------------------------
+As of this version, the script builds pdfUrl and coverUrl itself from the
+book's slug rather than trusting the browser, so this shouldn't happen
+again. If it still does:
+1. Confirm the slug in the BOOKS map exactly matches the actual filename
+   under website/pdf/ (case-sensitive, hyphens included).
+2. Confirm you published a "New version" after editing the code (see
+   Step 3) — editing alone doesn't update the live URL.
+3. Give GitHub Pages a minute after a push; the CDN can briefly serve a
+   cached 404 for a just-added file.
