@@ -211,8 +211,9 @@ section {
   width: 100%;
   aspect-ratio: 3 / 4;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
+  overflow: hidden;
   background-color: #FAF7F2;
 }
 
@@ -220,6 +221,7 @@ section {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  object-position: bottom;
   display: block;
 }
 
