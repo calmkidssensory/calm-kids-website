@@ -1021,3 +1021,25 @@ body.js-reveal [data-reveal].is-visible {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* TikTok follow button (footer "Connect With Us") — plain static link,
+   no SDK/embed/API involved. Small pill matching the site's existing
+   button language (.btn-view / .btn-printables). */
+.btn-tiktok {
+  display: inline-block;
+  text-decoration: none;
+  background: var(--sage-ink);
+  color: var(--white);
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.82rem;
+  letter-spacing: 0.01em;
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-tiktok:hover {
+  background: var(--sage-text);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(44, 68, 54, 0.22);
+}
