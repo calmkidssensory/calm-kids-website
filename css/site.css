@@ -3,10 +3,15 @@
 :root {
   --cream: #faf7f0;
   --cream-deep: #f0e8d8;
-  --sage: #c2dbc8;
-  --sage-deep: #8fb99c;
-  --sage-text: #3c5a47;
-  --sage-ink: #2c4436;
+  /* Unified brand green — Ash's explicit call: every green on the site is
+     this exact literal value, flat, including headings/logo/button text.
+     Note this is a deliberate, informed trade-off against WCAG AA contrast
+     (flagged and confirmed) in favor of matching the brand's soft, low-
+     stimulation look exactly. */
+  --sage: #8f9e8b;
+  --sage-deep: #8f9e8b;
+  --sage-text: #8f9e8b;
+  --sage-ink: #8f9e8b;
   --lavender: #e3dcf5;
   --lavender-deep: #b9a8e8;
   --gold: #b6935a;
@@ -17,6 +22,12 @@
   --white: #ffffff;
   --shadow: 0 18px 44px rgba(45, 42, 30, 0.10);
   --shadow-lg: 0 26px 60px rgba(45, 42, 30, 0.16);
+  /* Legibility aids for the flat #8f9e8b green above — a soft dark echo
+     directly behind the letterforms, not a color/contrast change. Reads
+     as a faint depth cue at normal viewing distance, giving text edges
+     definition without altering the green anyone actually perceives. */
+  --text-legibility-shadow: 0 1px 1px rgba(38, 45, 36, 0.35);
+  --text-legibility-shadow-strong: 0 1px 2px rgba(20, 24, 18, 0.5);
   --font-display: "Fraunces", Georgia, "Times New Roman", serif;
   --font-body: "Inter", "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
 }
@@ -510,7 +521,7 @@ section {
 .btn-view:hover {
   background: var(--sage-text);
   transform: translateY(-1px);
-  box-shadow: 0 10px 22px rgba(44, 68, 54, 0.25);
+  box-shadow: 0 10px 22px rgba(143, 158, 139, 0.25);
 }
 
 /* About / Mission */
@@ -626,7 +637,7 @@ section {
 .btn-printables:hover {
   background: var(--sage-text);
   transform: translateY(-1px);
-  box-shadow: 0 12px 26px rgba(44, 68, 54, 0.28);
+  box-shadow: 0 12px 26px rgba(143, 158, 139, 0.28);
 }
 
 .printables-note {
@@ -756,13 +767,42 @@ section {
 
 .offer-btn.sampler {
   background: var(--sage);
-  color: #2f4136;
+  color: var(--ink);
+}
+
+/* Text legibility helpers — see --text-legibility-shadow(-strong) in :root.
+   Green text on light backgrounds gets the soft shadow; white button text
+   on the green background gets the stronger one. The green itself is
+   untouched in every rule below. */
+.brand-mark,
+nav.site-nav a,
+.back-link,
+.section-heading h2,
+.age-badge,
+.mission-text h2,
+.printables-box h2,
+.book-hero-info h1,
+.sampler-success,
+.footer-brand,
+.footer-links button,
+.modal-box h3,
+.offer-btn.sampler {
+  text-shadow: var(--text-legibility-shadow);
+}
+
+.btn-amazon,
+.btn-view,
+.btn-printables,
+.btn-tiktok,
+.offer-btn.amazon,
+nav.site-nav a:hover {
+  text-shadow: var(--text-legibility-shadow-strong);
 }
 
 .offer-btn.sampler:hover {
   background: var(--sage-deep);
   transform: translateY(-1px);
-  box-shadow: 0 10px 20px rgba(143, 185, 156, 0.35);
+  box-shadow: 0 10px 20px rgba(143, 158, 139, 0.35);
 }
 
 .offer-btn.pack {
@@ -784,7 +824,7 @@ section {
 .offer-btn.amazon:hover {
   background: var(--sage-text);
   transform: translateY(-1px);
-  box-shadow: 0 10px 20px rgba(44, 68, 54, 0.3);
+  box-shadow: 0 10px 20px rgba(143, 158, 139, 0.3);
 }
 
 .offer-note {
@@ -1041,5 +1081,5 @@ body.js-reveal [data-reveal].is-visible {
 .btn-tiktok:hover {
   background: var(--sage-text);
   transform: translateY(-1px);
-  box-shadow: 0 8px 18px rgba(44, 68, 54, 0.22);
+  box-shadow: 0 8px 18px rgba(143, 158, 139, 0.22);
 }
