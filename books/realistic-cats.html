@@ -13,7 +13,7 @@
   "@context": "https://schema.org",
   "@type": "Product",
   "name": "Realistic Cats Coloring Book",
-  "description": "Soft, detailed cat portraits for a calm, focused session \u2014 a low-stimulation, sensory-friendly coloring book.",
+  "description": "Soft, detailed cat portraits for a calm, focused session — a low-stimulation, sensory-friendly coloring book.",
   "image": "https://calmkidssensory.com/images/covers/realistic-cats.jpg",
   "url": "https://calmkidssensory.com/books/realistic-cats.html",
   "brand": {
@@ -43,6 +43,73 @@
 }
 </script>
 <!-- SEO-SCHEMA:END -->
+<style>
+  .offer-card.is-featured {
+    position: relative;
+    background: var(--white);
+    border: 2px solid var(--sage);
+    box-shadow: 0 8px 24px rgba(143, 158, 139, 0.16);
+    padding-top: 40px;
+  }
+
+  .offer-badge {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--sage);
+    color: var(--white);
+    padding: 5px 16px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    width: max-content;
+    text-shadow: var(--text-legibility-shadow-strong);
+    box-shadow: 0 3px 8px rgba(143, 158, 139, 0.25);
+  }
+
+  .feature-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 0 0 22px;
+    padding: 0;
+    text-align: left;
+  }
+
+  .feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+  }
+
+  .feature-item::before {
+    content: "\2713";
+    color: var(--sage-ink);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .offer-card .offer-btn {
+    margin-top: auto;
+  }
+
+  .offer-card.coming-soon {
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    color: var(--ink-faint);
+  }
+
+  .offer-card.coming-soon .offer-kicker {
+    color: var(--ink-faint);
+  }
+</style>
 </head>
 <body>
 
@@ -66,12 +133,16 @@
       <!-- SEO-PHASE3-BODY:START -->
       <p class="book-desc">One realistic subject per page keeps this a calm, screen-free sensory activity for kids who focus best without a cluttered scene.</p>
       <!-- SEO-PHASE3-BODY:END -->
-
       <div class="offer-grid">
         <div class="offer-card">
           <p class="offer-kicker">Try it first</p>
           <h3>3-Page Free Sampler</h3>
           <p>A few pages to try before you decide. Tell us where to send them.</p>
+          <ul class="feature-list">
+            <li class="feature-item">3 high-resolution PDF pages</li>
+            <li class="feature-item">Delivered straight to your inbox</li>
+            <li class="feature-item">Try the paper and coloring layout first</li>
+          </ul>
           <form class="sampler-form">
             <input type="hidden" name="book" value="Realistic Cats Coloring Book" />
             <input type="hidden" name="slug" value="realistic-cats" />
@@ -81,17 +152,28 @@
             <p class="sampler-error" hidden></p>
           </form>
         </div>
-        <div class="offer-card">
+        <div class="offer-card is-featured">
+          <span class="offer-badge">Easiest to Print</span>
           <p class="offer-kicker">Print at home</p>
           <h3>10-Page Digital Pack</h3>
           <p>The full page set as a printable download, ready whenever you want a quiet coloring session.</p>
+          <ul class="feature-list">
+            <li class="feature-item">10 pages themed to this book</li>
+            <li class="feature-item">Reprint anytime, no limits</li>
+            <li class="feature-item">Delivered instantly after checkout</li>
+          </ul>
           <p class="offer-price">$2.99</p>
-          <a class="offer-btn pack" href="https://calmexplorer.gumroad.com" target="_blank" rel="noopener noreferrer">Get the Digital Pack</a>
+          <a class="offer-btn pack" href="https://calmexplorer.gumroad.com/l/cdryax" target="_blank" rel="noopener noreferrer">Get the Digital Pack</a>
         </div>
         <div class="offer-card">
           <p class="offer-kicker">Keep it on the shelf</p>
           <h3>Paperback on Amazon</h3>
           <p>The complete, bound coloring book, printed and delivered to your door.</p>
+          <ul class="feature-list">
+            <li class="feature-item">Durable softcover binding</li>
+            <li class="feature-item">Single-sided pages, so color won't bleed through</li>
+            <li class="feature-item">Ships via Amazon</li>
+          </ul>
           <a class="offer-btn amazon" href="https://www.amazon.com/dp/B0DTV1GH98" target="_blank" rel="noopener noreferrer">Buy on Amazon</a>
         </div>
       </div>

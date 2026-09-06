@@ -13,7 +13,7 @@
   "@context": "https://schema.org",
   "@type": "Product",
   "name": "Beautiful Dragons Coloring Book",
-  "description": "Soft-lined, cozy dragon scenes for calm imaginative coloring \u2014 a low-stimulation, sensory-friendly activity, not a scary one.",
+  "description": "Soft-lined, cozy dragon scenes for calm imaginative coloring — a low-stimulation, sensory-friendly activity, not a scary one.",
   "image": "https://calmkidssensory.com/images/covers/dragons.jpg",
   "url": "https://calmkidssensory.com/books/dragons.html",
   "brand": {
@@ -43,6 +43,77 @@
 }
 </script>
 <!-- SEO-SCHEMA:END -->
+<!-- Page-scoped enhancements for this book's offer cards (hero kicker, feature
+     lists, a featured/badged card) — additive only, reuses --sage/--gold/--shadow
+     etc. from site.css so it stays visually identical to the rest of the site.
+     Not touching css/site.css itself, since this upgrade was requested for this
+     page only. -->
+<style>
+  .hero-kicker {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+
+  .offer-card.is-featured {
+    position: relative;
+    background: var(--white);
+    border: 2px solid var(--sage);
+    box-shadow: 0 8px 24px rgba(143, 158, 139, 0.16);
+    padding-top: 40px;
+  }
+
+  .offer-badge {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--sage);
+    color: var(--white);
+    padding: 5px 16px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    width: max-content;
+    text-shadow: var(--text-legibility-shadow-strong);
+    box-shadow: 0 3px 8px rgba(143, 158, 139, 0.25);
+  }
+
+  .feature-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 0 0 22px;
+    padding: 0;
+    text-align: left;
+  }
+
+  .feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+  }
+
+  .feature-item::before {
+    content: "\2713";
+    color: var(--sage-ink);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .offer-card .offer-btn {
+    margin-top: auto;
+  }
+</style>
 </head>
 <body>
 
@@ -60,6 +131,7 @@
       <img src="../images/covers/dragons.jpg" alt="Beautiful Dragons Coloring Book cover" />
     </div>
     <div class="book-hero-info">
+      <span class="hero-kicker">Therapeutic Coloring Series</span>
       <span class="age-badge">Ages 5-up</span>
       <h1>Beautiful Dragons Coloring Book</h1>
       <p class="book-desc">Soft-lined dragon scenes, more cozy than fierce, for calm imaginative coloring.</p>
@@ -72,6 +144,11 @@
           <p class="offer-kicker">Try it first</p>
           <h3>3-Page Free Sampler</h3>
           <p>A few pages to try before you decide. Tell us where to send them.</p>
+          <ul class="feature-list">
+            <li class="feature-item">3 high-resolution PDF pages</li>
+            <li class="feature-item">Delivered straight to your inbox</li>
+            <li class="feature-item">Try the paper and coloring layout first</li>
+          </ul>
           <form class="sampler-form">
             <input type="hidden" name="book" value="Beautiful Dragons Coloring Book" />
             <input type="hidden" name="slug" value="dragons" />
@@ -81,10 +158,16 @@
             <p class="sampler-error" hidden></p>
           </form>
         </div>
-        <div class="offer-card">
+        <div class="offer-card is-featured">
+          <span class="offer-badge">Easiest to Print</span>
           <p class="offer-kicker">Print at home</p>
           <h3>10-Page Digital Pack</h3>
           <p>The full page set as a printable download, ready whenever you want a quiet coloring session.</p>
+          <ul class="feature-list">
+            <li class="feature-item">10 dragon-themed pages</li>
+            <li class="feature-item">Reprint anytime, no limits</li>
+            <li class="feature-item">Delivered instantly after checkout</li>
+          </ul>
           <p class="offer-price">$2.99</p>
           <a class="offer-btn pack" href="https://calmexplorer.gumroad.com/l/wneyub" target="_blank" rel="noopener noreferrer">Get the Digital Pack</a>
         </div>
@@ -92,6 +175,11 @@
           <p class="offer-kicker">Keep it on the shelf</p>
           <h3>Paperback on Amazon</h3>
           <p>The complete, bound coloring book, printed and delivered to your door.</p>
+          <ul class="feature-list">
+            <li class="feature-item">Durable softcover binding</li>
+            <li class="feature-item">Single-sided pages, so color won't bleed through</li>
+            <li class="feature-item">Ships via Amazon</li>
+          </ul>
           <a class="offer-btn amazon" href="https://www.amazon.com/dp/B0DQPKGXFP" target="_blank" rel="noopener noreferrer">Buy on Amazon</a>
         </div>
       </div>
