@@ -93,7 +93,7 @@ var BOOKS = {
   "historic-architecture": { title: "Historic Architecture Coloring Book", amazonUrl: "https://www.amazon.com/dp/B0DS3VRFJ5" },
   "psychedelic": { title: "Psychedelic Coloring Book", amazonUrl: "https://www.amazon.com/dp/B0DS8S8W8J" },
   "samurai": { title: "Samurai Coloring Book", amazonUrl: "https://www.amazon.com/author/calmkidssensory" },
-  "koi-fish": { title: "Koi Fish Coloring Book", amazonUrl: "https://www.amazon.com/dp/B0DTV1S551" },
+  "koi-fish": { title: "Koi Fish Coloring Book", amazonUrl: "https://www.amazon.com/dp/B0HJFKPV11" },
   "realistic-cats": { title: "Realistic Cats Coloring Book", amazonUrl: "https://www.amazon.com/dp/B0DTV1GH98" },
   "anime-art": { title: "Anime Art Coloring Book", amazonUrl: "https://www.amazon.com/dp/B0DY5ZWWBX" },
   "animal-inspirational-quotes": { title: "Animal Inspirational Quotes Coloring Book", amazonUrl: "https://www.amazon.com/dp/B0DXLFFTXY" },
