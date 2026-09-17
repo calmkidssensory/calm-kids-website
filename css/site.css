@@ -528,6 +528,12 @@ section {
    as the section's accent (the closest existing token to "indigo" in the
    brand palette) so the CTA reads distinct from the book grid's sage
    buttons without introducing a new, unapproved color. */
+#videos .wrap {
+  /* Slightly wider than the site's default 1080px .wrap so a 6-across
+     desktop row (see the 1024px breakpoint below) isn't cramped. */
+  max-width: 1320px;
+}
+
 .video-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
@@ -613,10 +619,49 @@ section {
   box-shadow: 0 10px 22px rgba(185, 168, 232, 0.4);
 }
 
-@media (max-width: 640px) {
+/* Desktop: 6 compact cards per row. Text/CTA sizes step down from the
+   default card styling above so a full row fits without overflowing at a
+   ~1320px container width. */
+@media (min-width: 1024px) {
+  .video-grid {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1rem;
+  }
+
+  .video-card {
+    border-radius: 14px;
+  }
+
+  .video-body {
+    padding: 12px 10px 16px;
+  }
+
+  .video-body h3 {
+    font-size: 0.78rem;
+    line-height: 1.25;
+    margin-bottom: 4px;
+  }
+
+  .video-body p {
+    font-size: 0.68rem;
+    margin-bottom: 10px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .btn-video-cta {
+    padding: 7px 10px;
+    font-size: 0.66rem;
+  }
+}
+
+/* Mobile: 2 cards side-by-side */
+@media (max-width: 768px) {
   .video-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
+    gap: 0.75rem;
   }
 
   .video-body {
@@ -786,6 +831,39 @@ section {
   height: auto;
 }
 
+/* Wraps .book-hero-cover (+ the optional .book-hero-video below it) so
+   both stack in the hero grid's left column instead of the video landing
+   in the right column as a second grid item. */
+.book-hero-media {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Compact seller-page video embed — a small 9:16 preview under the cover,
+   reusing .video-frame's aspect-ratio/object-fit rules from the Videos
+   section above rather than a separate player treatment. Only present on
+   book pages that have a matching compiled video (see the tiktok-carousel
+   skill's website sync step); pages without one are left untouched. */
+.book-hero-video {
+  max-width: 260px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.book-hero-video .video-frame {
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(45, 42, 30, 0.06);
+}
+
+.book-hero-video-caption {
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  margin: 8px 0 0;
+}
+
 .book-hero-info h1 {
   font-size: 2.1rem;
   font-weight: 550;
@@ -811,6 +889,9 @@ section {
   .book-hero-cover {
     max-width: 320px;
     margin: 0 auto;
+  }
+  .book-hero-video {
+    max-width: 320px;
   }
 }
 
