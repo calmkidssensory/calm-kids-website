@@ -857,7 +857,7 @@ section {
    book pages that have a matching compiled video (see the tiktok-carousel
    skill's website sync step); pages without one are left untouched. */
 .book-hero-video {
-  max-width: 220px;
+  max-width: 208px;
   width: 100%;
   margin: 0 auto;
 }
@@ -936,7 +936,13 @@ section {
 .offer-card {
   background: var(--cream-deep);
   border-radius: 18px;
-  padding: 28px 24px;
+  /* Top padding is reserved "badge slot" space, same on every card whether
+     or not it actually shows a .offer-badge (which is absolutely
+     positioned and floats in this zone) — this is what keeps the kicker
+     line starting at the same y on all 3 cards regardless of which one is
+     featured. See .offer-card.is-featured (per-page style block) for the
+     badge itself. */
+  padding: 40px 24px 28px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -949,20 +955,39 @@ section {
   transform: translateY(-3px);
 }
 
+/* Kicker and title each reserve enough height for 2 lines and center
+   their (1- or 2-line) text within that space, so "Try it first" /
+   "Print at home" / "Keep it on the shelf" line up across cards even
+   though one wraps and the others don't — same idea for the titles below
+   them. */
 .offer-card .offer-kicker {
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--gold);
-  margin-bottom: 10px;
+  line-height: 1.3;
+  min-height: 1.9rem;
+  margin: 0 0 10px;
+  /* It's a <p>, so it also matches .offer-card p's flex: 1 below — without
+     this override it grows to fill leftover space like the description
+     does, instead of staying pinned to its own reserved 2-line height. */
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .offer-card h3 {
   margin: 0 0 8px;
   font-size: 1.1rem;
   font-weight: 550;
+  line-height: 1.3;
+  min-height: 2.9rem;
   color: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .offer-card p {
@@ -972,18 +997,39 @@ section {
   flex: 1;
 }
 
+/* Fixed, not flexible — only the description paragraph above should
+   absorb leftover vertical space. A flexible price line would compete
+   with it for that space and make the row above the button land at a
+   slightly different height on every card. */
 .offer-card .offer-price {
   font-weight: 700;
   color: var(--ink);
+  flex: none;
+  margin: 0 0 16px;
 }
 
+/* Every CTA in a card — submit button, link, or disabled "Coming Soon"
+   span — renders as the same full-width, same-height pill regardless of
+   text length, so the three cards' buttons read as one consistent row
+   instead of three differently-sized shapes. */
 .offer-btn {
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   text-decoration: none;
+  width: 100%;
+  min-height: 48px;
   padding: 13px 20px;
   border-radius: 999px;
   font-weight: 600;
   font-size: 0.88rem;
+  /* Explicit, not inherited: a <button> ignores the body's line-height
+     (falls back to the UA default "normal") while <a>/<span> inherit it,
+     so without this a 2-line submit button renders visibly shorter than
+     a 2-line link/span with the exact same text metrics. */
+  line-height: 1.3;
+  box-sizing: border-box;
   transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -1016,7 +1062,6 @@ nav.site-nav a,
 .btn-view,
 .btn-printables,
 .btn-tiktok,
-.offer-btn.amazon,
 nav.site-nav a:hover {
   text-shadow: var(--text-legibility-shadow-strong);
 }
@@ -1038,15 +1083,18 @@ nav.site-nav a:hover {
   box-shadow: 0 10px 20px rgba(185, 168, 232, 0.35);
 }
 
+/* Amazon's own brand orange-yellow ("smile" mark), not the site's sage —
+   this button specifically represents an Amazon purchase, so it borrows
+   Amazon's own color rather than the brand green used everywhere else. */
 .offer-btn.amazon {
-  background: var(--sage-ink);
-  color: var(--white);
+  background: #ff9900;
+  color: var(--ink);
 }
 
 .offer-btn.amazon:hover {
-  background: var(--sage-text);
+  background: #e88a00;
   transform: translateY(-1px);
-  box-shadow: 0 10px 20px rgba(143, 158, 139, 0.3);
+  box-shadow: 0 10px 20px rgba(255, 153, 0, 0.3);
 }
 
 .offer-note {
@@ -1122,15 +1170,12 @@ nav.site-nav a:hover {
   background: #f1ede3;
 }
 
+/* Same solid-pill shape/size as every other CTA (sizing comes from the
+   base .offer-btn rule above) — soft yellow reads as "an Amazon button,
+   just not ready yet" rather than a differently-shaped disabled state. */
 .offer-btn.soon {
-  display: inline-block;
-  padding: 13px 20px;
-  border-radius: 999px;
-  font-weight: 600;
-  font-size: 0.88rem;
-  background: transparent;
-  color: var(--ink-faint);
-  border: 1.5px dashed #c9c2b3;
+  background: var(--gold-soft);
+  color: var(--ink);
   cursor: default;
 }
 
