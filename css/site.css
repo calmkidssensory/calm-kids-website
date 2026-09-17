@@ -819,6 +819,17 @@ section {
   align-items: center;
 }
 
+/* Pages with a cover-only left column look best vertically centered next
+   to the text (the default above). A page with a cover + video stack
+   (.book-hero-media, see below) is tall enough on its own that centering
+   it instead pulls its top and bottom away from the info column's — so
+   those pages top-align both columns, keeping the cover's top flush with
+   the heading and the video as close to the offer cards' bottom as its
+   own fixed 9:16 aspect ratio allows. */
+.book-hero-inner:has(.book-hero-media) {
+  align-items: start;
+}
+
 .book-hero-cover {
   border-radius: 22px;
   overflow: hidden;
@@ -846,9 +857,23 @@ section {
    book pages that have a matching compiled video (see the tiktok-carousel
    skill's website sync step); pages without one are left untouched. */
 .book-hero-video {
-  max-width: 260px;
+  max-width: 220px;
   width: 100%;
   margin: 0 auto;
+}
+
+/* The "split" between the cover and the video — a short brand-gradient
+   rule (same language as .video-card::before / .section-heading h2::after)
+   so the handoff from product photo to preview clip reads as deliberate
+   rather than an accidental gap. */
+.book-hero-video::before {
+  content: "";
+  display: block;
+  width: 46px;
+  height: 2px;
+  margin: 0 auto 18px;
+  background: linear-gradient(90deg, var(--lavender-deep), var(--gold));
+  opacity: 0.8;
 }
 
 .book-hero-video .video-frame {
