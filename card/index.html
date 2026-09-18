@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ash Avi Khalili — Calm Kids Sensory</title>
+<meta name="description" content="Tap to save contact details." />
+<meta name="robots" content="noindex" />
+<link rel="icon" type="image/png" href="../images/logo.png" />
+
+<!--
+  ============================================================
+  HOW TO USE THIS FILE
+  ============================================================
+  1. The Etsy shop link is still a placeholder (href="#") — swap it
+     in once the real shop URL is confirmed (marked <!-- EDIT -- ).
+  2. Avatar currently uses the brand logo (../images/logo.png).
+     Swap for a real photo by dropping a file in website/card/ and
+     pointing the <img> at it (square image, 300x300px+ works best).
+  3. Push this to the calm-kids-website repo (or wherever this
+     site is hosted) so it goes live at:
+         https://calmkidssensory.com/card/
+     (or your own domain's equivalent path).
+  4. To hand it to someone in person, phone-only (no NFC hardware):
+       - Tap "Share" — opens your phone's native share sheet
+         (AirDrop / Nearby Share / Messages) so you can beam the
+         link directly to a nearby phone.
+       - Or tap "QR" and let them scan it with their camera app.
+       - If you're both on iPhone, iOS's built-in NameDrop
+         (Settings > AirDrop) also works by holding phones near
+         each other — separate from this page, shares your native
+         Contacts entry instead.
+     (A literal NFC "tap" needs a physical tag on one side — a
+     phone can't emulate one in software — so this skips that
+     entirely rather than requiring a sticker.)
+  ============================================================
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,400&display=swap" rel="stylesheet">
+
+<style>
+    :root {
+        --bg-1: #16241f;
+        --bg-2: #0b1512;
+        --card-line: rgba(255,255,255,0.08);
+        --text-light: #f5f2ec;
+        --text-muted: rgba(245,242,236,0.58);
+        --pill-bg: rgba(255,255,255,0.06);
+        --pill-dot: #e8a268;
+        --gold-1: #f6c89f;
+        --gold-2: #e8a268;
+        --action-bg: rgba(255,255,255,0.05);
+        --action-border: rgba(255,255,255,0.10);
+        --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+        min-height: 100vh;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        color: var(--text-light);
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 48px 20px 64px;
+        background: radial-gradient(circle at 50% 0%, var(--bg-1) 0%, var(--bg-2) 75%);
+    }
+
+    .card {
+        width: 100%;
+        max-width: 380px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .avatar {
+        width: 92px;
+        height: 92px;
+        border-radius: 50%;
+        overflow: hidden;
+        background: rgba(255,255,255,0.06);
+        border: 1px solid var(--card-line);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 18px;
+    }
+
+    .avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    h1 {
+        font-family: 'Playfair Display', serif;
+        font-weight: 600;
+        font-size: 26px;
+        letter-spacing: -0.01em;
+        margin-bottom: 8px;
+    }
+
+    .role {
+        font-size: 15px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--gold-2);
+        margin-bottom: 28px;
+    }
+
+    /* Save my contact — primary CTA */
+    .btn-save {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 17px 20px;
+        border-radius: 16px;
+        background: linear-gradient(135deg, var(--gold-1), var(--gold-2));
+        color: #2a1c0f;
+        font-weight: 700;
+        font-size: 15px;
+        text-decoration: none;
+        border: none;
+        box-shadow: 0 10px 26px rgba(232,162,104,0.28);
+        transition: var(--transition);
+        margin-bottom: 14px;
+        cursor: pointer;
+    }
+
+    .btn-save:hover { transform: translateY(-2px); box-shadow: 0 14px 30px rgba(232,162,104,0.35); }
+    .btn-save svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+    /* Share / QR row */
+    .row-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        width: 100%;
+        margin-bottom: 14px;
+    }
+
+    .action-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 14px 12px;
+        border-radius: 14px;
+        background: var(--action-bg);
+        border: 1px solid var(--action-border);
+        color: var(--text-light);
+        font-size: 13.5px;
+        font-weight: 500;
+        text-decoration: none;
+        cursor: pointer;
+        transition: var(--transition);
+    }
+
+    .action-btn:hover { border-color: rgba(255,255,255,0.22); transform: translateY(-1px); }
+    .action-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+    /* WhatsApp / Call / Email row */
+    .row-3 {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 10px;
+        width: 100%;
+        margin-bottom: 12px;
+    }
+
+    .row-3 .action-btn { flex-direction: column; padding: 14px 8px; font-size: 12px; }
+    .row-3 .action-btn svg { width: 18px; height: 18px; }
+
+    .toast {
+        font-size: 12px;
+        color: var(--text-muted);
+        min-height: 16px;
+        margin-bottom: 8px;
+        opacity: 0;
+        transition: opacity 0.2s;
+    }
+    .toast.show { opacity: 1; }
+
+    /* QR panel */
+    .qr-panel {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        background: var(--action-bg);
+        border: 1px solid var(--action-border);
+        border-radius: 16px;
+        padding: 20px;
+        margin-bottom: 24px;
+        width: 100%;
+    }
+    .qr-panel.show { display: flex; }
+    .qr-panel img { width: 180px; height: 180px; border-radius: 8px; background: #fff; padding: 8px; }
+    .qr-panel span { font-size: 11px; color: var(--text-muted); word-break: break-all; }
+
+    /* Follow Along */
+    .follow-label {
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        margin: 10px 0 14px;
+    }
+
+    .follow-list {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 32px;
+    }
+
+    .follow-item {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 13px 16px;
+        border-radius: 14px;
+        background: var(--action-bg);
+        border: 1px solid var(--action-border);
+        text-decoration: none;
+        color: var(--text-light);
+        transition: var(--transition);
+    }
+
+    .follow-item:hover { border-color: rgba(255,255,255,0.22); transform: translateY(-1px); }
+
+    .follow-icon {
+        width: 34px;
+        height: 34px;
+        border-radius: 9px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+    .follow-icon svg { width: 17px; height: 17px; fill: #fff; }
+
+    .icon-youtube { background: #FF0000; }
+    .icon-instagram { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
+    .icon-tiktok { background: #000000; }
+    .icon-pinterest { background: #E60023; }
+    .icon-etsy { background: #F1641E; }
+    .icon-amazon { background: #131A22; }
+    .icon-site { background: #ffffff; padding: 6px; }
+    .icon-site img { width: 100%; height: 100%; object-fit: contain; }
+
+    .follow-text { flex: 1; text-align: left; }
+    .follow-platform { font-size: 13.5px; font-weight: 600; margin-bottom: 1px; }
+    .follow-handle { font-size: 12px; color: var(--text-muted); }
+
+    .follow-arrow { width: 14px; height: 14px; color: var(--text-muted); flex-shrink: 0; }
+
+    footer {
+        font-size: 12px;
+        color: var(--text-muted);
+        letter-spacing: 0.02em;
+        font-style: italic;
+        font-family: 'Playfair Display', serif;
+    }
+</style>
+</head>
+<body>
+
+<div class="card">
+
+    <!-- Avatar: brand logo -->
+    <div class="avatar">
+        <img src="../images/logo.png" alt="Calm Kids Sensory logo" />
+    </div>
+
+    <h1>Ash Avi Khalili</h1>
+
+    <p class="role">Calm Kids Sensory</p>
+
+    <!-- Save my contact -->
+    <a href="#" id="saveContactBtn" class="btn-save">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+        Save my contact
+    </a>
+
+    <div class="row-2">
+        <button type="button" class="action-btn" id="shareBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="13.5" x2="15.4" y2="17.5"/><line x1="15.4" y1="6.5" x2="8.6" y2="10.5"/></svg>
+            Share
+        </button>
+        <button type="button" class="action-btn" id="qrBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><line x1="14" y1="14" x2="14" y2="21"/><line x1="21" y1="14" x2="21" y2="21"/><line x1="17.5" y1="14" x2="17.5" y2="17.5"/><line x1="14" y1="17.5" x2="21" y2="17.5"/></svg>
+            QR
+        </button>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <div class="qr-panel" id="qrPanel">
+        <img id="qrImg" alt="QR code for this card" />
+        <span id="qrUrl"></span>
+    </div>
+
+    <div class="row-3">
+        <a href="https://wa.me/9170584568456" class="action-btn" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.06-1.33A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm5.2 14.24c-.22.62-1.28 1.19-1.76 1.24-.47.05-.9.22-3.04-.63-2.58-1.03-4.24-3.58-4.37-3.75-.13-.17-1.04-1.38-1.04-2.63 0-1.25.66-1.87.89-2.13.22-.25.5-.32.66-.32.17 0 .33 0 .48.01.15.01.35-.06.55.42.22.52.74 1.8.8 1.93.06.13.1.28.02.45-.08.17-.13.28-.25.43-.13.15-.27.34-.38.46-.13.13-.27.28-.11.55.15.27.68 1.12 1.46 1.82 1 .9 1.85 1.18 2.12 1.31.27.13.43.11.59-.07.17-.17.7-.81.89-1.09.19-.27.38-.23.63-.14.25.1 1.6.75 1.87.89.27.13.45.2.51.32.07.11.07.66-.15 1.28z"/></svg>
+            WhatsApp
+        </a>
+        <a href="tel:+15167246297" class="action-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            Call
+        </a>
+        <a href="mailto:explore@calmkidssensory.com" class="action-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z" stroke="none"/><path d="M22 6l-10 7L2 6" fill="none"/><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/></svg>
+            Email
+        </a>
+    </div>
+
+    <p class="follow-label">Follow Along</p>
+
+    <div class="follow-list">
+        <a href="https://calmkidssensory.com" class="follow-item" target="_blank" rel="noopener noreferrer">
+            <span class="follow-icon icon-site">
+                <img src="../images/logo.png" alt="" />
+            </span>
+            <span class="follow-text">
+                <span class="follow-platform">Website</span>
+                <span class="follow-handle">calmkidssensory.com</span>
+            </span>
+            <svg class="follow-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+        </a>
+
+        <a href="https://www.amazon.com/author/calmkidssensory" class="follow-item" target="_blank" rel="noopener noreferrer">
+            <span class="follow-icon icon-amazon">
+                <svg viewBox="0 0 24 24"><path d="M.045 18.02c.072-.116.187-.124.348-.022 3.636 2.11 7.594 3.166 11.87 3.166 2.852 0 5.668-.533 8.447-1.595l.315-.14c.138-.06.234-.1.293-.13.226-.088.39-.046.525.13.12.174.09.336-.12.48-.256.19-.6.41-1.006.654-1.244.743-2.64 1.316-4.185 1.726a17.617 17.617 0 01-10.951-.577 17.88 17.88 0 01-5.43-3.35c-.1-.074-.151-.15-.151-.22 0-.047.021-.09.051-.13zm6.565-6.218c0-1.005.247-1.863.743-2.577.495-.71 1.17-1.25 2.04-1.615.796-.335 1.756-.575 2.912-.72.39-.046 1.033-.103 1.92-.174v-.37c0-.93-.105-1.558-.3-1.875-.302-.43-.78-.65-1.44-.65h-.182c-.48.046-.896.196-1.246.46-.35.27-.575.63-.675 1.096-.06.3-.206.465-.435.51l-2.52-.315c-.248-.06-.372-.18-.372-.39 0-.046.007-.09.022-.15.247-1.29.855-2.25 1.82-2.88.976-.616 2.1-.975 3.39-1.05h.54c1.65 0 2.957.434 3.888 1.29.135.15.27.3.405.48.12.165.224.314.283.45.075.134.15.33.195.57.06.254.105.42.135.51.03.104.062.3.076.615.01.313.02.493.02.553v5.28c0 .376.06.72.165 1.036.105.313.21.54.315.674l.51.674c.09.136.136.256.136.36 0 .12-.06.226-.18.314-1.2 1.05-1.86 1.62-1.963 1.71-.165.135-.375.15-.63.045a6.062 6.062 0 01-.526-.496l-.31-.347a9.391 9.391 0 01-.317-.42l-.3-.435c-.81.886-1.603 1.44-2.4 1.665-.494.15-1.093.227-1.83.227-1.11 0-2.04-.343-2.76-1.034-.72-.69-1.08-1.665-1.08-2.94l-.05-.076zm3.753-.438c0 .566.14 1.02.425 1.364.285.34.675.512 1.155.512.045 0 .106-.007.195-.02.09-.016.134-.023.166-.023.614-.16 1.08-.553 1.424-1.178.165-.28.285-.58.36-.91.09-.32.12-.59.135-.8.015-.195.015-.54.015-1.005v-.54c-.84 0-1.484.06-1.92.18-1.275.36-1.92 1.17-1.92 2.43l-.035-.02zm9.162 7.027c.03-.06.075-.11.132-.17.362-.243.714-.41 1.05-.5a8.094 8.094 0 011.612-.24c.14-.012.28 0 .41.03.65.06 1.05.168 1.172.33.063.09.099.228.099.39v.15c0 .51-.149 1.11-.424 1.8-.278.69-.664 1.248-1.156 1.68-.073.06-.14.09-.197.09-.03 0-.06 0-.09-.012-.09-.044-.107-.12-.064-.24.54-1.26.806-2.143.806-2.64 0-.15-.03-.27-.087-.344-.145-.166-.55-.257-1.224-.257-.243 0-.533.016-.87.046-.363.045-.7.09-1 .135-.09 0-.148-.014-.18-.044-.03-.03-.036-.047-.02-.077 0-.017.006-.03.02-.063v-.06z"/></svg>
+            </span>
+            <span class="follow-text">
+                <span class="follow-platform">Amazon</span>
+                <span class="follow-handle">Author Page</span>
+            </span>
+            <svg class="follow-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+        </a>
+
+        <a href="https://www.youtube.com/@calmkidssensory" class="follow-item" target="_blank" rel="noopener noreferrer">
+            <span class="follow-icon icon-youtube">
+                <svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2 31 31 0 000 12a31 31 0 00.5 5.8 3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1A31 31 0 0024 12a31 31 0 00-.5-5.8zM9.6 15.6V8.4L15.8 12z"/></svg>
+            </span>
+            <span class="follow-text">
+                <span class="follow-platform">YouTube</span>
+                <span class="follow-handle">Calm Kids Sensory</span>
+            </span>
+            <svg class="follow-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+        </a>
+
+        <a href="https://www.instagram.com/calmkidssensory" class="follow-item" target="_blank" rel="noopener noreferrer">
+            <span class="follow-icon icon-instagram">
+                <svg viewBox="0 0 24 24"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </span>
+            <span class="follow-text">
+                <span class="follow-platform">Instagram</span>
+                <span class="follow-handle">@calmkidssensory</span>
+            </span>
+            <svg class="follow-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+        </a>
+
+        <a href="https://www.tiktok.com/@calmkidssensory" class="follow-item" target="_blank" rel="noopener noreferrer">
+            <span class="follow-icon icon-tiktok">
+                <svg viewBox="0 0 24 24"><path d="M16.6 5.82s.51.5 0 0A4.278 4.278 0 0 1 15.54 3h-3.09v12.4a2.592 2.592 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6 0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64 0 3.33 2.76 5.7 5.69 5.7 3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3s-1.88.09-3.24-1.48z"/></svg>
+            </span>
+            <span class="follow-text">
+                <span class="follow-platform">TikTok</span>
+                <span class="follow-handle">@calmkidssensory</span>
+            </span>
+            <svg class="follow-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+        </a>
+
+        <a href="https://www.pinterest.com/CalmKidsSensory" class="follow-item" target="_blank" rel="noopener noreferrer">
+            <span class="follow-icon icon-pinterest">
+                <svg viewBox="0 0 384 512"><path d="M204 6.5C101.4 6.5 0 74.9 0 185.6 0 256 39.6 296 63.6 296c9.9 0 15.6-27.6 15.6-35.4 0-9.3-23.7-29.1-23.7-67.8 0-80.4 61.2-137.4 140.4-137.4 68.1 0 118.5 38.7 118.5 109.8 0 53.1-21.3 152.7-90.3 152.7-24.9 0-46.2-18-46.2-43.8 0-37.8 26.4-74.4 26.4-113.4 0-66.2-93.9-54.2-93.9 25.8 0 16.8 1.8 35.4 9.6 50.4-14.1 60.6-42.9 151.2-42.9 213.6 0 19.5 2.7 38.7 4.5 58.2 3.6 4.2 1.8 3.6 7.5 1.5 55.5-76.5 53.7-91.5 79.5-191.7 13.8 26.4 51.3 40.8 79.8 40.8 101.7 0 154.5-99.9 154.5-198.6C384 62.7 297.3 6.5 204 6.5z"/></svg>
+            </span>
+            <span class="follow-text">
+                <span class="follow-platform">Pinterest</span>
+                <span class="follow-handle">CalmKidsSensory</span>
+            </span>
+            <svg class="follow-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+        </a>
+
+        <!-- EDIT: Etsy shop link — placeholder until the real shop URL is confirmed -->
+        <a href="#" class="follow-item" target="_blank" rel="noopener noreferrer">
+            <span class="follow-icon icon-etsy">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M6 2l1.5 3M18 2l-1.5 3M3 8h18l-1.5 12a2 2 0 01-2 1.8H6.5a2 2 0 01-2-1.8L3 8z"/><path d="M8 12h8M8 16h5"/></svg>
+            </span>
+            <span class="follow-text">
+                <span class="follow-platform">Etsy</span>
+                <span class="follow-handle">Calm Kids Sensory Shop</span>
+            </span>
+            <svg class="follow-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+        </a>
+    </div>
+
+    <footer>See it. Say it. Create it.</footer>
+
+</div>
+
+<script>
+(function () {
+    // ---- vCard fields (kept in one place for easy editing) ----
+    var contact = {
+        firstName: "Ash Avi",
+        lastName: "Khalili",
+        org: "Calm Kids Sensory",
+        phone: "+15167246297",
+        whatsapp: "+9170584568456",
+        email: "explore@calmkidssensory.com",
+        website: "https://calmkidssensory.com"
+    };
+
+    var vcard = [
+        "BEGIN:VCARD",
+        "VERSION:3.0",
+        "N:" + contact.lastName + ";" + contact.firstName + ";;;",
+        "FN:" + contact.firstName + " " + contact.lastName,
+        "ORG:" + contact.org,
+        "TEL;TYPE=CELL:" + contact.phone,
+        "TEL;TYPE=WORK:" + contact.whatsapp,
+        "EMAIL:" + contact.email,
+        "URL:" + contact.website,
+        "NOTE:Second number is WhatsApp",
+        "END:VCARD"
+    ].join("\r\n");
+
+    var saveBtn = document.getElementById("saveContactBtn");
+    saveBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+        var blob = new Blob([vcard], { type: "text/vcard" });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement("a");
+        a.href = url;
+        a.download = contact.firstName + "_" + contact.lastName + ".vcf";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
+    });
+
+    var toast = document.getElementById("toast");
+    function showToast(msg) {
+        toast.textContent = msg;
+        toast.classList.add("show");
+        setTimeout(function () { toast.classList.remove("show"); }, 2200);
+    }
+
+    document.getElementById("shareBtn").addEventListener("click", function () {
+        var url = window.location.href;
+        if (navigator.share) {
+            navigator.share({ title: document.title, url: url }).catch(function () {});
+        } else if (navigator.clipboard) {
+            navigator.clipboard.writeText(url).then(function () { showToast("Link copied"); });
+        } else {
+            showToast(url);
+        }
+    });
+
+    var qrPanel = document.getElementById("qrPanel");
+    var qrImg = document.getElementById("qrImg");
+    var qrUrlLabel = document.getElementById("qrUrl");
+    var qrLoaded = false;
+    document.getElementById("qrBtn").addEventListener("click", function () {
+        var url = window.location.href;
+        if (!qrLoaded) {
+            qrImg.src = "https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=" + encodeURIComponent(url);
+            qrUrlLabel.textContent = url;
+            qrLoaded = true;
+        }
+        qrPanel.classList.toggle("show");
+    });
+})();
+</script>
+
+</body>
+</html>
