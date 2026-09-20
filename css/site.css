@@ -840,6 +840,8 @@ section {
 .book-hero-cover img {
   width: 100%;
   height: auto;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
 }
 
 /* Wraps .book-hero-cover (+ the optional .book-hero-video below it) so
@@ -887,6 +889,9 @@ section {
   font-size: 0.78rem;
   color: var(--ink-soft);
   margin: 8px 0 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .book-hero-info h1 {
