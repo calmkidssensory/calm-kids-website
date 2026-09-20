@@ -822,19 +822,11 @@ section {
 /* Pages with a cover-only left column look best vertically centered next
    to the text (the default above). A page with a cover + video stack
    (.book-hero-media, see below) needs its column stretched to the full
-   grid-row height instead — combined with .book-hero-media's
-   `justify-content: space-between` below (which puts all the leftover
-   space between the cover and the video, none after it) and
-   .book-hero-video-caption's margin-top matching .offer-note's margin-top
-   exactly (20px, both below), this pins .video-frame's bottom edge level
-   with the three .offer-card boxes' bottom edge, and the caption's row
-   level with .offer-note's row — on every book, regardless of how that
-   book's cover aspect ratio or caption/paragraph lengths compare. Fixed
+   grid-row height instead, so .book-hero-video (absolutely positioned,
+   see below) has the full height to anchor its bottom against. Fixed
    2026-09-20 — the previous top-align approach only got the video "close"
-   to level, and on Heavy Duty Vehicles the gap was large enough that Ash
-   flagged it as visibly unaligned; the first fix attempt matched the
-   video block to the info column's outer bottom rather than to the
-   offer-cards specifically, which still left a visible few-pixel gap. */
+   to level with the offer-cards column, and on Heavy Duty Vehicles the
+   gap was large enough that Ash flagged it as visibly unaligned. */
 .book-hero-inner:has(.book-hero-media) {
   align-items: stretch;
 }
@@ -855,22 +847,32 @@ section {
 
 /* Wraps .book-hero-cover (+ the optional .book-hero-video below it) so
    both stack in the hero grid's left column instead of the video landing
-   in the right column as a second grid item. */
+   in the right column as a second grid item. Positioned so .book-hero-video
+   can anchor to its bottom edge (see below) — .book-hero-cover stays in
+   normal flow at the top. */
 .book-hero-media {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  justify-content: space-between;
+  position: relative;
 }
 
 /* Compact seller-page video embed — a small 9:16 preview under the cover,
    reusing .video-frame's aspect-ratio/object-fit rules from the Videos
    section above rather than a separate player treatment. Only present on
    book pages that have a matching compiled video (see the tiktok-carousel
-   skill's website sync step); pages without one are left untouched. */
+   skill's website sync step); pages without one are left untouched.
+   Absolutely positioned to the bottom of .book-hero-media (fixed
+   2026-09-20 — a flex `justify-content: space-between` approach tried
+   first only redistributes space when the cover + video's natural
+   combined height is *shorter* than the stretched column; on Simple
+   Unicorn the natural height happened to match exactly, leaving zero
+   slack to redistribute and the video 33px off the offer-cards' bottom.
+   Anchoring directly to the container's bottom edge holds regardless of
+   any book's content-length coincidences.) */
 .book-hero-video {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
   max-width: 208px;
-  width: 100%;
   margin: 0 auto;
 }
 
