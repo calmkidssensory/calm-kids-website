@@ -821,13 +821,22 @@ section {
 
 /* Pages with a cover-only left column look best vertically centered next
    to the text (the default above). A page with a cover + video stack
-   (.book-hero-media, see below) is tall enough on its own that centering
-   it instead pulls its top and bottom away from the info column's — so
-   those pages top-align both columns, keeping the cover's top flush with
-   the heading and the video as close to the offer cards' bottom as its
-   own fixed 9:16 aspect ratio allows. */
+   (.book-hero-media, see below) needs its column stretched to the full
+   grid-row height instead — combined with .book-hero-media's
+   `justify-content: space-between` below (which puts all the leftover
+   space between the cover and the video, none after it) and
+   .book-hero-video-caption's margin-top matching .offer-note's margin-top
+   exactly (20px, both below), this pins .video-frame's bottom edge level
+   with the three .offer-card boxes' bottom edge, and the caption's row
+   level with .offer-note's row — on every book, regardless of how that
+   book's cover aspect ratio or caption/paragraph lengths compare. Fixed
+   2026-09-20 — the previous top-align approach only got the video "close"
+   to level, and on Heavy Duty Vehicles the gap was large enough that Ash
+   flagged it as visibly unaligned; the first fix attempt matched the
+   video block to the info column's outer bottom rather than to the
+   offer-cards specifically, which still left a visible few-pixel gap. */
 .book-hero-inner:has(.book-hero-media) {
-  align-items: start;
+  align-items: stretch;
 }
 
 .book-hero-cover {
@@ -851,6 +860,7 @@ section {
   display: flex;
   flex-direction: column;
   gap: 18px;
+  justify-content: space-between;
 }
 
 /* Compact seller-page video embed — a small 9:16 preview under the cover,
@@ -888,7 +898,7 @@ section {
   text-align: center;
   font-size: 0.78rem;
   color: var(--ink-soft);
-  margin: 8px 0 0;
+  margin: 20px 0 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
