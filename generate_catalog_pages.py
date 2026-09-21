@@ -334,7 +334,10 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 
 <header class="site-header compact">
   <div class="header-inner wrap" style="text-align:left; max-width: 1080px;">
-    <a class="back-link" href="../index.html">&larr; All coloring books</a>
+    <div class="header-links">
+      <a class="back-link" href="../index.html">&larr; All coloring books</a>
+      <a class="back-link" href="../blog/index.html">Blog</a>
+    </div>
     <p class="brand-mark"><a href="../index.html">Calm Kids Sensory</a></p>
     <p class="brand-sub">PikMe Publishing</p>
   </div>
@@ -382,7 +385,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 {amazon_card}
       </div>
       <p class="offer-note">Digital downloads are for personal, print-at-home use.</p>
-    </div>
+{related_reading_block}    </div>
   </div>
 </section>
 
@@ -474,6 +477,63 @@ VIDEO_SCHEMA_BLOCK = """<script type="application/ld+json">
 </script>
 """
 
+# Book slug -> list of blog post slugs (website/blog/<slug>.html) covering
+# that book's cluster(s). A book can belong to more than one cluster; the
+# hero back-link below shows at most 2. Only books this script actually
+# manages (i.e. published in gumroad-links.json) get an automatic
+# "Related reading" block this way — several cluster-post matches live on
+# hand-built pages outside this script's catalog (no Gumroad entry) and
+# were deliberately left as a one-way link (blog -> book only), see the
+# 2026-09-21 blog-launch session.
+CLUSTER_MAP: dict[str, list[str]] = {
+    "flowers-butterflies-quotes": ["coloring-for-focus-and-reflection"],
+    "mosaic-medieval-designs": ["coloring-for-focus-and-reflection"],
+    "toddler-coloring-book": ["first-coloring-books-for-toddlers"],
+    "coloring-young-girls": ["first-coloring-books-for-toddlers"],
+    "coloring-young-boys": ["first-coloring-books-for-toddlers"],
+    "cute-cats-toddlers": ["first-coloring-books-for-toddlers"],
+    "birds": ["realistic-coloring-books-for-kids-and-adults"],
+    "dogs": ["realistic-coloring-books-for-kids-and-adults"],
+    "koi-fish": ["realistic-coloring-books-for-kids-and-adults"],
+    "zoo-animals": ["realistic-coloring-books-for-kids-and-adults"],
+    "roosters": ["realistic-coloring-books-for-kids-and-adults"],
+    "orchids": ["realistic-coloring-books-for-kids-and-adults"],
+    "wild-parakeets": ["realistic-coloring-books-for-kids-and-adults"],
+    "wild-flowers": ["realistic-coloring-books-for-kids-and-adults"],
+    "jungle-mammals": ["realistic-coloring-books-for-kids-and-adults"],
+    "reptiles-amphibians": ["realistic-coloring-books-for-kids-and-adults"],
+    "relaxing-animals": ["realistic-coloring-books-for-kids-and-adults"],
+    "relaxing-landscapes": ["realistic-coloring-books-for-kids-and-adults"],
+    "realistic-cats": ["realistic-coloring-books-for-kids-and-adults"],
+    "underwater-world": ["realistic-coloring-books-for-kids-and-adults"],
+    "beautiful-houses": ["realistic-coloring-books-for-kids-and-adults"],
+    "historic-architecture": ["realistic-coloring-books-for-kids-and-adults"],
+}
+
+BLOG_TITLES: dict[str, str] = {
+    "coloring-for-focus-and-reflection": "Coloring for Focus and Reflection",
+    "first-coloring-books-for-toddlers": "First Coloring Books for Toddlers",
+    "mazes-and-puzzles-for-quiet-focus": "Mazes and Puzzles for Quiet Focus",
+    "realistic-coloring-books-for-kids-and-adults": "Realistic Coloring Books for Kids and Adults",
+}
+
+RELATED_READING_BLOCK = """      <div class="related-reading">
+        <p class="related-reading-label">Related reading</p>
+{links}
+      </div>
+"""
+
+
+def build_related_reading_block(slug: str) -> str:
+    blog_slugs = CLUSTER_MAP.get(slug, [])[:2]
+    if not blog_slugs:
+        return ""
+    links = "\n".join(
+        f'        <a href="../blog/{blog_slug}.html">{BLOG_TITLES[blog_slug]}</a>'
+        for blog_slug in blog_slugs
+    )
+    return RELATED_READING_BLOCK.format(links=links)
+
 
 def json_escape(s: str) -> str:
     return s.replace("\\", "\\\\").replace('"', '\\"')
@@ -521,6 +581,8 @@ def render_page(rec: BookRecord) -> str:
         hero_media_block = HERO_MEDIA_NO_VIDEO.format(cover_src=rec.cover_src, title=rec.title)
         video_schema_block = ""
 
+    related_reading_block = build_related_reading_block(rec.slug)
+
     return PAGE_TEMPLATE.format(
         title=rec.title,
         title_tag_text=rec.title_tag_text,
@@ -528,6 +590,7 @@ def render_page(rec: BookRecord) -> str:
         title_attr=html_escape_attr(rec.title),
         meta_description=html_escape_attr(rec.meta_description),
         meta_description_json=json_escape(rec.meta_description),
+        related_reading_block=related_reading_block,
         cover_filename=cover_filename,
         cover_src=rec.cover_src,
         age=rec.age,

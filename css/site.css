@@ -1419,3 +1419,97 @@ body.js-reveal [data-reveal].is-visible {
   transform: translateY(-1px);
   box-shadow: 0 8px 18px rgba(143, 158, 139, 0.22);
 }
+
+/* Blog */
+.header-links {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.header-links .back-link {
+  margin-bottom: 0;
+}
+
+.blog-intro {
+  padding-bottom: 24px;
+}
+
+.blog-intro h1 {
+  font-family: var(--font-display);
+  font-size: 2.3rem;
+  font-weight: 550;
+  color: var(--sage-ink);
+  margin: 0 0 16px;
+  max-width: 760px;
+}
+
+.blog-dek {
+  color: var(--ink-soft);
+  font-size: 1.05rem;
+  max-width: 680px;
+  margin: 0;
+}
+
+.blog-article {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.blog-article h2 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 550;
+  color: var(--sage-ink);
+  margin: 0 0 12px;
+}
+
+.blog-article .blog-section {
+  max-width: 720px;
+  margin: 0 0 36px;
+}
+
+.blog-article .blog-section p {
+  color: var(--ink-soft);
+  margin: 0 0 14px;
+}
+
+.blog-article .blog-section p:last-child {
+  margin-bottom: 0;
+}
+
+/* Blog listing page cards (books/blog-post-card reuse .book-card's shape) */
+.blog-post-card p.blog-post-teaser {
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+  margin: 0 0 12px;
+}
+
+/* Book-page "Related reading" back-link to its cluster post(s) */
+.related-reading {
+  margin: 24px 0 0;
+  padding-top: 20px;
+  border-top: 1px solid rgba(45, 42, 30, 0.1);
+}
+
+.related-reading .related-reading-label {
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-faint);
+  margin: 0 0 8px;
+}
+
+.related-reading a {
+  display: inline-block;
+  color: var(--sage-ink);
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  margin: 0 14px 4px 0;
+}
+
+.related-reading a:hover {
+  text-decoration: underline;
+}
