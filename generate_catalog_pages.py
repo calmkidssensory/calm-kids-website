@@ -71,6 +71,7 @@ from pathlib import Path
 SCRIPT_DIR = Path(__file__).resolve().parent          # website/
 BOOKS_DIR = SCRIPT_DIR / "books"
 IMAGES_DIR = SCRIPT_DIR / "images" / "covers"
+VIDEOS_DIR = SCRIPT_DIR / "videos"
 DEFAULT_DATA_DIR = SCRIPT_DIR.parent                   # video-editor/ (sibling repo root)
 
 BLUEPRINT_SLUG = "dragons"  # never a write target — it's the hand-tuned source template
@@ -217,6 +218,14 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 <meta name="description" content="{meta_description}" />
 <link rel="icon" type="image/png" href="../images/logo.png" />
 <link rel="stylesheet" href="../css/site.css" />
+<!-- OG-TWITTER:START -->
+<meta property="og:title" content="{title_tag_text} &mdash; Calm Kids Sensory" />
+<meta property="og:description" content="{meta_description}" />
+<meta property="og:image" content="https://calmkidssensory.com/images/covers/{cover_filename}" />
+<meta property="og:url" content="https://calmkidssensory.com/books/{slug}.html" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary_large_image" />
+<!-- OG-TWITTER:END -->
 <!-- SEO-SCHEMA:START -->
 <script type="application/ld+json">
 {{
@@ -252,7 +261,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
   ]
 }}
 </script>
-<!-- SEO-SCHEMA:END -->
+{video_schema_block}<!-- SEO-SCHEMA:END -->
 <style>
   .offer-card.is-featured {{
     position: relative;
@@ -333,9 +342,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 
 <section class="book-hero">
   <div class="wrap book-hero-inner">
-    <div class="book-hero-cover">
-      <img src="{cover_src}" alt="{title} cover" />
-    </div>
+{hero_media_block}
     <div class="book-hero-info">
       <span class="age-badge">{age}</span>
       <h1>{title}</h1>
@@ -423,7 +430,49 @@ AMAZON_CARD_COMING_SOON = """        <div class="offer-card coming-soon">
           <p class="offer-kicker">Keep it on the shelf</p>
           <h3>Paperback &mdash; Coming Soon</h3>
           <p>A bound paperback edition is on its way to Amazon. The digital pack works today if you'd like to print at home in the meantime.</p>
+          <span class="offer-btn soon" aria-disabled="true">Coming Soon</span>
         </div>"""
+
+# Compact seller-page video embed — same markup the tiktok-carousel skill's
+# website-sync step hand-inserts today (see website/css/site.css's
+# .book-hero-media / .book-hero-video comments). Only rendered when a
+# matching compiled video actually exists on disk for this slug, so a book
+# with no video yet keeps the plain (unwrapped) .book-hero-cover layout the
+# CSS's `.book-hero-inner:has(.book-hero-media)` rule depends on.
+HERO_MEDIA_WITH_VIDEO = """    <div class="book-hero-media">
+      <div class="book-hero-cover">
+        <img src="{cover_src}" alt="{title} cover" />
+      </div>
+      <!-- SELLER-VIDEO:START -->
+      <div class="book-hero-video">
+        <div class="video-frame">
+          <video controls preload="metadata" poster="../images/covers/{slug}-video-poster.jpg" playsinline>
+            <source src="../videos/tiktok_{slug}_slideshow.mp4" type="video/mp4" />
+            Your browser does not support embedded video.
+          </video>
+        </div>
+        <p class="book-hero-video-caption">A quiet look inside, straight from the book.</p>
+        <a class="book-hero-video-btn" href="../videos/tiktok_{slug}_slideshow.mp4" target="_blank" rel="noopener noreferrer">Watch the Preview</a>
+      </div>
+      <!-- SELLER-VIDEO:END -->
+    </div>"""
+
+HERO_MEDIA_NO_VIDEO = """    <div class="book-hero-cover">
+      <img src="{cover_src}" alt="{title} cover" />
+    </div>"""
+
+VIDEO_SCHEMA_BLOCK = """<script type="application/ld+json">
+{{
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": "{title_json}",
+  "description": "{meta_description_json}",
+  "thumbnailUrl": "https://calmkidssensory.com/images/covers/{slug}-video-poster.jpg",
+  "contentUrl": "https://calmkidssensory.com/videos/tiktok_{slug}_slideshow.mp4",
+  "uploadDate": "{upload_date}"
+}}
+</script>
+"""
 
 
 def json_escape(s: str) -> str:
@@ -454,6 +503,24 @@ def render_page(rec: BookRecord) -> str:
 
     cover_filename = rec.cover_src.rsplit("/", 1)[-1]
 
+    video_path = VIDEOS_DIR / f"tiktok_{rec.slug}_slideshow.mp4"
+    has_video = video_path.exists()
+
+    if has_video:
+        hero_media_block = HERO_MEDIA_WITH_VIDEO.format(
+            cover_src=rec.cover_src, title=rec.title, slug=rec.slug
+        )
+        upload_date = datetime.fromtimestamp(video_path.stat().st_mtime).strftime("%Y-%m-%d")
+        video_schema_block = VIDEO_SCHEMA_BLOCK.format(
+            title_json=json_escape(rec.title),
+            meta_description_json=json_escape(rec.meta_description),
+            slug=rec.slug,
+            upload_date=upload_date,
+        )
+    else:
+        hero_media_block = HERO_MEDIA_NO_VIDEO.format(cover_src=rec.cover_src, title=rec.title)
+        video_schema_block = ""
+
     return PAGE_TEMPLATE.format(
         title=rec.title,
         title_tag_text=rec.title_tag_text,
@@ -468,6 +535,8 @@ def render_page(rec: BookRecord) -> str:
         gumroad_url=rec.gumroad_url,
         description_block=description_block,
         amazon_card=amazon_card,
+        hero_media_block=hero_media_block,
+        video_schema_block=video_schema_block,
     )
 
 
