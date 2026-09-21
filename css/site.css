@@ -414,6 +414,24 @@ section {
   transform: scale(1.045);
 }
 
+/* Desktop-only 10% size reduction (Ash's request, 2026-09-21). Scoped
+   above the existing 640px mobile breakpoint (see that block's
+   `.book-grid` override below) so phones are untouched — shrinking the
+   box itself (not just the img) keeps its 3/4 aspect-ratio intact and
+   uniformly reduces both width and height. `.book-card` still sizes each
+   grid column equally via `.book-grid`'s `1fr` tracks, so every cover in
+   a row shrinks by the same amount and row alignment is unaffected;
+   `align-self: center` centers the now-narrower box within its card
+   (a flex column, so this is the cross-axis alignment property, not
+   `justify-self`, which only applies to grid items). */
+@media (min-width: 641px) {
+  .book-cover {
+    width: 90%;
+    margin: 0 auto;
+    align-self: center;
+  }
+}
+
 .book-body {
   padding: 22px 20px 26px;
   display: flex;
@@ -845,6 +863,30 @@ section {
   height: auto;
   aspect-ratio: 3 / 4;
   object-fit: cover;
+}
+
+/* Desktop-only 10% size reduction (Ash's request, 2026-09-21), scoped
+   just above the 760px mobile breakpoint below (which already sets its
+   own `max-width: 320px` for this element — deliberately not touched, so
+   mobile sizing is unaffected). Shrinking `.book-hero-cover` itself
+   (not just its img) keeps the `aspect-ratio: 3/4` img sizing intact and
+   scales the whole framed box (border/shadow/radius included)
+   uniformly. `margin: 0 auto` centers it whether the box is a direct
+   CSS-grid child (plain-cover pages, `.book-hero-inner`'s default
+   `justify-items: stretch` needs the explicit `justify-self: center`
+   override once width is no longer 100%) or a flex child inside
+   `.book-hero-media` (cover+video pages, where `align-self: center` is
+   the cross-axis property that matters instead — see that class's own
+   comments above for why the flex-column mechanic doesn't care about
+   this box's width, only its height, when pinning the video to the
+   bottom). */
+@media (min-width: 761px) {
+  .book-hero-cover {
+    width: 90%;
+    margin: 0 auto;
+    justify-self: center;
+    align-self: center;
+  }
 }
 
 /* Wraps .book-hero-cover (+ the optional .book-hero-divider and
