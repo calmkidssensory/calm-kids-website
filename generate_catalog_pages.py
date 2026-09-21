@@ -385,9 +385,9 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 {amazon_card}
       </div>
       <p class="offer-note">Digital downloads are for personal, print-at-home use.</p>
-{related_reading_block}    </div>
+    </div>
   </div>
-</section>
+{related_reading_block}</section>
 
 <footer class="site-footer" id="footer">
   <div class="wrap">
@@ -517,10 +517,18 @@ BLOG_TITLES: dict[str, str] = {
     "realistic-coloring-books-for-kids-and-adults": "Realistic Coloring Books for Kids and Adults",
 }
 
-RELATED_READING_BLOCK = """      <div class="related-reading">
-        <p class="related-reading-label">Related reading</p>
+# A sibling of .book-hero-inner, NOT nested inside .book-hero-info — that
+# column is one side of a stretched two-column grid that .book-hero-video
+# anchors its absolute bottom position against (see .book-hero-inner:has(
+# .book-hero-media) in site.css). Nesting this block inside .book-hero-info
+# was tried first (2026-09-21) and made that column taller, which dragged
+# the video's bottom-anchor down with it, visibly detaching it from the
+# offer-cards row. Keeping it outside the grid, as its own full-width strip,
+# cannot affect that alignment no matter how long the link list gets.
+RELATED_READING_BLOCK = """  <div class="wrap related-reading">
+    <p class="related-reading-label">Related reading</p>
 {links}
-      </div>
+  </div>
 """
 
 
@@ -529,7 +537,7 @@ def build_related_reading_block(slug: str) -> str:
     if not blog_slugs:
         return ""
     links = "\n".join(
-        f'        <a href="../blog/{blog_slug}.html">{BLOG_TITLES[blog_slug]}</a>'
+        f'    <a href="../blog/{blog_slug}.html">{BLOG_TITLES[blog_slug]}</a>'
         for blog_slug in blog_slugs
     )
     return RELATED_READING_BLOCK.format(links=links)

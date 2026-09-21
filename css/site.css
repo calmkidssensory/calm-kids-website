@@ -1487,9 +1487,13 @@ body.js-reveal [data-reveal].is-visible {
 }
 
 /* Book-page "Related reading" back-link to its cluster post(s) */
+/* Sits as a full-width sibling below .book-hero-inner, not nested inside
+   .book-hero-info — see the comment on RELATED_READING_BLOCK in
+   generate_catalog_pages.py for why nesting it there broke the
+   .book-hero-video bottom-anchor alignment. */
 .related-reading {
-  margin: 24px 0 0;
-  padding-top: 20px;
+  margin: 40px 0 0;
+  padding-top: 24px;
   border-top: 1px solid rgba(45, 42, 30, 0.1);
 }
 
