@@ -509,6 +509,7 @@ CLUSTER_MAP: dict[str, list[str]] = {
     "underwater-world": ["realistic-coloring-books-for-kids-and-adults"],
     "beautiful-houses": ["realistic-coloring-books-for-kids-and-adults"],
     "historic-architecture": ["realistic-coloring-books-for-kids-and-adults"],
+    "heavy-duty-vehicles": ["realistic-coloring-books-for-kids-and-adults"],
 }
 
 BLOG_TITLES: dict[str, str] = {
