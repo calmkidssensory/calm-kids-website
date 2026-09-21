@@ -819,18 +819,6 @@ section {
   align-items: center;
 }
 
-/* Pages with a cover-only left column look best vertically centered next
-   to the text (the default above). A page with a cover + video stack
-   (.book-hero-media, see below) needs its column stretched to the full
-   grid-row height instead, so .book-hero-video (absolutely positioned,
-   see below) has the full height to anchor its bottom against. Fixed
-   2026-09-20 — the previous top-align approach only got the video "close"
-   to level with the offer-cards column, and on Heavy Duty Vehicles the
-   gap was large enough that Ash flagged it as visibly unaligned. */
-.book-hero-inner:has(.book-hero-media) {
-  align-items: stretch;
-}
-
 .book-hero-cover {
   border-radius: 22px;
   overflow: hidden;
@@ -847,9 +835,7 @@ section {
 
 /* Wraps .book-hero-cover (+ the optional .book-hero-video below it) so
    both stack in the hero grid's left column instead of the video landing
-   in the right column as a second grid item. Positioned so .book-hero-video
-   can anchor to its bottom edge (see below) — .book-hero-cover stays in
-   normal flow at the top. */
+   in the right column as a second grid item. */
 .book-hero-media {
   position: relative;
 }
@@ -859,21 +845,21 @@ section {
    section above rather than a separate player treatment. Only present on
    book pages that have a matching compiled video (see the tiktok-carousel
    skill's website sync step); pages without one are left untouched.
-   Absolutely positioned to the bottom of .book-hero-media (fixed
-   2026-09-20 — a flex `justify-content: space-between` approach tried
-   first only redistributes space when the cover + video's natural
-   combined height is *shorter* than the stretched column; on Simple
-   Unicorn the natural height happened to match exactly, leaving zero
-   slack to redistribute and the video 33px off the offer-cards' bottom.
-   Anchoring directly to the container's bottom edge holds regardless of
-   any book's content-length coincidences.) */
+   Sits in normal flow directly below the cover, not absolutely
+   bottom-anchored (reverted 2026-09-21 — the previous bottom-anchor-to-
+   offer-cards approach, from 2026-09-20, made the cover-to-video gap
+   depend on each book's own .book-hero-info height, which varies with
+   description length and whether the Amazon card is the short
+   "Coming Soon" variant or the longer real-listing one. That produced a
+   visibly different gap per book once more than one book had a video to
+   compare — e.g. Beautiful Houses (Coming Soon, shorter column) sat close
+   under its cover while Heavy Duty Vehicles / Unicorn / Birds / Dogs (real
+   Amazon card, taller column) had a large gap above the video. A fixed,
+   content-independent margin here is what actually keeps every book's
+   video in the same place relative to its own cover.) */
 .book-hero-video {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  margin: 24px auto 0;
   max-width: 208px;
-  margin: 0 auto;
 }
 
 /* The "split" between the cover and the video — a short brand-gradient
@@ -961,14 +947,9 @@ section {
     max-width: 320px;
     margin: 0 auto;
   }
-  /* The desktop bottom-anchor (see .book-hero-video above) only makes
-     sense while .book-hero-media is stretched to match the offer-cards
-     column height (two-column grid). Single-column mobile collapses that
-     stretch, so an absolutely-positioned bottom:0 here just overlaps the
-     tail end of the cover image instead of sitting below it — put it back
-     in normal flow. */
+  /* Desktop already uses normal flow (see .book-hero-video above); this
+     just widens it to match the full-width stacked cover on mobile. */
   .book-hero-video {
-    position: static;
     max-width: 320px;
     margin-top: 20px;
   }
@@ -1489,8 +1470,10 @@ body.js-reveal [data-reveal].is-visible {
 /* Book-page "Related reading" back-link to its cluster post(s) */
 /* Sits as a full-width sibling below .book-hero-inner, not nested inside
    .book-hero-info — see the comment on RELATED_READING_BLOCK in
-   generate_catalog_pages.py for why nesting it there broke the
-   .book-hero-video bottom-anchor alignment. */
+   generate_catalog_pages.py for why nesting it there broke the hero
+   layout (it grew that column's height, which mattered even more back
+   when .book-hero-video was bottom-anchored to it — see the 2026-09-21
+   comment on .book-hero-video above for why that mechanism was dropped). */
 .related-reading {
   margin: 40px 0 0;
   padding-top: 24px;
