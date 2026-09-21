@@ -223,7 +223,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 <meta property="og:description" content="{meta_description}" />
 <meta property="og:image" content="https://calmkidssensory.com/images/covers/{cover_filename}" />
 <meta property="og:url" content="https://calmkidssensory.com/books/{slug}.html" />
-<meta property="og:type" content="website" />
+<meta property="og:type" content="product" />
 <meta name="twitter:card" content="summary_large_image" />
 <!-- OG-TWITTER:END -->
 <!-- SEO-SCHEMA:START -->
