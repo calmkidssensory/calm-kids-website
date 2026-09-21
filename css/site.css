@@ -819,6 +819,20 @@ section {
   align-items: center;
 }
 
+/* Pages with a cover-only left column look best vertically centered next
+   to the text (the default above). A page with a cover + video stack
+   (.book-hero-media, see below) needs its column stretched to the full
+   grid-row height instead: cover pinned to the top (level with the
+   age-badge/title), video pinned to the bottom (level with the offer
+   cards), and the divider between them centered in whatever space is
+   left — see .book-hero-media / .book-hero-divider / .book-hero-video
+   below for how the stretched height gets distributed. Desktop only:
+   the mobile breakpoint below undoes this, since a single-column layout
+   has nothing to stretch against. */
+.book-hero-inner:has(.book-hero-media) {
+  align-items: stretch;
+}
+
 .book-hero-cover {
   border-radius: 22px;
   overflow: hidden;
@@ -833,47 +847,55 @@ section {
   object-fit: cover;
 }
 
-/* Wraps .book-hero-cover (+ the optional .book-hero-video below it) so
-   both stack in the hero grid's left column instead of the video landing
-   in the right column as a second grid item. */
+/* Wraps .book-hero-cover (+ the optional .book-hero-divider and
+   .book-hero-video below it) so all three stack in the hero grid's left
+   column instead of the video landing in the right column as a second
+   grid item. A flex column so .book-hero-divider's auto top/bottom
+   margins (see below) can absorb the stretched column's leftover height,
+   which is what pins the cover to the top and the video to the bottom
+   simultaneously (fixed 2026-09-21 — see the comment on
+   .book-hero-divider for the mechanics and why a plain fixed margin
+   couldn't hit both anchor points at once). */
 .book-hero-media {
-  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* The brand-gradient split between the cover and the video (same
+   language as .video-card::before / .section-heading h2::after). A real
+   flex item, not a ::before on .book-hero-video (changed 2026-09-21) —
+   giving it its own `margin: auto` top AND bottom is what centers it in
+   whatever space .book-hero-media has left over after the cover
+   (pinned top) and the video block (pinned bottom, see .book-hero-video)
+   take their natural height. Desktop only: the mobile breakpoint below
+   gives it a fixed margin instead, since there's no stretched space to
+   split evenly on a single-column layout. */
+.book-hero-divider {
+  align-self: center;
+  flex-shrink: 0;
+  width: 46px;
+  height: 2px;
+  margin-top: auto;
+  margin-bottom: auto;
+  background: linear-gradient(90deg, var(--lavender-deep), var(--gold));
+  opacity: 0.8;
 }
 
 /* Compact seller-page video embed — a small 9:16 preview under the cover,
    reusing .video-frame's aspect-ratio/object-fit rules from the Videos
    section above rather than a separate player treatment. Only present on
    book pages that have a matching compiled video (see the tiktok-carousel
-   skill's website sync step); pages without one are left untouched.
-   Sits in normal flow directly below the cover, not absolutely
-   bottom-anchored (reverted 2026-09-21 — the previous bottom-anchor-to-
-   offer-cards approach, from 2026-09-20, made the cover-to-video gap
-   depend on each book's own .book-hero-info height, which varies with
-   description length and whether the Amazon card is the short
-   "Coming Soon" variant or the longer real-listing one. That produced a
-   visibly different gap per book once more than one book had a video to
-   compare — e.g. Beautiful Houses (Coming Soon, shorter column) sat close
-   under its cover while Heavy Duty Vehicles / Unicorn / Birds / Dogs (real
-   Amazon card, taller column) had a large gap above the video. A fixed,
-   content-independent margin here is what actually keeps every book's
-   video in the same place relative to its own cover.) */
+   skill's website sync step); pages without one are left untouched. No
+   margin-top of its own (unlike .book-hero-divider above it) — with the
+   divider absorbing all the leftover space via its auto margins, this
+   block naturally lands flush at .book-hero-media's bottom edge, level
+   with the offer cards' bottom (see .book-hero-inner:has(.book-hero-media)
+   above). */
 .book-hero-video {
-  margin: 24px auto 0;
+  align-self: center;
+  flex-shrink: 0;
   max-width: 208px;
-}
-
-/* The "split" between the cover and the video — a short brand-gradient
-   rule (same language as .video-card::before / .section-heading h2::after)
-   so the handoff from product photo to preview clip reads as deliberate
-   rather than an accidental gap. */
-.book-hero-video::before {
-  content: "";
-  display: block;
-  width: 46px;
-  height: 2px;
-  margin: 0 auto 18px;
-  background: linear-gradient(90deg, var(--lavender-deep), var(--gold));
-  opacity: 0.8;
+  margin: 0 auto;
 }
 
 .book-hero-video .video-frame {
@@ -947,21 +969,13 @@ section {
     max-width: 320px;
     margin: 0 auto;
   }
-  /* Desktop already uses normal flow (see .book-hero-video above); this
-     just widens it to match the full-width stacked cover on mobile. */
-  .book-hero-video {
-    max-width: 320px;
+  /* Single-column mobile has nothing to stretch .book-hero-media against,
+     so .book-hero-divider's auto margins (desktop-only mechanic, see the
+     base rule) resolve to zero — give it a fixed gap on both sides
+     instead so the cover/divider/video spacing still looks intentional. */
+  .book-hero-divider {
     margin-top: 20px;
-  }
-  /* On phone widths the embedded player reads cramped inside the stacked
-     column, so swap it for a plain link-out button instead of the video
-     itself — same tap target either way, lighter page weight. */
-  .book-hero-video .video-frame,
-  .book-hero-video-caption {
-    display: none;
-  }
-  .book-hero-video-btn {
-    display: inline-flex;
+    margin-bottom: 18px;
   }
 }
 

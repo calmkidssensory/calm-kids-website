@@ -447,6 +447,7 @@ HERO_MEDIA_WITH_VIDEO = """    <div class="book-hero-media">
         <img src="{cover_src}" alt="{title} cover" />
       </div>
       <!-- SELLER-VIDEO:START -->
+      <div class="book-hero-divider" aria-hidden="true"></div>
       <div class="book-hero-video">
         <div class="video-frame">
           <video controls preload="metadata" poster="../images/covers/{slug}-video-poster.jpg" playsinline>
