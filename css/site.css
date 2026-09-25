@@ -621,8 +621,9 @@ section {
 .btn-video-cta {
   display: inline-block;
   text-decoration: none;
-  background: var(--lavender-deep);
-  color: var(--white);
+  background: var(--sage);
+  color: var(--ink);
+  text-shadow: var(--text-legibility-shadow);
   padding: 12px 22px;
   border-radius: 999px;
   font-weight: 600;
@@ -634,7 +635,7 @@ section {
 .btn-video-cta:hover {
   filter: brightness(0.94);
   transform: translateY(-1px);
-  box-shadow: 0 10px 22px rgba(185, 168, 232, 0.4);
+  box-shadow: 0 10px 22px rgba(143, 158, 139, 0.4);
 }
 
 /* Desktop: 6 compact cards per row. Text/CTA sizes step down from the
@@ -1174,14 +1175,15 @@ nav.site-nav a:hover {
 }
 
 .offer-btn.pack {
-  background: var(--lavender-deep);
-  color: #3a2f52;
+  background: var(--sage);
+  color: var(--ink);
+  text-shadow: var(--text-legibility-shadow);
 }
 
 .offer-btn.pack:hover {
-  background: #b8a9ea;
+  background: var(--sage-deep);
   transform: translateY(-1px);
-  box-shadow: 0 10px 20px rgba(185, 168, 232, 0.35);
+  box-shadow: 0 10px 20px rgba(143, 158, 139, 0.35);
 }
 
 /* Amazon's own brand orange-yellow ("smile" mark), not the site's sage —
