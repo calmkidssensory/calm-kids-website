@@ -1033,9 +1033,32 @@ section {
   .offer-grid {
     grid-template-columns: 1fr;
   }
+  /* The floor below only matters for the side-by-side desktop hero (see
+     .book-hero-media's comment): once the grid stacks to one column here,
+     forcing every card to the same tall floor would just pad out three
+     stacked "coming soon" cards with empty space for no benefit. */
+  .offer-card {
+    min-height: 0;
+  }
 }
 
+/* Floor height, not a fixed one — a book whose sampler/digital-pack cards
+   are still "coming soon" placeholders (short kicker+title+one line, no
+   checklist) renders a much shorter card than a fully-live one. .book-hero-inner's
+   align-items:stretch sizes the grid row to whichever column's natural
+   content is taller, so when the card row goes this short, .book-hero-media
+   (cover+video, roughly 900-970px tall depending on column width) becomes
+   the taller column instead of .book-hero-info — flipping which side drives
+   the row height and leaving .book-hero-video's "pinned to the bottom,
+   level with the offer cards" mechanic with no stretched space to work
+   with (fixed 2026-09-27, Inspirational Quotes — its sampler and digital
+   pack are both still pending, see its .offer-card-soon / "not ready yet"
+   copy). A live card's own content (kicker + 2-line title + paragraph +
+   checklist + price + button) already comfortably clears 660px, so this
+   floor is a no-op there and only pads out the short placeholder variant
+   up to a book with full cards' typical height. */
 .offer-card {
+  min-height: 660px;
   background: var(--cream-deep);
   border-radius: 18px;
   /* Top padding is reserved "badge slot" space, same on every card whether
