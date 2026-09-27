@@ -43,6 +43,47 @@
 }
 </script>
 <!-- SEO-SCHEMA:END -->
+<style>
+  .feature-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 0 0 22px;
+    padding: 0;
+    text-align: left;
+  }
+
+  .feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+  }
+
+  .feature-item::before {
+    content: "\2713";
+    color: var(--sage-ink);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .offer-card .offer-btn {
+    margin-top: auto;
+  }
+
+  .offer-card.coming-soon {
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    color: var(--ink-faint);
+  }
+
+  .offer-card.coming-soon .offer-kicker {
+    color: var(--ink-faint);
+  }
+</style>
 </head>
 <body>
 
@@ -83,22 +124,27 @@
       <!-- SEO-PHASE3-BODY:END -->
 
       <div class="offer-grid">
-        <div class="offer-card offer-card-soon">
+        <div class="offer-card coming-soon">
           <p class="offer-kicker">Try it first</p>
           <h3>3-Page Free Sampler</h3>
-          <p>Our sampler pages for this book are still being prepared. Please check back soon.</p>
+          <p>Our sampler pages for this book are still being prepared. Once ready, they'll give you three gentle quotes and simple patterns to try — sent straight to your inbox, so you can see the paper and layout before deciding. Please check back soon.</p>
           <span class="offer-btn soon" aria-disabled="true">Coming Soon</span>
         </div>
-        <div class="offer-card">
+        <div class="offer-card coming-soon">
           <p class="offer-kicker">Print at home</p>
           <h3>10-Page Digital Pack</h3>
-          <p>Our digital pack for this book isn't ready yet. The paperback is available now on Amazon.</p>
+          <p>Our digital pack for this book isn't ready yet. Once it is, it will bring ten printable pages of calm affirmations and repeating patterns you can print and color as often as you like. The paperback is available now on Amazon if you'd rather start today.</p>
           <a class="offer-btn pack" href="https://www.amazon.com/dp/B0DVV5B36X" target="_blank" rel="noopener noreferrer">Shop the Paperback</a>
         </div>
         <div class="offer-card">
           <p class="offer-kicker">Keep it on the shelf</p>
           <h3>Paperback & Hardcover</h3>
-          <p>The complete, bound coloring book — paperback or hardcover, delivered to your door.</p>
+          <p>The complete, bound coloring book — one hundred pages of gentle quotes paired with simple, repeating patterns, in paperback or hardcover, delivered to your door.</p>
+          <ul class="feature-list">
+            <li class="feature-item">100 pages, one quote and pattern per page</li>
+            <li class="feature-item">Single-sided pages, so color won't bleed through</li>
+            <li class="feature-item">Choose softcover or a durable hardcover edition</li>
+          </ul>
           <a class="offer-btn amazon" href="https://www.amazon.com/dp/B0DVV5B36X" target="_blank" rel="noopener noreferrer">Buy on Amazon</a>
         </div>
       </div>
