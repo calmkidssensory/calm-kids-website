@@ -1033,13 +1033,6 @@ section {
   .offer-grid {
     grid-template-columns: 1fr;
   }
-  /* The floor below only matters for the side-by-side desktop hero (see
-     .book-hero-media's comment): once the grid stacks to one column here,
-     forcing every card to the same tall floor would just pad out three
-     stacked "coming soon" cards with empty space for no benefit. */
-  .offer-card {
-    min-height: 0;
-  }
 }
 
 /* Floor height, not a fixed one — a book whose sampler/digital-pack cards
@@ -1078,6 +1071,21 @@ section {
 .offer-card:hover {
   box-shadow: var(--shadow);
   transform: translateY(-3px);
+}
+
+/* Must come after the base .offer-card rule above (same specificity, so
+   source order decides). The floor only matters for the side-by-side
+   desktop hero (see .book-hero-media's comment): once the grid stacks to
+   one column, forcing a tall floor makes the flex:1 description paragraph
+   stretch and leaves a large empty gap inside each card (fixed 2026-09-30,
+   when this override sat before the base rule and never applied). */
+@media (max-width: 900px) {
+  .offer-card {
+    min-height: 0;
+  }
+  .offer-card p {
+    flex: none;
+  }
 }
 
 /* Kicker and title each reserve enough height for 2 lines and center
