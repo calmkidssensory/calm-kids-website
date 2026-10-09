@@ -1564,7 +1564,7 @@ body.js-reveal [data-reveal].is-visible {
    when .book-hero-video was bottom-anchored to it — see the 2026-09-21
    comment on .book-hero-video above for why that mechanism was dropped). */
 .related-reading {
-  margin: 40px 0 0;
+  margin: 40px auto 0;
   padding-top: 24px;
   border-top: 1px solid rgba(45, 42, 30, 0.1);
 }
@@ -1590,21 +1590,94 @@ body.js-reveal [data-reveal].is-visible {
   text-decoration: underline;
 }
 
-/* Etsy card + 4-card offer grid (added 2026-10-09). Four cards sit 2 x 2 so
-   each keeps a readable width inside the hero column; the floor height is
-   dropped because two rows already give the grid its height. */
-.offer-grid.offer-grid-4 {
-  grid-template-columns: repeat(2, 1fr);
+/* Etsy card + full-width offer row (2026-10-09). With four cards the offer grid
+   moves out of the narrow hero column into .offer-row, a full-width band under
+   the hero. The hero itself then holds just the cover, the optional video and
+   the title text, side by side. */
+.book-hero:has(.offer-row) .book-hero-inner:has(.book-hero-media) {
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 48px;
 }
 
-.offer-grid.offer-grid-4 .offer-card {
+.book-hero:has(.offer-row) .book-hero-media {
+  flex-direction: row;
+  align-items: center;
+  gap: 28px;
+}
+
+.book-hero:has(.offer-row) .book-hero-media .book-hero-cover {
+  width: 300px;
+  margin: 0;
+  align-self: center;
+}
+
+.book-hero:has(.offer-row) .book-hero-divider {
+  width: 2px;
+  height: 48px;
+  margin: 0;
+  background: linear-gradient(180deg, var(--lavender-deep), var(--gold));
+}
+
+.book-hero:has(.offer-row) .book-hero-video {
+  margin: 0;
+}
+
+.offer-row {
+  padding-top: 44px;
+  padding-bottom: 8px;
+}
+
+.offer-row .offer-grid {
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.offer-row .offer-grid.offer-grid-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.offer-row .offer-card {
   min-height: 0;
+  padding: 36px 18px 24px;
 }
 
-@media (max-width: 900px) {
-  .offer-grid.offer-grid-4 {
+@media (max-width: 1000px) {
+  .offer-row .offer-grid.offer-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 760px) {
+  .book-hero:has(.offer-row) .book-hero-inner:has(.book-hero-media) {
     grid-template-columns: 1fr;
   }
+  .book-hero:has(.offer-row) .book-hero-media {
+    flex-direction: column;
+    gap: 0;
+  }
+  .book-hero:has(.offer-row) .book-hero-media .book-hero-cover {
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+  .book-hero:has(.offer-row) .book-hero-divider {
+    width: 46px;
+    height: 2px;
+    margin: 20px 0 18px;
+    background: linear-gradient(90deg, var(--lavender-deep), var(--gold));
+  }
+  .offer-row .offer-grid,
+  .offer-row .offer-grid.offer-grid-4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* "Free" sits inside the sampler form, between the email field and the button,
+   so it lines up with the price row on the other cards. */
+.sampler-form .offer-price {
+  margin: 0 0 6px;
+  text-align: center;
 }
 
 .offer-btn.etsy {
@@ -1628,10 +1701,6 @@ body.js-reveal [data-reveal].is-visible {
    lighter shade so the two read as separate choices. */
 .offer-card .offer-btn + .offer-price {
   margin-top: 14px;
-}
-
-.offer-card .offer-price:has(+ .offer-btn.amazon) {
-  margin-bottom: 8px;
 }
 
 .offer-btn.amazon.hardcover {

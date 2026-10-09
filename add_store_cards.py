@@ -59,18 +59,20 @@ def nl_fix(s, crlf):
 
 
 def patch(slug, html):
-    d = DATA.get(slug)
-    if not d:
-        return html, []
+    d = DATA.get(slug) or {}
     crlf = "\r\n" in html
     h = html.replace("\r\n", "\n")
     done = []
 
-    # 1. Free price on the sampler card (live form only, not the "coming soon" placeholder)
-    if 'class="sampler-form"' in h and "offer-price free" not in h:
-        h = h.replace('          <form class="sampler-form">',
-                      '          <p class="offer-price free">Free</p>\n          <form class="sampler-form">', 1)
-        done.append("free")
+    # 1. "Free" price inside the sampler form, between the email field and the button, so it
+    #    sits level with the price row on the other cards (live form only, not "coming soon").
+    if 'class="sampler-form"' in h:
+        before = h
+        h = re.sub(r'(?m)^ +<p class="offer-price free">Free</p>\n', '', h)
+        h = h.replace('            <button type="submit" class="offer-btn sampler">',
+                      '            <p class="offer-price free">Free</p>\n            <button type="submit" class="offer-btn sampler">', 1)
+        if h != before:
+            done.append("free")
 
     # 2. Amazon card: one button per format, each linked straight to that format's own
     #    listing (the generic /dp/ link opens whichever format Amazon shows first, which is
@@ -110,11 +112,22 @@ def patch(slug, html):
     if done and "Prices shown" not in h:
         h = h.replace('<p class="offer-note">Digital downloads are for personal, print-at-home use.</p>',
                       '<p class="offer-note">Digital downloads are for personal, print-at-home use. Prices shown are as listed on each store and may change.</p>', 1)
+    # 5. Full-width offer row: four cards need more room than the right-hand hero column
+    #    gives them, so the grid and its note move below the hero, across the page width.
+    if 'class="offer-grid' in h and 'class="wrap offer-row"' not in h:
+        start = re.search(r'      <div class="offer-grid[^"]*">', h).start()
+        note = re.compile(r'      <p class="offer-note">[^\n]*</p>\n').search(h, start)
+        block = h[start:note.end()]
+        rest = h[note.end():]
+        tail = '    </div>\n  </div>\n'
+        if rest.startswith(tail):
+            h = h[:start] + tail + '  <div class="wrap offer-row">\n' + block + '  </div>\n' + rest[len(tail):]
+            done.append("offer-row")
     return nl_fix(h, crlf), done
 
 
 changed = 0
-for slug in sorted(DATA):
+for slug in sorted(p.stem for p in (HERE / 'books').glob('*.html')):
     p = HERE / "books" / f"{slug}.html"
     if not p.exists():
         print("MISSING PAGE", slug); continue
