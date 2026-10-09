@@ -6,7 +6,7 @@ website/books/<slug>.html offer grid, driven by store-data.json.
 store-data.json (keyed by book page slug):
     {"dragons": {"etsy": {"id": "4590601380", "price": "6.99", "pages": 49},
                  "amazon": {"paperback": {"price": "8.99", "asin": "B0..."}, "hardcover": {...}}}, ...}
-  - "etsy" present  -> a "{pages}-Page Full Digital Book" card is inserted before the Amazon card.
+  - "etsy" present  -> a "{pages}-Page Digital Book" card is inserted before the Amazon card.
   - "amazon" present -> the Amazon card shows Paperback (and Hardcover when it exists) prices.
   - Books without a per-book Amazon listing keep their existing card untouched.
 
@@ -23,7 +23,7 @@ APPLY = "--apply" in sys.argv
 
 ETSY_CARD = """        <div class="offer-card">
           <p class="offer-kicker">Full book on Etsy</p>
-          <h3>{pages}-Page Full Digital Book</h3>
+          <h3>{pages}-Page Digital Book</h3>
           <p>The complete coloring book as a printable PDF download, ready to print at home.</p>
           <ul class="feature-list">
             <li class="feature-item">{pages} coloring illustrations</li>

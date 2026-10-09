@@ -1735,3 +1735,9 @@ body.js-reveal [data-reveal].is-visible {
   overflow: visible;
   text-overflow: clip;
 }
+
+/* Slightly smaller card titles in the full-width row so "174-Page Digital Book"
+   stays on one line even at the narrowest 4-across width. */
+.offer-row .offer-card h3 {
+  font-size: 1.05rem;
+}
