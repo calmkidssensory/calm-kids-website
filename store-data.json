@@ -1,0 +1,803 @@
+{
+ "fun-cowboys": {
+  "etsy": {
+   "id": "4591573552",
+   "price": "8.99",
+   "pages": 109
+  }
+ },
+ "scary-zombies": {
+  "etsy": {
+   "id": "4591570168",
+   "price": "8.99",
+   "pages": 90
+  }
+ },
+ "beautiful-houses": {
+  "etsy": {
+   "id": "4591554279",
+   "price": "8.99",
+   "pages": 174
+  }
+ },
+ "mosaic-churches": {
+  "etsy": {
+   "id": "4591537765",
+   "price": "8.99",
+   "pages": 129
+  }
+ },
+ "mosaic-flowers": {
+  "etsy": {
+   "id": "4591542526",
+   "price": "8.99",
+   "pages": 110
+  },
+  "amazon": {
+   "hardcover": {
+    "price": "21.99",
+    "asin": "B0DVZJWQNH"
+   },
+   "paperback": {
+    "price": "11.99",
+    "asin": "B0DVG8L3ZM"
+   }
+  }
+ },
+ "mosaic-medieval-designs": {
+  "etsy": {
+   "id": "4591525969",
+   "price": "6.99",
+   "pages": 62
+  },
+  "amazon": {
+   "paperback": {
+    "price": "11.99",
+    "asin": "B0H2LX94GW"
+   }
+  }
+ },
+ "mosaic-butterflies": {
+  "etsy": {
+   "id": "4591521839",
+   "price": "8.99",
+   "pages": 109
+  }
+ },
+ "flowers-butterflies-quotes": {
+  "etsy": {
+   "id": "4591529382",
+   "price": "8.99",
+   "pages": 109
+  }
+ },
+ "flowers-butterflies": {
+  "etsy": {
+   "id": "4591511023",
+   "price": "8.99",
+   "pages": 109
+  },
+  "amazon": {
+   "hardcover": {
+    "price": "21.99",
+    "asin": "B0DWJFYF3D"
+   },
+   "paperback": {
+    "price": "12.99",
+    "asin": "B0DW8NBQTY"
+   }
+  }
+ },
+ "animal-inspirational-quotes": {
+  "etsy": {
+   "id": "4591519676",
+   "price": "8.99",
+   "pages": 89
+  },
+  "amazon": {
+   "paperback": {
+    "price": "10.99",
+    "asin": "B0DXLFFTXY"
+   }
+  }
+ },
+ "anime-art": {
+  "etsy": {
+   "id": "4591503799",
+   "price": "8.99",
+   "pages": 89
+  },
+  "amazon": {
+   "hardcover": {
+    "price": "19.99",
+    "asin": "B0DY5ZWWBX"
+   },
+   "paperback": {
+    "price": "12.99",
+    "asin": "B0DXP2G26N"
+   }
+  }
+ },
+ "realistic-cats": {
+  "etsy": {
+   "id": "4591511696",
+   "price": "8.99",
+   "pages": 89
+  },
+  "amazon": {
+   "hardcover": {
+    "price": "19.99",
+    "asin": "B0DTV1GH98"
+   },
+   "paperback": {
+    "price": "9.99",
+    "asin": "B0DTYYSP1Y"
+   }
+  }
+ },
+ "koi-fish": {
+  "etsy": {
+   "id": "4591500216",
+   "price": "8.99",
+   "pages": 99
+  },
+  "amazon": {
+   "hardcover": {
+    "price": "21.99",
+    "asin": "B0HJTQVD9X"
+   },
+   "paperback": {
+    "price": "14.99",
+    "asin": "B0HJFKPV11"
+   }
+  }
+ },
+ "samurai": {
+  "etsy": {
+   "id": "4591480747",
+   "price": "6.99",
+   "pages": 59
+  }
+ },
+ "psychedelic": {
+  "etsy": {
+   "id": "4591476113",
+   "price": "8.99",
+   "pages": 84
+  },
+  "amazon": {
+   "hardcover": {
+    "price": "21.99",
+    "asin": "B0DS8S8W8J"
+   },
+   "paperback": {
+    "price": "11.99",
+    "asin": "B0DSB9PPP2"
+   }
+  }
+ },
+ "historic-architecture": {
+  "etsy": {
+   "id": "4591225628",
+   "price": "8.99",
+   "pages": 109
+  },
+  "amazon": {
+   "hardcover": {
+    "price": "22.99",
+    "asin": "B0DS3VRFJ5"
+   },
+   "paperback": {
+    "price": "12.99",
+    "asin": "B0DS9FMKJD"
+   }
+  }
+ },
+ "brides": {
+  "etsy": {
+   "id": "4591204473",
+   "price": "8.99",
+   "pages": 74
+  },
+  "amazon": {
+   "hardcover": {
+    "price": "19.99",
+    "asin": "B0DS8S2L87"
+   },
+   "paperback": {
+    "price": "9.99",
+    "asin": "B0DS9W4P1Z"
+   }
+  }
+ },
+ "medieval-ships": {
+  "etsy": {
+   "id": "4591198989",
+   "price": "6.99",
+   "pages": 59
+  },
+  "amazon": {
+   "hardcover": {
+    "price": "19.99",
+    "asin": "B0DS498462"
+   },
+   "paperback": {
+    "price": "8.99",
+    "asin": "B0DS8XS5ZN"
+   }
+  }
+ },
+ "heavy-duty-vehicles": {
+  "etsy": {
+   "id": "4591188793",
+   "price": "6.99",
+   "pages": 59
+  },
+  "amazon": {
+   "hardcover": {
+    "price": "19.99",
+    "asin": "B0DS2GLY9R"
+   },
+   "paperback": {
+    "price": "8.99",
+    "asin": "B0DS5F5Y38"
+   }
+  }
+ },
+ "fighter-jets": {
+  "etsy": {
+   "id": "4591182131",
+   "price": "6.99",
+   "pages": 49
+  },
+  "amazon": {
+   "hardcover": {
+    "price": "19.99",
+    "asin": "B0DS2JKF4X"
+   },
+   "paperback": {
+    "price": "8.99",
+    "asin": "B0DS5BWHLC"
+   }
+  }
+ },
+ "super-cars": {
+  "etsy": {
+   "id": "4591188660",
+   "price": "8.99",
+   "pages": 79
+  },
+  "amazon": {
+   "hardcover": {
+    "price": "19.99",
+    "asin": "B0DRYHFLVR"
+   },
+   "paperback": {
+    "price": "9.99",
+    "asin": "B0DS172XZ1"
+   }
+  }
+ },
+ "wild-flowers": {
+  "etsy": {
+   "id": "4591171459",
+   "price": "8.99",
+   "pages": 99
+  }
+ },
+ "relaxing-animals": {
+  "etsy": {
+   "id": "4591176752",
+   "price": "8.99",
+   "pages": 99
+  },
+  "amazon": {
+   "hardcover": {
+    "price": "19.99",
+    "asin": "B0DRVVRNK1"
+   },
+   "paperback": {
+    "price": "14.99",
+    "asin": "B0DRZ3C1RV"
+   }
+  }
+ },
+ "magical-creatures": {
+  "etsy": {
+   "id": "4591169572",
+   "price": "6.99",
+   "pages": 49
+  },
+  "amazon": {
+   "hardcover": {
+    "price": "19.99",
+    "asin": "B0DRVLWLGD"
+   },
+   "paperback": {
+    "price": "8.99",
+    "asin": "B0DRVPDSGW"
+   }
+  }
+ },
+ "wild-parakeets": {
+  "etsy": {
+   "id": "4591151695",
+   "price": "6.99",
+   "pages": 49
+  },
+  "amazon": {
+   "hardcover": {
+    "price": "19.99",
+    "asin": "B0DRGH6Z3N"
+   },
+   "paperback": {
+    "price": "9.99",
+    "asin": "B0DRK66JDJ"
+   }
+  }
+ },
+ "halloween-scenes": {
+  "etsy": {
+   "id": "4591157616",
+   "price": "6.99",
+   "pages": 49
+  },
+  "amazon": {
+   "hardcover": {
+    "price": "19.99",
+    "asin": "B0DRFZGWNB"
+   },
+   "paperback": {
+    "price": "8.99",
+    "asin": "B0DRJRS11D"
+   }
+  }
+ },
+ "scifi-robots": {
+  "etsy": {
+   "id": "4591152298",
+   "price": "6.99",
+   "pages": 49
+  },
+  "amazon": {
+   "hardcover": {
+    "price": "19.99",
+    "asin": "B0DRCWC1T2"
+   },
+   "paperback": {
+    "price": "8.99",
+    "asin": "B0DRGYTF19"
+   }
+  }
+ },
+ "orchids": {
+  "etsy": {
+   "id": "4591147142",
+   "price": "6.99",
+   "pages": 49
+  },
+  "amazon": {
+   "hardcover": {
+    "price": "19.99",
+    "asin": "B0DRCTH88J"
+   },
+   "paperback": {
+    "price": "9.99",
+    "asin": "B0DRGMTZVH"
+   }
+  }
+ },
+ "zoo-animals": {
+  "etsy": {
+   "id": "4591142592",
+   "price": "6.99",
+   "pages": 49
+  },
+  "amazon": {
+   "hardcover": {
+    "price": "19.99",
+    "asin": "B0DR8KP7ZY"
+   },
+   "paperback": {
+    "price": "8.99",
+    "asin": "B0DRDFP3MS"
+   }
+  }
+ },
+ "roosters": {
+  "etsy": {
+   "id": "4591125969",
+   "price": "6.99",
+   "pages": 49
+  },
+  "amazon": {
+   "hardcover": {
+    "price": "19.99",
+    "asin": "B0DR8LXNPB"
+   },
+   "paperback": {
+    "price": "8.99",
+    "asin": "B0DRDDR1CY"
+   }
+  }
+ },
+ "reptiles-amphibians": {
+  "etsy": {
+   "id": "4591132058",
+   "price": "6.99",
+   "pages": 49
+  },
+  "amazon": {
+   "hardcover": {
+    "price": "19.99",
+    "asin": "B0DR6Z6ZLS"
+   },
+   "paperback": {
+    "price": "8.99",
+    "asin": "B0DRCLYHJ3"
+   }
+  }
+ },
+ "science-fiction": {
+  "etsy": {
+   "id": "4591127606",
+   "price": "6.99",
+   "pages": 49
+  },
+  "amazon": {
+   "hardcover": {
+    "price": "19.99",
+    "asin": "B0DQYLCZS3"
+   },
+   "paperback": {
+    "price": "8.99",
+    "asin": "B0DR5RQJTQ"
+   }
+  }
+ },
+ "relaxing-landscapes": {
+  "etsy": {
+   "id": "4590715489",
+   "price": "6.99",
+   "pages": 49
+  },
+  "amazon": {
+   "hardcover": {
+    "price": "19.99",
+    "asin": "B0DR6ZLLPJ"
+   },
+   "paperback": {
+    "price": "8.99",
+    "asin": "B0DRC9P7LF"
+   }
+  }
+ },
+ "jungle-mammals": {
+  "etsy": {
+   "id": "4590708005",
+   "price": "6.99",
+   "pages": 49
+  },
+  "amazon": {
+   "hardcover": {
+    "price": "19.99",
+    "asin": "B0DR6YFWS2"
+   },
+   "paperback": {
+    "price": "8.99",
+    "asin": "B0DR8Y9W72"
+   }
+  }
+ },
+ "underwater-world": {
+  "etsy": {
+   "id": "4590712476",
+   "price": "6.99",
+   "pages": 49
+  },
+  "amazon": {
+   "hardcover": {
+    "price": "19.99",
+    "asin": "B0DR6X8GJK"
+   },
+   "paperback": {
+    "price": "8.99",
+    "asin": "B0DR8NP2FN"
+   }
+  }
+ },
+ "magical-mermaids": {
+  "etsy": {
+   "id": "4590706580",
+   "price": "6.99",
+   "pages": 49
+  }
+ },
+ "magical-fairies": {
+  "etsy": {
+   "id": "4590698156",
+   "price": "6.99",
+   "pages": 49
+  },
+  "amazon": {
+   "hardcover": {
+    "price": "19.99",
+    "asin": "B0DQGTT54W"
+   },
+   "paperback": {
+    "price": "8.99",
+    "asin": "B0DQKYX2JR"
+   }
+  }
+ },
+ "magical-snakes": {
+  "etsy": {
+   "id": "4590684884",
+   "price": "6.99",
+   "pages": 49
+  },
+  "amazon": {
+   "hardcover": {
+    "price": "19.99",
+    "asin": "B0DQGT7Y82"
+   },
+   "paperback": {
+    "price": "8.99",
+    "asin": "B0DQJMKKNJ"
+   }
+  }
+ },
+ "magical-christmas": {
+  "etsy": {
+   "id": "4590672518",
+   "price": "6.99",
+   "pages": 49
+  },
+  "amazon": {
+   "hardcover": {
+    "price": "19.99",
+    "asin": "B0DQJSYMGD"
+   },
+   "paperback": {
+    "price": "8.99",
+    "asin": "B0DQGVP7W6"
+   }
+  }
+ },
+ "dogs": {
+  "etsy": {
+   "id": "4590639405",
+   "price": "6.99",
+   "pages": 49
+  },
+  "amazon": {
+   "hardcover": {
+    "price": "19.99",
+    "asin": "B0DQYCMBFJ"
+   },
+   "paperback": {
+    "price": "8.99",
+    "asin": "B0DQD5S4BL"
+   }
+  }
+ },
+ "cute-cats-toddlers": {
+  "etsy": {
+   "id": "4590611266",
+   "price": "6.99",
+   "pages": 49
+  },
+  "amazon": {
+   "hardcover": {
+    "price": "19.99",
+    "asin": "B0DQYCNSLR"
+   },
+   "paperback": {
+    "price": "7.99",
+    "asin": "B0DPX55Q3J"
+   }
+  }
+ },
+ "dragons": {
+  "etsy": {
+   "id": "4590601380",
+   "price": "6.99",
+   "pages": 49
+  },
+  "amazon": {
+   "hardcover": {
+    "price": "19.99",
+    "asin": "B0DQPKGXFP"
+   },
+   "paperback": {
+    "price": "8.99",
+    "asin": "B0DPVGBMJQ"
+   }
+  }
+ },
+ "unicorn": {
+  "etsy": {
+   "id": "4590568135",
+   "price": "6.99",
+   "pages": 49
+  },
+  "amazon": {
+   "hardcover": {
+    "price": "19.99",
+    "asin": "B0DQPMH8WW"
+   },
+   "paperback": {
+    "price": "7.99",
+    "asin": "B0DPQQPLMV"
+   }
+  }
+ },
+ "dinosaur": {
+  "etsy": {
+   "id": "4590553889",
+   "price": "6.99",
+   "pages": 48
+  },
+  "amazon": {
+   "hardcover": {
+    "price": "19.99",
+    "asin": "B0DTQ9Q395"
+   },
+   "paperback": {
+    "price": "7.99",
+    "asin": "B0DPMVBZQT"
+   }
+  }
+ },
+ "coloring-young-boys": {
+  "etsy": {
+   "id": "4590546098",
+   "price": "6.99",
+   "pages": 48
+  },
+  "amazon": {
+   "hardcover": {
+    "price": "19.99",
+    "asin": "B0DQP7Q4ZV"
+   },
+   "paperback": {
+    "price": "7.99",
+    "asin": "B0DPMYBDSP"
+   }
+  }
+ },
+ "coloring-young-girls": {
+  "etsy": {
+   "id": "4590538864",
+   "price": "4.99",
+   "pages": 39
+  },
+  "amazon": {
+   "hardcover": {
+    "price": "19.99",
+    "asin": "B0DQP72GWH"
+   },
+   "paperback": {
+    "price": "7.99",
+    "asin": "B0DPQDTJ4W"
+   }
+  }
+ },
+ "birds": {
+  "etsy": {
+   "id": "4590495227",
+   "price": "6.99",
+   "pages": 49
+  },
+  "amazon": {
+   "hardcover": {
+    "price": "19.99",
+    "asin": "B0DQPKQGJ3"
+   },
+   "paperback": {
+    "price": "7.99",
+    "asin": "B0DPSXNFXF"
+   }
+  }
+ },
+ "fun-mazes-adventurers": {
+  "amazon": {
+   "hardcover": {
+    "price": "14.99",
+    "asin": "B0DRJHDCVY"
+   },
+   "paperback": {
+    "price": "5.99",
+    "asin": "B0DRNQTY62"
+   }
+  }
+ },
+ "fun-mazes-relaxation": {
+  "amazon": {
+   "hardcover": {
+    "price": "13.99",
+    "asin": "B0DRJK1FD6"
+   },
+   "paperback": {
+    "price": "5.99",
+    "asin": "B0DRNMK5ZT"
+   }
+  }
+ },
+ "fun-mazes-toddlers": {
+  "amazon": {
+   "hardcover": {
+    "price": "14.99",
+    "asin": "B0DRPFFT2C"
+   },
+   "paperback": {
+    "price": "5.99",
+    "asin": "B0DRSBYMCN"
+   }
+  }
+ },
+ "inspirational-quotes": {
+  "amazon": {
+   "hardcover": {
+    "price": "17.99",
+    "asin": "B0DVV5B36X"
+   },
+   "paperback": {
+    "price": "7.99",
+    "asin": "B0DVC14SDV"
+   }
+  }
+ },
+ "positive-journal": {
+  "amazon": {
+   "paperback": {
+    "price": "13.99",
+    "asin": "B0DY13YHT8"
+   }
+  }
+ },
+ "relaxing-maze": {
+  "amazon": {
+   "hardcover": {
+    "price": "19.99",
+    "asin": "B0DRSCCHQ7"
+   },
+   "paperback": {
+    "price": "9.99",
+    "asin": "B0DRSSY1B9"
+   }
+  }
+ },
+ "round-maze": {
+  "amazon": {
+   "hardcover": {
+    "price": "16.99",
+    "asin": "B0DTYQNCZV"
+   }
+  }
+ },
+ "toddler-coloring-book": {
+  "amazon": {
+   "hardcover": {
+    "price": "19.99",
+    "asin": "B0DQPC6YYR"
+   },
+   "paperback": {
+    "price": "7.99",
+    "asin": "B0DPDPVR3Q"
+   }
+  }
+ },
+ "ultimate-time-killer": {
+  "amazon": {
+   "hardcover": {
+    "price": "19.99",
+    "asin": "B0DXFSG47P"
+   },
+   "paperback": {
+    "price": "9.99",
+    "asin": "B0DWJVWM54"
+   }
+  }
+ }
+}

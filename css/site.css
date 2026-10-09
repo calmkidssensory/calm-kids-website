@@ -1589,3 +1589,55 @@ body.js-reveal [data-reveal].is-visible {
 .related-reading a:hover {
   text-decoration: underline;
 }
+
+/* Etsy card + 4-card offer grid (added 2026-10-09). Four cards sit 2 x 2 so
+   each keeps a readable width inside the hero column; the floor height is
+   dropped because two rows already give the grid its height. */
+.offer-grid.offer-grid-4 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.offer-grid.offer-grid-4 .offer-card {
+  min-height: 0;
+}
+
+@media (max-width: 900px) {
+  .offer-grid.offer-grid-4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.offer-btn.etsy {
+  background: #c24a0f;
+  color: #fff;
+  text-shadow: var(--text-legibility-shadow-strong);
+}
+
+.offer-btn.etsy:hover {
+  background: #a53e0c;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(194, 74, 15, 0.3);
+}
+
+.offer-card .offer-price.free {
+  color: var(--sage-deep);
+}
+
+/* Amazon card with one button per format (paperback / hardcover), 2026-10-09.
+   Each price sits directly above its own button; the hardcover button is a
+   lighter shade so the two read as separate choices. */
+.offer-card .offer-btn + .offer-price {
+  margin-top: 14px;
+}
+
+.offer-card .offer-price:has(+ .offer-btn.amazon) {
+  margin-bottom: 8px;
+}
+
+.offer-btn.amazon.hardcover {
+  background: #ffd699;
+}
+
+.offer-btn.amazon.hardcover:hover {
+  background: #ffc873;
+}
