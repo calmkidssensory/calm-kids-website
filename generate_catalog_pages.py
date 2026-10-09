@@ -432,7 +432,7 @@ AMAZON_CARD_REAL = """        <div class="offer-card">
 
 AMAZON_CARD_COMING_SOON = """        <div class="offer-card coming-soon">
           <p class="offer-kicker">Keep it on the shelf</p>
-          <h3>Paperback &mdash; Coming Soon</h3>
+          <h3>Paperback Soon</h3>
           <p>A bound paperback edition is on its way to Amazon. The digital pack works today if you'd like to print at home in the meantime.</p>
           <span class="offer-btn soon" aria-disabled="true">Coming Soon</span>
         </div>"""
