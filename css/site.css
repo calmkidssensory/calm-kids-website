@@ -1596,31 +1596,39 @@ body.js-reveal [data-reveal].is-visible {
    the title text, side by side. */
 .book-hero:has(.offer-row) .book-hero-inner:has(.book-hero-media) {
   grid-template-columns: auto 1fr;
-  align-items: center;
+  align-items: start;
   gap: 48px;
 }
 
+/* Top edges line up (cover, video, age badge) and so do the bottom edges (cover
+   bottom = end of the video caption). The cover is 300px wide at 3:4, i.e.
+   (300 - 2) * 4/3 + 2 = 399.33px tall; the video column is the 9:16 frame plus
+   its 41.22px caption block (20px margin + 21.22px line), so a frame width of
+   (399.33 - 41.22) * 9/16 = 201.4px makes the column exactly as tall as the cover. */
 .book-hero:has(.offer-row) .book-hero-media {
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
   gap: 28px;
 }
 
 .book-hero:has(.offer-row) .book-hero-media .book-hero-cover {
   width: 300px;
   margin: 0;
-  align-self: center;
+  align-self: flex-start;
 }
 
 .book-hero:has(.offer-row) .book-hero-divider {
   width: 2px;
   height: 48px;
-  margin: 0;
+  margin: 175px 0 0;
+  align-self: flex-start;
   background: linear-gradient(180deg, var(--lavender-deep), var(--gold));
 }
 
 .book-hero:has(.offer-row) .book-hero-video {
   margin: 0;
+  width: 201.4px;
+  align-self: flex-start;
 }
 
 .offer-row {
@@ -1661,7 +1669,11 @@ body.js-reveal [data-reveal].is-visible {
     max-width: 320px;
     margin: 0 auto;
   }
+  .book-hero:has(.offer-row) .book-hero-media .book-hero-video {
+    align-self: center;
+  }
   .book-hero:has(.offer-row) .book-hero-divider {
+    align-self: center;
     width: 46px;
     height: 2px;
     margin: 20px 0 18px;
@@ -1709,4 +1721,17 @@ body.js-reveal [data-reveal].is-visible {
 
 .offer-btn.amazon.hardcover:hover {
   background: #ffc873;
+}
+
+/* Nudge the age badge up 1px so its top edge sits exactly on the cover's top edge. */
+.book-hero:has(.offer-row) .book-hero-info .age-badge {
+  margin-top: -1px;
+}
+
+/* The caption may be a little wider than the 201px video so it is not cut off
+   with an ellipsis; its height (and so the bottom alignment with the cover) is unchanged. */
+.book-hero:has(.offer-row) .book-hero-video-caption {
+  margin: 20px -26px 0;
+  overflow: visible;
+  text-overflow: clip;
 }
