@@ -22,5 +22,13 @@
       "jellyfish"
     ],
     "sample": "tiger"
+  },
+  "coloring-young-girls": {
+    "title": "Simple Coloring Book for Young Girls",
+    "related": [
+      "puppy",
+      "rope"
+    ],
+    "sample": "bike"
   }
 }
