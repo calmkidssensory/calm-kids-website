@@ -14,5 +14,13 @@
       "hedgehog"
     ],
     "sample": "deer"
+  },
+  "toddler-coloring-book": {
+    "title": "Simple Coloring Book for Toddler",
+    "related": [
+      "frog",
+      "jellyfish"
+    ],
+    "sample": "tiger"
   }
 }
