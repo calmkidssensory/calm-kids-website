@@ -9,7 +9,7 @@ For every book listed in etsy-videos.json:
 
 Usage
   python add_etsy_videos.py --ingest SLUG --title "Book Title" NAME=a.mp4 NAME=b.mp4 NAME=c.mp4 [--apply]
-      First two files -> related reading, third -> samples page. Makes small silent web
+      First two files -> related reading, third -> samples page. Makes small web (with the video's music)
       versions + posters in videos/etsy/ and records the book in etsy-videos.json.
       NAME is the short subject label (kittens, owls, sled ...). A bare path uses the file stem.
   python add_etsy_videos.py [--apply]
@@ -54,8 +54,8 @@ def ingest(argv):
         OUT.mkdir(parents=True, exist_ok=True)
         for n, path in names:
             base = OUT / f"{slug}-{n}"
-            subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", path, "-an", "-vf", "scale=540:960",
-                            "-c:v", "libx264", "-crf", "27", "-preset", "slow", "-movflags", "+faststart",
+            subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", path, "-vf", "scale=540:960",
+                            "-c:v", "libx264", "-crf", "27", "-preset", "slow", "-c:a", "aac", "-b:a", "64k", "-ac", "1", "-movflags", "+faststart",
                             str(base) + ".mp4"], check=True)
             subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-ss", "24", "-i", path, "-frames:v", "1",
                             "-vf", "scale=540:960", "-q:v", "4", str(base) + ".jpg"], check=True)
@@ -65,7 +65,7 @@ def ingest(argv):
 def vid_fig(slug, name, title, rel):
     alt = html.escape(f"{title}: {name} page being colored with soft pencils")
     return (f'        <figure class="related-video">\n'
-            f'          <video controls preload="none" playsinline muted poster="{rel}videos/etsy/{slug}-{name}.jpg" aria-label="{alt}">\n'
+            f'          <video controls preload="none" playsinline poster="{rel}videos/etsy/{slug}-{name}.jpg" aria-label="{alt}">\n'
             f'            <source src="{rel}videos/etsy/{slug}-{name}.mp4" type="video/mp4" />\n'
             f'          </video>\n'
             f'        </figure>')
@@ -181,7 +181,7 @@ def sample_card(slug, b):
     n = b["sample"]; title = html.escape(b["title"])
     return (f'      <div class="video-card sample-card">\n'
             f'        <div class="video-frame">\n'
-            f'          <video controls preload="none" playsinline muted poster="videos/etsy/{slug}-{n}.jpg">\n'
+            f'          <video controls preload="none" playsinline poster="videos/etsy/{slug}-{n}.jpg">\n'
             f'            <source src="videos/etsy/{slug}-{n}.mp4" type="video/mp4" />\n'
             f'          </video>\n'
             f'        </div>\n'
