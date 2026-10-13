@@ -323,3 +323,9 @@ wr(HERE/"sitemap.xml", sm)
 print("MODE:", "APPLY" if APPLY else "DRY RUN", stats)
 for s in ["samurai","orchids","sudoku","dragons"]:
     print(s, "->", [(p, g) for p, g in related(s)], GUIDE_OF[s])
+
+# Re-apply the Etsy example videos (right side of Related reading + coloring-samples page)
+# that this script's block rebuild would otherwise drop. See add_etsy_videos.py / etsy-videos.json.
+if APPLY and (HERE/"etsy-videos.json").exists():
+    import subprocess
+    subprocess.run([sys.executable, str(HERE/"add_etsy_videos.py"), "--apply"], check=True)

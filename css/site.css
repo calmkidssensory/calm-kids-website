@@ -1763,3 +1763,7 @@ body.js-reveal [data-reveal].is-visible {
   .related-videos { grid-template-columns: 1fr; order: -1; max-width: 270px; margin: 0 auto; }
 }
 /* RELATED-READING-VIDEOS:END */
+
+/* Page coloring samples page (2026-10-13): a few large cards, centered, not the 6-across Videos grid. */
+.video-grid.samples-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 260px)); justify-content: center; }
+@media (max-width: 760px) { .video-grid.samples-grid { grid-template-columns: minmax(0, 300px); } }
