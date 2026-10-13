@@ -65,7 +65,7 @@ def ingest(argv):
 def vid_fig(slug, name, title, rel):
     alt = html.escape(f"{title}: {name} page being colored with soft pencils")
     return (f'        <figure class="related-video">\n'
-            f'          <video controls preload="none" playsinline muted poster="{rel}videos/etsy/{slug}-{name}.jpg" aria-label="{alt}">\n'
+            f'          <video controls preload="none" playsinline poster="{rel}videos/etsy/{slug}-{name}.jpg" aria-label="{alt}">\n'
             f'            <source src="{rel}videos/etsy/{slug}-{name}.mp4" type="video/mp4" />\n'
             f'          </video>\n'
             f'        </figure>')
@@ -181,7 +181,7 @@ def sample_card(slug, b):
     n = b["sample"]; title = html.escape(b["title"])
     return (f'      <div class="video-card sample-card">\n'
             f'        <div class="video-frame">\n'
-            f'          <video controls preload="none" playsinline muted poster="videos/etsy/{slug}-{n}.jpg">\n'
+            f'          <video controls preload="none" playsinline poster="videos/etsy/{slug}-{n}.jpg">\n'
             f'            <source src="videos/etsy/{slug}-{n}.mp4" type="video/mp4" />\n'
             f'          </video>\n'
             f'        </div>\n'
