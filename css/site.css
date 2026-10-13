@@ -1748,3 +1748,18 @@ body.js-reveal [data-reveal].is-visible {
 .related-reading .related-reading-list li { margin: 0 0 8px; font-size: 0.85rem; color: var(--ink-soft); }
 .related-reading .related-reading-list a { display: inline; margin: 0; }
 /* RELATED-READING-LIST:END */
+
+/* RELATED-READING-VIDEOS:START (2026-10-13) Related reading: text left, two colored-page
+   example videos side by side on the right. Phones: the videos stack first, one after
+   another, then the reading text below. */
+.related-split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; align-items: start; }
+.related-split .related-text .related-reading-label { margin-top: 0; }
+.related-videos { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.related-video { margin: 0; border-radius: 10px; overflow: hidden; background: rgba(45, 42, 30, 0.06); aspect-ratio: 9 / 16; }
+.related-video video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.related-videos-caption { grid-column: 1 / -1; margin: 0; font-size: 0.8rem; color: var(--ink-faint); text-align: center; }
+@media (max-width: 760px) {
+  .related-split { grid-template-columns: 1fr; gap: 24px; }
+  .related-videos { grid-template-columns: 1fr; order: -1; max-width: 270px; margin: 0 auto; }
+}
+/* RELATED-READING-VIDEOS:END */
