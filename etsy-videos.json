@@ -30,5 +30,13 @@
       "rope"
     ],
     "sample": "bike"
+  },
+  "coloring-young-boys": {
+    "title": "Simple Coloring Book for Young Boys",
+    "related": [
+      "car",
+      "kite"
+    ],
+    "sample": "ball"
   }
 }
