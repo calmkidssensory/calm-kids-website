@@ -38,5 +38,13 @@
       "kite"
     ],
     "sample": "ball"
+  },
+  "dinosaur": {
+    "title": "Simple Dinosaur Coloring Book",
+    "related": [
+      "stegosaurus",
+      "longneck"
+    ],
+    "sample": "baby"
   }
 }
