@@ -46,5 +46,13 @@
       "longneck"
     ],
     "sample": "baby"
+  },
+  "unicorn": {
+    "title": "Simple Unicorn Coloring Book",
+    "related": [
+      "gallop",
+      "portrait"
+    ],
+    "sample": "cottage"
   }
 }
