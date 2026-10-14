@@ -54,5 +54,13 @@
       "portrait"
     ],
     "sample": "cottage"
+  },
+  "birds": {
+    "title": "Beautiful Birds Coloring Book",
+    "related": [
+      "cockatoo",
+      "nest"
+    ],
+    "sample": "duck"
   }
 }
