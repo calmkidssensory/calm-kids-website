@@ -86,5 +86,13 @@
       "nest"
     ],
     "sample": "cave"
+  },
+  "inspirational-quotes": {
+    "title": "Inspirational Quotes Coloring Book",
+    "related": [
+      "beautiful",
+      "grow"
+    ],
+    "sample": "rise"
   }
 }
