@@ -110,5 +110,13 @@
       "rock"
     ],
     "sample": "flying"
+  },
+  "magical-mermaids": {
+    "title": "Magical Mermaids Coloring Book",
+    "related": [
+      "tail",
+      "shore"
+    ],
+    "sample": "friends"
   }
 }
