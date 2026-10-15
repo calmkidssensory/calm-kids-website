@@ -78,5 +78,13 @@
       "corgi"
     ],
     "sample": "poodle"
+  },
+  "dragons": {
+    "title": "Beautiful Dragons Coloring Book",
+    "related": [
+      "village",
+      "nest"
+    ],
+    "sample": "cave"
   }
 }
