@@ -94,5 +94,13 @@
       "grow"
     ],
     "sample": "rise"
+  },
+  "magical-snakes": {
+    "title": "Magical Snakes Coloring Book",
+    "related": [
+      "cobra",
+      "coil"
+    ],
+    "sample": "branch"
   }
 }
