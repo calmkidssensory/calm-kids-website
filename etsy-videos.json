@@ -70,5 +70,13 @@
       "window"
     ],
     "sample": "kittens"
+  },
+  "dogs": {
+    "title": "Beautiful Dogs Coloring Book",
+    "related": [
+      "shihtzu",
+      "corgi"
+    ],
+    "sample": "poodle"
   }
 }
