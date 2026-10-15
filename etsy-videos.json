@@ -102,5 +102,13 @@
       "coil"
     ],
     "sample": "branch"
+  },
+  "magical-fairies": {
+    "title": "Magical Fairies Coloring Book",
+    "related": [
+      "gown",
+      "rock"
+    ],
+    "sample": "flying"
   }
 }
