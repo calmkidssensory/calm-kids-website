@@ -134,5 +134,13 @@
       "sloth"
     ],
     "sample": "okapi"
+  },
+  "relaxing-landscapes": {
+    "title": "Relaxing Landscapes Coloring Book",
+    "related": [
+      "temple",
+      "meadow"
+    ],
+    "sample": "oak"
   }
 }
