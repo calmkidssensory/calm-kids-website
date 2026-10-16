@@ -174,5 +174,13 @@
       "elephant"
     ],
     "sample": "lion"
+  },
+  "orchids": {
+    "title": "Beautiful Orchids Coloring Book",
+    "related": [
+      "mothorchid",
+      "cymbidium"
+    ],
+    "sample": "lycaste"
   }
 }
