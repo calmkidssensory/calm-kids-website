@@ -126,5 +126,13 @@
       "jellyfish"
     ],
     "sample": "clownfish"
+  },
+  "jungle-mammals": {
+    "title": "Jungle Mammals Coloring Book",
+    "related": [
+      "jaguar",
+      "sloth"
+    ],
+    "sample": "okapi"
   }
 }
