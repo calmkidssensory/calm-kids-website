@@ -158,5 +158,13 @@
       "lizard"
     ],
     "sample": "eel"
+  },
+  "roosters": {
+    "title": "Beautiful Roosters Coloring Book",
+    "related": [
+      "river",
+      "wings"
+    ],
+    "sample": "meadow"
   }
 }
