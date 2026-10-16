@@ -166,5 +166,13 @@
       "wings"
     ],
     "sample": "meadow"
+  },
+  "zoo-animals": {
+    "title": "Beautiful Zoo Animals Coloring Book",
+    "related": [
+      "panda",
+      "elephant"
+    ],
+    "sample": "lion"
   }
 }
