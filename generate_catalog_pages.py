@@ -384,7 +384,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
         </div>
 {amazon_card}
       </div>
-      <p class="offer-note">Digital downloads are for personal, print-at-home use.</p>
+      <p class="offer-note">Digital downloads are for personal, print-at-home use. They are delivered instantly and all digital sales are final. If a file does not open or download, contact us and we will help.</p>
     </div>
   </div>
 {related_reading_block}</section>
@@ -581,7 +581,7 @@ def render_page(rec: BookRecord) -> str:
         hero_media_block = HERO_MEDIA_WITH_VIDEO.format(
             cover_src=rec.cover_src, title=rec.title, slug=rec.slug
         )
-        upload_date = datetime.fromtimestamp(video_path.stat().st_mtime).strftime("%Y-%m-%d")
+        upload_date = datetime.fromtimestamp(video_path.stat().st_mtime).astimezone().replace(microsecond=0).isoformat()  # full ISO-8601 with UTC offset (Search Console requires a timezone)
         video_schema_block = VIDEO_SCHEMA_BLOCK.format(
             title_json=json_escape(rec.title),
             meta_description_json=json_escape(rec.meta_description),
