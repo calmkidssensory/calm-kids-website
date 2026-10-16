@@ -142,5 +142,13 @@
       "meadow"
     ],
     "sample": "oak"
+  },
+  "science-fiction": {
+    "title": "Science Fiction Coloring Book",
+    "related": [
+      "spaceship",
+      "submarine"
+    ],
+    "sample": "saucer"
   }
 }
