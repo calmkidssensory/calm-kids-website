@@ -150,5 +150,13 @@
       "submarine"
     ],
     "sample": "saucer"
+  },
+  "reptiles-amphibians": {
+    "title": "Reptiles and Amphibians Coloring Book",
+    "related": [
+      "frog",
+      "lizard"
+    ],
+    "sample": "eel"
   }
 }
