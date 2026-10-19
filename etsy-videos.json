@@ -238,5 +238,13 @@
       "forest"
     ],
     "sample": "country"
+  },
+  "fighter-jets": {
+    "title": "Fighter Jets Coloring Book",
+    "related": [
+      "mountains",
+      "runway"
+    ],
+    "sample": "jungle"
   }
 }
