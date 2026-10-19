@@ -222,5 +222,13 @@
       "fox"
     ],
     "sample": "turtle"
+  },
+  "wild-flowers": {
+    "title": "Wild Flowers Coloring Book",
+    "related": [
+      "rose",
+      "lotus"
+    ],
+    "sample": "passion"
   }
 }
