@@ -230,5 +230,13 @@
       "lotus"
     ],
     "sample": "passion"
+  },
+  "super-cars": {
+    "title": "Super Cars Coloring Book",
+    "related": [
+      "canyon",
+      "forest"
+    ],
+    "sample": "country"
   }
 }
