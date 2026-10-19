@@ -190,5 +190,13 @@
       "greeter"
     ],
     "sample": "winged"
+  },
+  "halloween-scenes": {
+    "title": "Spooky Playful Halloween Scenes",
+    "related": [
+      "pumpkins",
+      "house"
+    ],
+    "sample": "scarecrow"
   }
 }
