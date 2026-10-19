@@ -206,5 +206,13 @@
       "quaker"
     ],
     "sample": "conure"
+  },
+  "magical-creatures": {
+    "title": "Magical Creatures Coloring Book",
+    "related": [
+      "fairy",
+      "winged"
+    ],
+    "sample": "horned"
   }
 }
