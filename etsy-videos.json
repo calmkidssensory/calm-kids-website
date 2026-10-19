@@ -198,5 +198,13 @@
       "house"
     ],
     "sample": "scarecrow"
+  },
+  "wild-parakeets": {
+    "title": "Wild Parakeets Coloring Book",
+    "related": [
+      "budgie",
+      "quaker"
+    ],
+    "sample": "conure"
   }
 }
