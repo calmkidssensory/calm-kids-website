@@ -246,5 +246,13 @@
       "runway"
     ],
     "sample": "jungle"
+  },
+  "scary-zombies": {
+    "title": "Scary Zombies Coloring Book",
+    "related": [
+      "grave",
+      "dog"
+    ],
+    "sample": "city"
   }
 }
