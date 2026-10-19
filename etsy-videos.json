@@ -254,5 +254,13 @@
       "dog"
     ],
     "sample": "city"
+  },
+  "heavy-duty-vehicles": {
+    "title": "Heavy Duty Vehicles Coloring Book",
+    "related": [
+      "tractor",
+      "excavator"
+    ],
+    "sample": "crane"
   }
 }
