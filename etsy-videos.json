@@ -182,5 +182,13 @@
       "cymbidium"
     ],
     "sample": "lycaste"
+  },
+  "scifi-robots": {
+    "title": "Sci-Fi Robots Coloring Book",
+    "related": [
+      "explorer",
+      "greeter"
+    ],
+    "sample": "winged"
   }
 }
