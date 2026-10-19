@@ -214,5 +214,13 @@
       "winged"
     ],
     "sample": "horned"
+  },
+  "relaxing-animals": {
+    "title": "Relaxing Animals Coloring Book",
+    "related": [
+      "deer",
+      "fox"
+    ],
+    "sample": "turtle"
   }
 }
