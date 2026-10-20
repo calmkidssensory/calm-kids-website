@@ -270,5 +270,13 @@
       "waves"
     ],
     "sample": "island"
+  },
+  "brides": {
+    "title": "Beautiful Brides Coloring Book",
+    "related": [
+      "garden",
+      "arch"
+    ],
+    "sample": "beach"
   }
 }
