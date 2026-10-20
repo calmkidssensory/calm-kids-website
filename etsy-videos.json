@@ -278,5 +278,13 @@
       "arch"
     ],
     "sample": "beach"
+  },
+  "historic-architecture": {
+    "title": "Historic Architecture Coloring Book",
+    "related": [
+      "pagoda",
+      "cottage"
+    ],
+    "sample": "cathedral"
   }
 }
