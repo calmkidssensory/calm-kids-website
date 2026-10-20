@@ -62,8 +62,17 @@ def ingest(argv):
     save(m)
 
 # ---------------------------------------------------------------- book pages
-def vid_fig(slug, name, title, rel):
-    alt = html.escape(f"{title}: {name} page being colored with soft pencils")
+def harvest_labels(s):
+    """Map video file stem (slug-name) -> existing aria-label, so a rebuild keeps hand-written alt text."""
+    out = {}
+    for tag in re.findall(r"<video\s[^>]*>", s):
+        a = re.search(r'aria-label="([^"]*)"', tag)
+        v = re.search(r'videos/etsy/([^"/]+)\.jpg', tag)
+        if a and v: out[v.group(1)] = a.group(1)
+    return out
+
+def vid_fig(slug, name, title, rel, labels=None):
+    alt = (labels or {}).get(f"{slug}-{name}") or html.escape(f"{title}: {name} page being colored with soft pencils")
     return (f'        <figure class="related-video">\n'
             f'          <video controls preload="none" playsinline poster="{rel}videos/etsy/{slug}-{name}.jpg" aria-label="{alt}">\n'
             f'            <source src="{rel}videos/etsy/{slug}-{name}.mp4" type="video/mp4" />\n'
@@ -79,6 +88,7 @@ def update_book(slug, b):
     if not m:
         print(f"  ! {slug}: no RELATED-READING markers"); return False
     body = m.group(1)
+    labels = harvest_labels(body)
     t = re.search(r'<div class="related-text">\n(.*?)\n\s*</div>\n\s*<div class="related-videos">', body, re.S)
     if t:
         text = t.group(1)
@@ -90,7 +100,7 @@ def update_book(slug, b):
         if not l: return ""
         return ("          " if l.startswith("<li") else "        ") + l
     text = "\n".join(_ind(l) for l in text.split("\n"))
-    figs = "\n".join(vid_fig(slug, n, b["title"], "../") for n in b["related"])
+    figs = "\n".join(vid_fig(slug, n, b["title"], "../", labels) for n in b["related"])
     cap = f'Two {html.escape(b["title"])} pages, colored with soft pencils.'
     new = ('  <!-- RELATED-READING:START -->\n  <div class="wrap related-reading">\n    <div class="related-split">\n'
            '      <div class="related-text">\n' + text + '\n      </div>\n      <div class="related-videos">\n' + figs +
@@ -177,11 +187,12 @@ PAGE_TAIL = '''    </div>
 </html>
 '''
 
-def sample_card(slug, b):
+def sample_card(slug, b, labels=None):
     n = b["sample"]; title = html.escape(b["title"])
+    alt = (labels or {}).get(f"{slug}-{n}") or html.escape(f"{b['title']}: {n} page being colored with soft pencils")
     return (f'      <div class="video-card sample-card">\n'
             f'        <div class="video-frame">\n'
-            f'          <video controls preload="none" playsinline poster="videos/etsy/{slug}-{n}.jpg">\n'
+            f'          <video controls preload="none" playsinline poster="videos/etsy/{slug}-{n}.jpg" aria-label="{alt}">\n'
             f'            <source src="videos/etsy/{slug}-{n}.mp4" type="video/mp4" />\n'
             f'          </video>\n'
             f'        </div>\n'
@@ -193,9 +204,10 @@ def sample_card(slug, b):
             f'      </div>\n')
 
 def write_samples(m):
-    page = PAGE_HEAD + "".join(sample_card(s, b) for s, b in m.items()) + PAGE_TAIL
     p = HERE / "coloring-samples.html"
     old = p.read_text(encoding="utf-8") if p.exists() else ""
+    labels = harvest_labels(old)
+    page = PAGE_HEAD + "".join(sample_card(s, b, labels) for s, b in m.items()) + PAGE_TAIL
     print("  coloring-samples.html:", "updated" if old != page else "up to date", f"({len(m)} samples)")
     if APPLY and old != page: p.write_text(page, encoding="utf-8")
 
