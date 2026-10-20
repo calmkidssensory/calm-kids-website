@@ -262,5 +262,13 @@
       "excavator"
     ],
     "sample": "crane"
+  },
+  "medieval-ships": {
+    "title": "Medieval Ships Coloring Book",
+    "related": [
+      "harbor",
+      "waves"
+    ],
+    "sample": "island"
   }
 }
