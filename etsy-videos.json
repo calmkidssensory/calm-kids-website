@@ -326,5 +326,13 @@
       "field"
     ],
     "sample": "seaside"
+  },
+  "flowers-butterflies": {
+    "title": "Flowers and Butterflies Coloring Book",
+    "related": [
+      "sunflower",
+      "bloom"
+    ],
+    "sample": "trumpet"
   }
 }
