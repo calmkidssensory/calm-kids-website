@@ -286,5 +286,13 @@
       "cottage"
     ],
     "sample": "cathedral"
+  },
+  "psychedelic": {
+    "title": "Psychedelic Coloring Book",
+    "related": [
+      "afro",
+      "river"
+    ],
+    "sample": "bloom"
   }
 }
