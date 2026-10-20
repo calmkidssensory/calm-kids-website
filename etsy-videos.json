@@ -302,5 +302,13 @@
       "armor"
     ],
     "sample": "bamboo"
+  },
+  "koi-fish": {
+    "title": "Koi Fish Coloring Book",
+    "related": [
+      "shoal",
+      "pond"
+    ],
+    "sample": "pair"
   }
 }
