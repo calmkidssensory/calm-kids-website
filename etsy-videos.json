@@ -310,5 +310,13 @@
       "pond"
     ],
     "sample": "pair"
+  },
+  "realistic-cats": {
+    "title": "Realistic Cats Coloring Book",
+    "related": [
+      "chair",
+      "toyger"
+    ],
+    "sample": "kittens"
   }
 }
