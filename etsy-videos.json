@@ -294,5 +294,13 @@
       "river"
     ],
     "sample": "bloom"
+  },
+  "samurai": {
+    "title": "Samurai Coloring Book",
+    "related": [
+      "archer",
+      "armor"
+    ],
+    "sample": "bamboo"
   }
 }
