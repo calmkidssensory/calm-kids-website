@@ -318,5 +318,13 @@
       "toyger"
     ],
     "sample": "kittens"
+  },
+  "anime-art": {
+    "title": "Anime Art Coloring Book",
+    "related": [
+      "portrait",
+      "field"
+    ],
+    "sample": "seaside"
   }
 }
