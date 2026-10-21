@@ -382,5 +382,13 @@
       "jungle"
     ],
     "sample": "dojo"
+  },
+  "fun-cowboys": {
+    "title": "Fun Cowboys Coloring Book",
+    "related": [
+      "portrait",
+      "mountain"
+    ],
+    "sample": "farm"
   }
 }
