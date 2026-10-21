@@ -342,5 +342,13 @@
       "calla"
     ],
     "sample": "lotus"
+  },
+  "mosaic-butterflies": {
+    "title": "Mosaic Butterflies Coloring Book",
+    "related": [
+      "beaded",
+      "radial"
+    ],
+    "sample": "leaf"
   }
 }
