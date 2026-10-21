@@ -358,5 +358,13 @@
       "shield"
     ],
     "sample": "veil"
+  },
+  "mosaic-flowers": {
+    "title": "Mosaic Flowers Coloring Book",
+    "related": [
+      "hibiscus",
+      "anemone"
+    ],
+    "sample": "lotus"
   }
 }
