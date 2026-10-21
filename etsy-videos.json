@@ -350,5 +350,13 @@
       "radial"
     ],
     "sample": "leaf"
+  },
+  "mosaic-medieval-designs": {
+    "title": "Mosaic Medieval Designs with Quotes Coloring Book",
+    "related": [
+      "king",
+      "shield"
+    ],
+    "sample": "veil"
   }
 }
