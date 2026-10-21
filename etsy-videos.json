@@ -366,5 +366,13 @@
       "anemone"
     ],
     "sample": "lotus"
+  },
+  "mosaic-churches": {
+    "title": "Mosaic Churches Coloring Book",
+    "related": [
+      "garden",
+      "sunburst"
+    ],
+    "sample": "plaza"
   }
 }
