@@ -374,5 +374,13 @@
       "sunburst"
     ],
     "sample": "plaza"
+  },
+  "beautiful-houses": {
+    "title": "Beautiful Houses Coloring Book",
+    "related": [
+      "lighthouse",
+      "jungle"
+    ],
+    "sample": "dojo"
   }
 }
