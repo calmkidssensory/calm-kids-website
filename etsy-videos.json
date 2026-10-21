@@ -334,5 +334,13 @@
       "bloom"
     ],
     "sample": "trumpet"
+  },
+  "flowers-butterflies-quotes": {
+    "title": "Flowers and Butterflies Quotes Coloring Book",
+    "related": [
+      "orchid",
+      "calla"
+    ],
+    "sample": "lotus"
   }
 }
