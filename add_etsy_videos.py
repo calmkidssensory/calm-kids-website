@@ -12,6 +12,9 @@ Usage
       First two files -> related reading, third -> samples page. Makes small web (with the video's music)
       versions + posters in videos/etsy/ and records the book in etsy-videos.json.
       NAME is the short subject label (kittens, owls, sled ...). A bare path uses the file stem.
+  python add_etsy_videos.py --replace-related SLUG NAME=new.mp4 [--slot 2] [--apply]
+      Vivid pencil runs: encode ONE new video and put it in slot 1 or 2 (default 2) of that book's related-reading
+      pair, keeping the other video and the samples-page video. The replaced video's files stay on disk.
   python add_etsy_videos.py [--apply]
       Rebuilds every book page + coloring-samples.html + nav/sitemap links from etsy-videos.json.
 
@@ -60,6 +63,32 @@ def ingest(argv):
             subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-ss", "24", "-i", path, "-frames:v", "1",
                             "-vf", "scale=540:960", "-q:v", "4", str(base) + ".jpg"], check=True)
     save(m)
+
+def replace_related(argv):
+    args = [a for a in argv if a != "--apply"]
+    slug = args[args.index("--replace-related") + 1]
+    slot = int(args[args.index("--slot") + 1]) if "--slot" in args else 2
+    f = [a for a in args if a.lower().endswith(".mp4")]
+    if len(f) != 1 or slot not in (1, 2):
+        sys.exit("need exactly one NAME=file.mp4 and --slot 1 or 2")
+    name, _, path = f[0].partition("=") if "=" in f[0] else (None, None, f[0])
+    name = name or re.sub(r"^(post_|tiktok_)", "", Path(path).stem)
+    m = load()
+    if slug not in m:
+        sys.exit(f"{slug} is not in etsy-videos.json; ingest the book's three Etsy videos first")
+    old = m[slug]["related"][slot - 1]
+    m[slug]["related"][slot - 1] = name
+    print(f"{slug}: slot {slot} {old} -> {name}; related={m[slug]['related']} sample={m[slug]['sample']}")
+    if APPLY:
+        OUT.mkdir(parents=True, exist_ok=True)
+        base = OUT / f"{slug}-{name}"
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", path, "-vf", "scale=540:960",
+                        "-c:v", "libx264", "-crf", "27", "-preset", "slow", "-c:a", "aac", "-b:a", "64k", "-ac", "1", "-movflags", "+faststart",
+                        str(base) + ".mp4"], check=True)
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-ss", "24", "-i", path, "-frames:v", "1",
+                        "-vf", "scale=540:960", "-q:v", "4", str(base) + ".jpg"], check=True)
+    save(m)
+    return m
 
 # ---------------------------------------------------------------- book pages
 def harvest_labels(s):
@@ -225,6 +254,12 @@ def link_site():
         if APPLY: sm.write_text(t, encoding="utf-8")
 
 def main():
+    if "--replace-related" in sys.argv:
+        m = replace_related(sys.argv)
+        if not APPLY:
+            print("(dry run: manifest not written; re-run with --apply)"); return
+        update_book(sys.argv[sys.argv.index("--replace-related") + 1], m[sys.argv[sys.argv.index("--replace-related") + 1]])
+        write_samples(m); link_site(); print("done"); return
     if "--ingest" in sys.argv:
         ingest(sys.argv)
     m = load() if not ("--ingest" in sys.argv and not APPLY) else {**load()}
