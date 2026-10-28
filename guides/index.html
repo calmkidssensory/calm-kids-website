@@ -5,8 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Calm Guides &mdash; Calm Kids Sensory</title>
 <meta name="description" content="Gentle, practical guides to quiet time, calming spaces, and low-stimulation routines at home, plus a free printable Quiet Time Starter Pack." />
-<!-- HOLD: keep noindex until at least 3 guides are published, then delete this line and add /guides/ to sitemap.xml -->
-<meta name="robots" content="noindex, follow" />
 <link rel="canonical" href="https://calmkidssensory.com/guides/" />
 <link rel="icon" type="image/png" href="../images/logo.png" />
 <link rel="stylesheet" href="../css/site.css" />
@@ -33,6 +31,9 @@
   .guide-item { background: var(--white); border-radius: 16px; padding: 18px 22px; box-shadow: var(--shadow); text-align: left; }
   .guide-item h3 { margin: 0 0 4px; font-family: var(--font-display); color: var(--ink); font-size: 1.1rem; }
   .guide-item p { margin: 0; color: var(--ink-soft); font-size: 0.92rem; line-height: 1.6; }
+  a.guide-item { display: block; text-decoration: none; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+  a.guide-item:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+  .guide-read { display: inline-block; margin-top: 8px; font-size: 0.8rem; font-weight: 600; color: var(--sage-text); }
   .guide-soon { display: inline-block; margin-top: 8px; font-size: 0.75rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-faint); }
 </style>
 </head>
@@ -92,26 +93,25 @@
 <section>
   <div class="wrap">
     <div class="section-heading" data-reveal>
-      <h2>Guides in progress</h2>
+      <h2>Guides</h2>
       <p>New guides are added regularly. Each one links to books from our catalog that fit the theme.</p>
     </div>
     <div class="guide-list">
-      <!-- When a guide goes live: change the <div class="guide-item"> to <a class="guide-item" href="slug.html"> and remove the guide-soon line. -->
-      <div class="guide-item">
+      <a class="guide-item" href="quiet-activities-for-overstimulated-child.html">
         <h3>Quiet Activities for an Overstimulated Child</h3>
         <p>Low-demand ideas for the hour after school, when a child needs quiet before conversation.</p>
-        <span class="guide-soon">Coming soon</span>
-      </div>
-      <div class="guide-item">
+        <span class="guide-read">Read the guide</span>
+      </a>
+      <a class="guide-item" href="low-stimulation-calming-corner-at-home.html">
         <h3>How to Create a Low-Stimulation Calming Corner at Home</h3>
         <p>Light, texture, and a clear space, with no special equipment needed.</p>
-        <span class="guide-soon">Coming soon</span>
-      </div>
-      <div class="guide-item">
+        <span class="guide-read">Read the guide</span>
+      </a>
+      <a class="guide-item" href="wind-down-bedtime-routines-for-toddlers.html">
         <h3>Wind-Down Bedtime Routines for Toddlers</h3>
         <p>A predictable, screen-free sequence that helps the evening slow down.</p>
-        <span class="guide-soon">Coming soon</span>
-      </div>
+        <span class="guide-read">Read the guide</span>
+      </a>
       <div class="guide-item">
         <h3>How to Choose a Coloring Page for Quiet Time</h3>
         <p>Line weight, detail level, and subject, matched to age and mood.</p>
