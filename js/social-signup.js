@@ -11,7 +11,7 @@
   "use strict";
 
   // SETUP: paste your IDs between the quotes.
-  var GOOGLE_CLIENT_ID = "PASTE_YOUR_GOOGLE_CLIENT_ID_HERE";
+  var GOOGLE_CLIENT_ID = "160203199985-mdb4u8ljie31b6qa7nib5atjva7r313j.apps.googleusercontent.com";
   var FACEBOOK_APP_ID = "PASTE_YOUR_FACEBOOK_APP_ID_HERE";
   var FB_VERSION = "v25.0";
 
