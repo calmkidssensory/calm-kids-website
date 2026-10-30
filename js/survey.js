@@ -189,6 +189,27 @@
     em.setAttribute("aria-label", "Your email address, optional");
     em.autocomplete = "email";
     em.value = email;
+    // One-click Google / Facebook, when set up: fills the email box and ticks the consent box.
+    if (window.CKSSocial && window.CKSSocial.configured()) {
+      var social = el("div", "sv-social");
+      pack.appendChild(social);
+      window.CKSSocial.mount(social, {
+        onEmail: function (addr) {
+          email = addr;
+          consent = true;
+          var emBox = document.getElementById("sv-email");
+          var cbBox = document.getElementById("sv-consent");
+          if (emBox) emBox.value = addr;
+          if (cbBox) cbBox.checked = true;
+          var hint = document.getElementById("sv-social-note");
+          if (hint) hint.hidden = false;
+        }
+      });
+      var added = el("p", "sv-privacy", "Email added. Press Send my picks to finish, and the Starter Pack will follow.");
+      added.id = "sv-social-note";
+      added.hidden = true;
+      pack.appendChild(added);
+    }
     pack.appendChild(em);
     var cl = el("label", "sv-consent");
     var cb = el("input");
@@ -198,7 +219,7 @@
     cl.appendChild(cb);
     cl.appendChild(el("span", "", "Yes, email me the Starter Pack and one follow-up note. I can unsubscribe at any time by replying to either email."));
     pack.appendChild(cl);
-    pack.appendChild(el("p", "sv-privacy", "Your survey answers are anonymous. Your email is only used to send the pack, and is never saved with your answers."));
+    pack.appendChild(el("p", "sv-privacy", 'Your survey answers are anonymous. Your email is only used to send the pack, and is never saved with your answers. Read our <a href="/privacy/" style="color:inherit; text-decoration:underline;">Privacy Policy</a>.'));
     box.appendChild(pack);
 
     var trap = el("div", "trap", '<label>Leave this field empty <input type="text" id="sv-trap" tabindex="-1" autocomplete="off" /></label>');
