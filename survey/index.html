@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Choose the Next Calm Pages &mdash; Calm Kids Sensory</title>
+<meta name="description" content="A short, gentle survey. Tell us what helps quiet-time coloring feel easy, and help choose the next calm pages we draw." />
+<meta name="robots" content="noindex, follow" />
+<link rel="canonical" href="https://calmkidssensory.com/survey/" />
+<link rel="icon" type="image/png" href="../images/logo.png" />
+<link rel="stylesheet" href="../css/site.css" />
+<style>
+  .sv-wrap { max-width: 700px; margin: 0 auto; }
+  .sv-card { background: var(--white); border-radius: 24px; box-shadow: var(--shadow); padding: 30px 28px 26px; position: relative; overflow: hidden; }
+  .sv-card::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 6px; background: linear-gradient(90deg, var(--sage), var(--lavender-deep), var(--gold-soft)); }
+
+  .sv-progress { display: flex; align-items: center; gap: 10px; margin: 6px 0 22px; }
+  .sv-progress[hidden] { display: none; }
+  .sv-dots { display: flex; gap: 7px; flex: 1; }
+  .sv-dot { height: 8px; flex: 1; border-radius: 999px; background: var(--cream-deep); transition: background 0.35s ease; }
+  .sv-dot.is-done { background: var(--sage); }
+  .sv-dot.is-now { background: var(--lavender-deep); }
+  .sv-count { font-size: 0.8rem; color: var(--ink-faint); white-space: nowrap; }
+
+  .sv-step { animation: fadeUp 0.45s ease both; }
+  .sv-step h2 { font-family: var(--font-display); color: var(--ink); font-size: 1.55rem; line-height: 1.25; margin: 0 0 6px; text-align: left; }
+  .sv-step h2:focus { outline: none; }
+  .sv-hint { margin: 0 0 18px; color: var(--ink-soft); font-size: 0.95rem; }
+  .sv-group { border: 0; padding: 0; margin: 0 0 20px; min-width: 0; }
+  .sv-group legend { font-weight: 600; color: var(--ink); font-size: 0.95rem; padding: 0; margin: 0 0 10px; }
+
+  .sv-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+
+  .sv-choice { --acc: #8f9e8b; --tint: #eef2ec; position: relative; display: flex; align-items: center; gap: 12px; min-height: 58px; padding: 12px 16px; border: 2px solid var(--cream-deep); border-radius: 16px; background: var(--cream); color: var(--ink); cursor: pointer; text-align: left; line-height: 1.35; transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease; }
+  .sv-grid .sv-choice:nth-child(3n+2) { --acc: #b9a8e8; --tint: #f1edfb; }
+  .sv-grid .sv-choice:nth-child(3n+3) { --acc: #b6935a; --tint: #f8f0df; }
+  .sv-choice:hover { transform: translateY(-2px); border-color: var(--acc); box-shadow: 0 8px 20px rgba(45, 42, 30, 0.08); }
+  .sv-choice input { position: absolute; opacity: 0; inset: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
+  .sv-choice:focus-within { outline: 3px solid var(--lavender-deep); outline-offset: 2px; }
+  .sv-tick { flex: none; width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--ink-faint); background: var(--white); display: grid; place-items: center; transition: background 0.18s ease, border-color 0.18s ease, transform 0.25s cubic-bezier(.3,1.6,.5,1); }
+  .sv-tick svg { width: 15px; height: 15px; opacity: 0; transform: scale(0.4); transition: opacity 0.18s ease, transform 0.25s cubic-bezier(.3,1.6,.5,1); }
+  .sv-choice.is-on { border-color: var(--acc); background: var(--tint); }
+  .sv-choice.is-on .sv-tick { background: var(--acc); border-color: var(--acc); transform: scale(1.08); }
+  .sv-choice.is-on .sv-tick svg { opacity: 1; transform: scale(1); }
+  .sv-choice.is-off { opacity: 0.45; cursor: not-allowed; transform: none; box-shadow: none; }
+  .sv-choice.is-off input { cursor: not-allowed; }
+  .sv-label { font-size: 0.98rem; }
+
+  .sv-field { width: 100%; font: inherit; font-size: 0.98rem; padding: 13px 15px; border: 2px solid var(--cream-deep); border-radius: 14px; background: var(--cream); color: var(--ink); }
+  .sv-field:focus { outline: none; border-color: var(--lavender-deep); background: var(--white); }
+  textarea.sv-field { min-height: 96px; resize: vertical; }
+  .sv-label-block { display: block; font-weight: 600; font-size: 0.95rem; margin: 0 0 8px; color: var(--ink); }
+  .sv-optional { font-weight: 400; color: var(--ink-faint); }
+  .sv-pack { margin: 22px 0 0; padding: 18px; border-radius: 18px; background: var(--cream); border: 2px dashed var(--gold-soft); }
+  .sv-pack h3 { font-family: var(--font-display); font-size: 1.1rem; margin: 0 0 4px; color: var(--ink); }
+  .sv-pack p { margin: 0 0 12px; color: var(--ink-soft); font-size: 0.9rem; }
+  .sv-consent { display: flex; gap: 10px; align-items: flex-start; margin-top: 12px; font-size: 0.85rem; color: var(--ink-soft); line-height: 1.5; cursor: pointer; }
+  .sv-consent input { margin-top: 3px; width: 18px; height: 18px; accent-color: #8f9e8b; flex: none; }
+  .sv-privacy { margin: 12px 0 0; font-size: 0.78rem; color: var(--ink-faint); }
+
+  .sv-nav { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 24px; }
+  .sv-btn { font: inherit; font-weight: 600; font-size: 0.98rem; border: 0; border-radius: 999px; padding: 13px 30px; cursor: pointer; transition: transform 0.18s ease, box-shadow 0.18s ease; }
+  .sv-btn:disabled { opacity: 0.6; cursor: wait; }
+  .sv-btn.primary { background: var(--sage); color: #fff; text-shadow: var(--text-legibility-shadow); box-shadow: 0 8px 20px rgba(143, 158, 139, 0.4); }
+  .sv-btn.primary:hover:not(:disabled) { transform: translateY(-2px); }
+  .sv-btn.ghost { background: transparent; color: var(--ink-soft); padding-left: 6px; padding-right: 6px; }
+  .sv-btn.ghost:hover { color: var(--ink); }
+  .sv-btn.ghost[hidden] { display: none; }
+  .sv-btn:focus-visible { outline: 3px solid var(--lavender-deep); outline-offset: 3px; }
+  .sv-error { margin: 14px 0 0; color: #8a4a3a; font-size: 0.9rem; }
+
+  .sv-done { text-align: center; animation: fadeUp 0.5s ease both; }
+  .sv-done h2 { font-family: var(--font-display); font-size: 1.7rem; color: var(--ink); margin: 6px 0 8px; text-align: center; }
+  .sv-done h2:focus { outline: none; }
+  .sv-done p { color: var(--ink-soft); margin: 0 0 14px; }
+  .sv-recipe { margin: 18px 0 20px; padding: 18px; border-radius: 18px; background: var(--cream); }
+  .sv-recipe h3 { margin: 0 0 12px; font-family: var(--font-display); font-size: 1.05rem; color: var(--ink); }
+  .sv-chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+  .sv-chip { padding: 7px 14px; border-radius: 999px; background: var(--white); border: 2px solid var(--cream-deep); font-size: 0.88rem; color: var(--ink); animation: svPop 0.5s cubic-bezier(.3,1.6,.5,1) both; }
+  .sv-chip:nth-child(3n+1) { border-color: #8f9e8b; }
+  .sv-chip:nth-child(3n+2) { border-color: #b9a8e8; }
+  .sv-chip:nth-child(3n+3) { border-color: #b6935a; }
+  @keyframes svPop { from { opacity: 0; transform: scale(0.7); } to { opacity: 1; transform: scale(1); } }
+  .sv-link { display: inline-block; text-decoration: none; }
+  .sv-note { font-size: 0.8rem; color: var(--ink-faint); }
+
+  .trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+  @media (max-width: 520px) {
+    .sv-card { padding: 26px 18px 22px; border-radius: 20px; }
+    .sv-step h2 { font-size: 1.35rem; }
+    .sv-grid { grid-template-columns: 1fr; }
+    .sv-btn.primary { padding: 13px 26px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .sv-choice:hover, .sv-btn.primary:hover:not(:disabled) { transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header compact">
+  <div class="header-inner wrap" style="text-align:left; max-width: 1080px;">
+    <div class="header-links">
+      <a class="back-link" href="../index.html">&larr; All coloring books</a>
+      <a class="back-link" href="../guides/index.html">Calm Guides</a>
+    </div>
+    <p class="brand-mark"><a href="../index.html">Calm Kids Sensory</a></p>
+    <p class="brand-sub">PikMe Publishing</p>
+  </div>
+</header>
+
+<section class="blog-intro">
+  <div class="wrap">
+    <h1>Choose the Next Calm Pages</h1>
+    <p class="blog-dek">Six gentle taps, about two minutes. Your answers shape which pages we draw next.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sv-wrap">
+      <div class="sv-card" id="sv-card">
+        <noscript><p>This short survey needs JavaScript to run. Please turn it on, or visit us again from another browser.</p></noscript>
+        <div class="sv-progress" id="sv-progress" hidden>
+          <div class="sv-dots" id="sv-dots" aria-hidden="true"></div>
+          <span class="sv-count" id="sv-count"></span>
+        </div>
+        <div id="sv-stage" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer" id="footer">
+  <div class="wrap">
+    <img src="../images/logo.png" alt="Calm Kids Sensory logo" class="footer-logo" />
+    <p class="footer-brand">Calm Kids Sensory &middot; PikMe Publishing</p>
+    <p>Serene, low-stimulation coloring books for kids and the grown-ups who care for them.</p>
+
+    <div class="footer-connect">
+      <p class="connect-title">Connect With Us</p>
+      <p>YouTube: Calm Kids Sensory</p>
+      <p>Amazon Author Page, PikMe Publishing: <a href="https://www.amazon.com/author/calmkidssensory" target="_blank" rel="noopener noreferrer">amazon.com/author/calmkidssensory</a></p>
+      <p>Etsy Shop: <a href="https://calmkidssensory.etsy.com" target="_blank" rel="noopener noreferrer">calmkidssensory.etsy.com</a></p>
+      <p>Instagram: @calmkidssensory</p>
+      <p><a class="btn-tiktok" href="https://www.tiktok.com/@calmkidssensory" target="_blank" rel="noopener noreferrer">Follow on TikTok</a></p>
+      <p>Pinterest: CalmKidsSensory</p>
+    </div>
+
+    <div class="footer-links">
+      <a href="../index.html#footer" style="color:var(--sage-text); font-weight:600; font-size:0.9rem; text-decoration:underline;">Back to Calm Kids Sensory</a>
+    </div>
+
+    <p class="footer-copy">&copy; 2026 Calm Kids Sensory / PikMe Publishing. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="../js/survey.js" defer></script>
+</body>
+</html>
