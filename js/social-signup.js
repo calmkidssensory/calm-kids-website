@@ -22,8 +22,8 @@
 
   var CSS =
     ".cks-social{margin:0 0 6px;text-align:center}" +
-    ".cks-social-btn{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;max-width:340px;margin:0 auto 10px;padding:11px 18px;" +
-    "font-family:var(--font-body,Inter,Arial,sans-serif);font-weight:500;font-size:.95rem;line-height:1.2;color:#1f1f1f;background:#fff;border:1px solid #747775;border-radius:999px;cursor:pointer;" +
+    ".cks-social-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;max-width:340px;margin:0 auto 10px;padding:11px 12px;white-space:nowrap;" +
+    "font-family:var(--font-body,Inter,Arial,sans-serif);font-weight:500;font-size:.88rem;line-height:1.2;color:#1f1f1f;background:#fff;border:1px solid #747775;border-radius:999px;cursor:pointer;" +
     "transition:transform .18s ease,box-shadow .18s ease,background .18s ease}" +
     ".cks-social-btn:hover:not([disabled]){background:#f8faf6;box-shadow:0 8px 20px rgba(45,42,30,.10);transform:translateY(-1px)}" +
     ".cks-social-btn:focus-visible{outline:3px solid var(--lavender-deep,#b9a8e8);outline-offset:3px}" +
