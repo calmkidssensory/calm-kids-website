@@ -217,7 +217,7 @@
     cb.id = "sv-consent";
     cb.checked = consent;
     cl.appendChild(cb);
-    cl.appendChild(el("span", "", "Yes, email me the Starter Pack and one follow-up note. I can unsubscribe at any time by replying to either email."));
+    cl.appendChild(el("span", "", "Yes, email me the Starter Pack, then four short notes over about two weeks. I can unsubscribe at any time by replying to any email."));
     pack.appendChild(cl);
     pack.appendChild(el("p", "sv-privacy", 'Your survey answers are anonymous. Your email is only used to send the pack, and is never saved with your answers. Read our <a href="/privacy/" style="color:inherit; text-decoration:underline;">Privacy Policy</a>.'));
     box.appendChild(pack);
