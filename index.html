@@ -42,6 +42,15 @@
 }
 </script>
 <!-- SEO-SCHEMA:END -->
+<style>
+  .starter-wrap { max-width: 560px; margin: 0 auto; }
+  .starter-card { background: var(--white); border-radius: 22px; box-shadow: var(--shadow); padding: 32px 28px; text-align: center; }
+  .starter-card .offer-kicker { margin: 0 0 6px; }
+  .starter-card h2 { font-family: var(--font-display); color: var(--ink); font-size: 1.6rem; margin: 0 0 10px; }
+  .starter-card p { color: var(--ink-soft); line-height: 1.65; margin: 0 0 14px; }
+  .starter-form .starter-consent { font-size: 0.78rem; color: var(--ink-faint); margin: 4px 0 0; text-align: center; }
+  .trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+</style>
 </head>
 <body>
 
@@ -67,6 +76,26 @@
     </nav>
   </div>
 </header>
+
+<section id="starter-pack">
+  <div class="wrap">
+    <div class="starter-wrap" data-reveal>
+      <div class="starter-card">
+        <p class="offer-kicker">Free printable</p>
+        <h2>Quiet Time Starter Pack</h2>
+        <p>A one-page guide to creating a calming corner at home, plus three coloring pages from our books, ready to print.</p>
+        <form class="sampler-form starter-form" novalidate>
+          <div class="trap" aria-hidden="true"><label>Leave this field empty <input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
+          <input type="email" name="email" class="sampler-input" placeholder="Your email address" aria-label="Your email address" required />
+          <button type="submit" class="offer-btn sampler">Send Me the Starter Pack</button>
+          <p class="starter-consent">We will email your pack and one follow-up note. You can unsubscribe at any time by replying to either email.</p>
+          <p class="sampler-success" hidden>Your Quiet Time Starter Pack is on its way. If it does not appear in a few minutes, please check your spam folder.</p>
+          <p class="sampler-error" hidden></p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section id="books">
   <div class="wrap">
@@ -864,6 +893,7 @@
   });
 </script>
 <script src="js/reveal.js" defer></script>
+<script src="js/starter-pack-form.js" defer></script>
 
 </body>
 </html>
