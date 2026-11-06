@@ -48,10 +48,10 @@
   <div class="wrap">
     <div class="pp-wrap">
       <div class="pp-card">
-        <p class="pp-updated">Last updated: November 4, 2026</p>
+        <p class="pp-updated">Last updated: November 6, 2026</p>
 
         <div class="pp-summary">
-          <p><strong>In short.</strong> We ask for an email address only if you want the free Quiet Time Starter Pack. Survey answers are anonymous. We do not sell your information, and we do not run advertising or analytics trackers on this site. You can ask us to delete your data at any time.</p>
+          <p><strong>In short.</strong> We ask for an email address only if you want the free Quiet Time Starter Pack. Survey answers are anonymous. We do not sell your information. We use Google Analytics to count visits and a Pinterest tag to measure how Pinterest visitors use the site; visitors in Europe are asked first, and everyone can opt out below. You can ask us to delete your data at any time.</p>
         </div>
 
         <h2 id="who-we-are">Who we are</h2>
@@ -62,6 +62,7 @@
           <li><strong>Quiet Time Starter Pack signup.</strong> Your email address, and the date you signed up. We use it to send the pack, then four short notes over about two weeks about quiet time and our coloring books.</li>
           <li><strong>Survey answers.</strong> The cards you tap and any note you type. Answers are stored without your name or email. Please do not type personal details, or details about a child, into the note box.</li>
           <li><strong>Emails you send us.</strong> If you write to us, we keep the message so we can reply.</li>
+          <li><strong>Visit statistics.</strong> If analytics is switched on, Google Analytics records which pages are viewed, roughly where in the world a visit comes from, the type of device and browser, how a visitor found the site, and whether they signed up for the Starter Pack. The Pinterest tag records page views and the same signup event. These records do not include your email address.</li>
         </ul>
         <p>We do not ask for children's names, birth dates, photos, or any payment details on this site.</p>
 
@@ -74,15 +75,24 @@
           <li>To send you the Starter Pack, then four short notes over about two weeks, as described when you sign up.</li>
           <li>To decide which coloring pages and guides to make next, using survey answers in aggregate.</li>
           <li>To answer your messages.</li>
+          <li>To understand which pages are useful and whether our Pinterest posts bring visitors who sign up, so we can improve the site and our Pinterest advertising.</li>
         </ul>
         <p>If you are in the European Economic Area or the United Kingdom, our legal basis is your consent, which you give when you submit the form and can withdraw at any time. Withdrawing does not affect anything we sent before.</p>
 
         <h2 id="sharing">Who else sees it</h2>
-        <p>We do not sell or rent your information. Your email and survey answers are stored in Google Sheets in our Google Workspace account, and our emails are sent through Google. These providers process data for us under their own terms. Our pages are hosted on GitHub Pages and use fonts from Google Fonts, so those services see your IP address when a page loads.</p>
+        <p>We do not sell or rent your information. Your email and survey answers are stored in Google Sheets in our Google Workspace account, and our emails are sent through Google. These providers process data for us under their own terms. Our pages are hosted on GitHub Pages and use fonts from Google Fonts, so those services see your IP address when a page loads. If analytics is switched on, Google (Google Analytics) and Pinterest receive the visit statistics described above under their own terms.</p>
         <p>When you click through to buy a book on Amazon, Etsy, or Gumroad, you leave this site. Those companies handle your order and payment under their own privacy policies, and we do not receive your card details.</p>
 
-        <h2 id="cookies">Cookies and tracking</h2>
-        <p>This site does not use advertising cookies, analytics, or tracking pixels. If we add any, we will update this page first.</p>
+        <h2 id="cookies">Cookies, analytics and the advertising pixel</h2>
+        <p>We use two tools on our home page, link page, book pages, guides and this page:</p>
+        <ul>
+          <li><strong>Google Analytics 4</strong> (Google) counts visits and shows us which pages are read. It sets cookies in your browser to tell one visit from another. Google shortens IP addresses and does not store them in full. <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google Privacy Policy</a>.</li>
+          <li><strong>The Pinterest tag</strong> (Pinterest) is an advertising pixel. It tells Pinterest when a visitor from Pinterest views a page or signs up for the Starter Pack, so we can measure how our Pinterest content performs. It also sets cookies. <a href="https://policies.pinterest.com/en/privacy-policy" target="_blank" rel="noopener noreferrer">Pinterest Privacy Policy</a>.</li>
+        </ul>
+        <p>We do not send your email address to either tool, and we do not use them to build profiles of children. Our signup forms are for adults.</p>
+        <p><strong>If you are in Europe or the United Kingdom,</strong> neither tool loads until you choose Accept on the banner. If you choose Decline, they stay off. <strong>Elsewhere,</strong> they load by default and you can switch them off at any time with the button below, or with your browser's cookie settings or a tracking blocker. Your choice is saved in your browser only.</p>
+        <p>Your choice on this browser: <strong id="cks-consent-status">not recorded</strong>.</p>
+        <p><button type="button" id="cks-consent-change" style="background:#4a5c46;color:#fff;border:0;border-radius:8px;padding:9px 18px;font:inherit;cursor:pointer">Change my choice</button></p>
 
         <h2 id="keeping">How long we keep it</h2>
         <p>We keep your email until you unsubscribe or ask us to delete it. Anonymous survey answers may be kept for as long as they help us plan new pages.</p>
@@ -140,5 +150,24 @@
   </div>
 </footer>
 
+<script src="../js/tracking.js" defer></script>
+<script>
+(function () {
+  function status() {
+    var el = document.getElementById("cks-consent-status");
+    if (!el || !window.CKSTrack) return;
+    var s = window.CKSTrack.status();
+    el.textContent = s === "granted" ? "analytics on" : s === "denied" ? "analytics off" : s;
+  }
+  document.addEventListener("DOMContentLoaded", function () {
+    var b = document.getElementById("cks-consent-change");
+    if (b) b.addEventListener("click", function () {
+      if (window.CKSTrack) { window.CKSTrack.openChoices(); setTimeout(status, 300); }
+    });
+    setTimeout(status, 500);
+    document.addEventListener("click", function (e) { if (e.target && /^cks-consent-(yes|no)$/.test(e.target.id)) setTimeout(status, 200); });
+  });
+})();
+</script>
 </body>
 </html>

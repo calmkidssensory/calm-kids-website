@@ -18,6 +18,15 @@
     note.hidden = false;
   }
 
+  // Fires GA4 "starter_pack_signup" and the Pinterest "lead" event (tracking.js).
+  // Called only after the submit has gone out cleanly; does nothing if the
+  // visitor declined tracking or tracking.js is not on the page.
+  function trackSignup(method) {
+    try {
+      if (window.CKSTrack && typeof window.CKSTrack.signup === "function") window.CKSTrack.signup(method);
+    } catch (e) { /* never block the success message */ }
+  }
+
   function showSuccess(form) {
     var ok = form.querySelector(".sampler-success");
     form.querySelectorAll("input, button[type=submit], .starter-consent, .cks-social").forEach(function (el) { el.hidden = true; });
@@ -59,7 +68,7 @@
       if (btn) { btn.disabled = true; btn.textContent = "Sending..."; }
 
       post(email)
-        .then(function () { showSuccess(form); })
+        .then(function () { showSuccess(form); trackSignup("email"); })
         .catch(function () {
           if (btn) { btn.disabled = false; btn.textContent = "Send Me the Starter Pack"; }
           showError(err, "Something went quietly wrong. Please try again in a moment.");
@@ -76,7 +85,7 @@
         if (err) err.hidden = true;
         if (!isValidEmail(email)) { showError(err, "That email address does not look quite right. Please type it in the box instead."); return; }
         post(email)
-          .then(function () { showSuccess(form); })
+          .then(function () { showSuccess(form); trackSignup("social"); })
           .catch(function () { showError(err, "Something went quietly wrong. Please try again in a moment."); });
       }
     });
