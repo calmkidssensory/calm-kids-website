@@ -13,7 +13,7 @@
   "use strict";
 
   var GA4_ID = "G-8TYLTRYQXL";
-  var PINTEREST_TAG_ID = "PASTE_PINTEREST_TAG_ID"; // numbers only; skipped until replaced
+  var PINTEREST_TAG_ID = "2613586674556"; // numbers only; skipped if not all digits
 
   var KEY = "cks_consent";
   var loaded = false;
